@@ -1,7 +1,10 @@
-/**
- * Implement Gatsby's Browser APIs in this file.
- *
- * See: https://www.gatsbyjs.org/docs/browser-apis/
- */
+// It's not ready yet: https://github.com/gatsbyjs/gatsby/issues/8237.
+//
+// import React from 'react';
+// import withRoot from './src/withRoot';
 
-// You can delete this file if you're not using it
+// const WithRoot = withRoot(props => props.children);
+
+// export const wrapRootElement = ({ element }) => {
+//   return <WithRoot key={Math.random()}>{element}</WithRoot>;
+// };
