@@ -33,7 +33,7 @@ exports.createPages = ({graphql, actions}) => {
     ).then(result => {
         result.data.allMarkdownRemark.edges.forEach(({node}) => {
             createPage({
-                path: node.fields.slug,
+                path: `posts${node.fields.slug}`,
                 component: path.resolve(`./src/components/blog-post.js`),
                 context: {
                     // Data passed to context is available

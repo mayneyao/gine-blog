@@ -29,12 +29,23 @@ class BlogPost extends React.Component {
             <div>
                 <ScrollProgress/>
                 <Layout>
-                    <Paper>
-                        <main>
+                    <div style={{
+                        width: '100%',
+                        background: `url(${post.frontmatter.image})`,
+                        height: '400px',
+                        backgroundSize: '100%',
+                        backgroundPosition: 'bottom',
+                    }}/>
+                    <main style={{
+                        maxWidth: 900,
+                        margin: '0 auto',
+                        marginTop: -100,
+                    }}>
+                        <Paper>
                             <h1>{post.frontmatter.title}</h1>
                             <div dangerouslySetInnerHTML={{__html: post.html}}/>
-                        </main>
-                    </Paper>
+                        </Paper>
+                    </main>
                 </Layout>
             </div>
         )
@@ -50,6 +61,7 @@ export const query = graphql`
       html
       frontmatter {
         title
+        image
       }
     }
   }
