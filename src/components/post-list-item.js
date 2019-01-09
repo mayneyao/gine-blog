@@ -10,15 +10,14 @@ import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
 import { Link } from 'gatsby'
 
+import ColorfulTag from './hash-colorful-tag'
+
 
 const colorImage = [
     "https://www.notion.so/images/page-cover/thumbs/solid_red.png",
     "https://www.notion.so/images/page-cover/thumbs/solid_yellow.png",
     "https://www.notion.so/images/page-cover/thumbs/solid_blue.png",
     "https://www.notion.so/images/page-cover/thumbs/solid_beige.png",
-    "https://www.notion.so/images/page-cover/thumbs/gradients_8.png",
-    "https://www.notion.so/images/page-cover/thumbs/gradients_4.png",
-    "https://www.notion.so/images/page-cover/thumbs/gradients_2.png",
     "https://www.notion.so/images/page-cover/thumbs/gradients_11.jpg",
     "https://www.notion.so/images/page-cover/thumbs/gradients_10.jpg",
     "https://www.notion.so/images/page-cover/thumbs/gradients_5.png",
@@ -48,9 +47,9 @@ const styles = {
 }
 
 function ImgMediaCard(props) {
-    const { classes, title, content, slug, image } = props
+    const { classes, title, content, slug, image, tags } = props
     const MyLink = props => <Link to={slug} {...props} />
-    console.log(slug)
+    console.log(slug, slug.hashCode(), slug.hashCode() % 8)
     return (
         <Card className={classes.card}>
             <CardActionArea component={MyLink}>
@@ -59,7 +58,7 @@ function ImgMediaCard(props) {
                     alt="Contemplative Reptile"
                     className={classes.media}
                     height="140"
-                    image={image || colorImage[slug.charCodeAt() % 11]}
+                    image={image || colorImage[Math.abs(slug.hashCode()) % 7]}
                     title="Contemplative Reptile"
                 />
                 <CardContent>
@@ -72,9 +71,9 @@ function ImgMediaCard(props) {
                 </CardContent>
             </CardActionArea>
             <CardActions>
-                <Button size="small" color="primary" component={MyLink}>
-                    阅读更多
-                </Button>
+                {
+                    tags.map(tag => <ColorfulTag tag={tag} />)
+                }
             </CardActions>
         </Card>
     )

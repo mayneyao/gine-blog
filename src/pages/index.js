@@ -49,6 +49,7 @@ class Index extends React.Component {
                                       content={node.excerpt}
                                       slug={`posts${node.fields.slug}`}
                                       image={node.frontmatter.image}
+                                      tags={node.frontmatter.tags}
                                       />
                     ))}
                 </div>
@@ -72,6 +73,7 @@ export const query = graphql`
         frontmatter{
           title
           image
+          tags
         }
         excerpt
         wordCount {
