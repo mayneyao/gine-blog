@@ -47,7 +47,9 @@ class Index extends React.Component {
                         <PostListItem title={node.frontmatter.title}
                                       key={node.id}
                                       content={node.excerpt}
-                                      slug={`posts${node.fields.slug}`}/>
+                                      slug={`posts${node.fields.slug}`}
+                                      image={node.frontmatter.image}
+                                      />
                     ))}
                 </div>
             </Layout>
@@ -69,6 +71,7 @@ export const query = graphql`
         id
         frontmatter{
           title
+          image
         }
         excerpt
         wordCount {
