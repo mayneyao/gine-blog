@@ -1,7 +1,7 @@
 module.exports = {
     siteMetadata: {
         title: `Pandas Eating Lots`,
-        pageSize: 2
+        pageSize: 5,
     },
     plugins: [
         {
