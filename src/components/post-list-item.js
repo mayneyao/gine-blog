@@ -8,30 +8,9 @@ import CardContent from '@material-ui/core/CardContent'
 import CardMedia from '@material-ui/core/CardMedia'
 import Typography from '@material-ui/core/Typography'
 import { Link } from 'gatsby'
+import getImageByName from '../utils/notion-hash-image'
 
 import ColorfulTag from './hash-colorful-tag'
-
-const colorImage = [
-    'https://www.notion.so/images/page-cover/thumbs/solid_red.png',
-    'https://www.notion.so/images/page-cover/thumbs/solid_yellow.png',
-    'https://www.notion.so/images/page-cover/thumbs/solid_blue.png',
-    'https://www.notion.so/images/page-cover/thumbs/solid_beige.png',
-    'https://www.notion.so/images/page-cover/thumbs/gradients_11.jpg',
-    'https://www.notion.so/images/page-cover/thumbs/gradients_10.jpg',
-    'https://www.notion.so/images/page-cover/thumbs/gradients_5.png',
-    'https://www.notion.so/images/page-cover/thumbs/gradients_3.png',
-]
-
-String.prototype.hashCode = function () {
-    var hash = 0, i, chr
-    if (this.length === 0) return hash
-    for (i = 0; i < this.length; i++) {
-        chr = this.charCodeAt(i)
-        hash = ((hash << 5) - hash) + chr
-        hash |= 0 // Convert to 32bit integer
-    }
-    return hash
-}
 
 const styles = {
     card: {
@@ -56,7 +35,7 @@ function ImgMediaCard (props) {
                     alt="Contemplative Reptile"
                     className={classes.media}
                     height="140"
-                    image={image || colorImage[Math.abs(slug.hashCode()) % 7]}
+                    image={image || getImageByName(slug)}
                     title="Contemplative Reptile"
                 />
                 <CardContent>

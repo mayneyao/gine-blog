@@ -7,28 +7,7 @@ import 'prismjs/themes/prism-tomorrow.css'
 import 'prismjs/plugins/line-numbers/prism-line-numbers.css'
 import ScrollProgress from './scroll-progress'
 import ColorfulTag from './hash-colorful-tag'
-
-String.prototype.hashCode = function () {
-    var hash = 0, i, chr
-    if (this.length === 0) return hash
-    for (i = 0; i < this.length; i++) {
-        chr = this.charCodeAt(i)
-        hash = ((hash << 5) - hash) + chr
-        hash |= 0 // Convert to 32bit integer
-    }
-    return hash
-}
-
-const colorImage = [
-    'https://www.notion.so/images/page-cover/thumbs/solid_red.png',
-    'https://www.notion.so/images/page-cover/thumbs/solid_yellow.png',
-    'https://www.notion.so/images/page-cover/thumbs/solid_blue.png',
-    'https://www.notion.so/images/page-cover/thumbs/solid_beige.png',
-    'https://www.notion.so/images/page-cover/thumbs/gradients_11.jpg',
-    'https://www.notion.so/images/page-cover/thumbs/gradients_10.jpg',
-    'https://www.notion.so/images/page-cover/thumbs/gradients_5.png',
-    'https://www.notion.so/images/page-cover/thumbs/gradients_3.png',
-]
+import getImageByName from '../utils/notion-hash-image'
 
 class BlogPost extends React.Component {
 
@@ -56,8 +35,7 @@ class BlogPost extends React.Component {
                     <div style={{
                         width: '100%',
                         background: `url(${post.frontmatter.image ||
-                        colorImage[Math.abs(
-                            `posts${post.fields.slug}`.hashCode()) % 7]})`,
+                        getImageByName(`posts${post.fields.slug}`)})`,
                         height: '400px',
                         backgroundSize: '100%',
                         backgroundPosition: 'bottom',
