@@ -70,7 +70,7 @@ function ImgMediaCard (props) {
             </CardActionArea>
             <CardActions>
                 {
-                    tags && tags.map(tag => <ColorfulTag tag={tag}/>)
+                    tags && tags.map(tag => <ColorfulTag tag={tag} key={tag}/>)
                 }
             </CardActions>
         </Card>

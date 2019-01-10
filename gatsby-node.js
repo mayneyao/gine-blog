@@ -49,6 +49,7 @@ exports.createPages = ({graphql, actions}) => {
                 context: {
                     skip: (i - 1) * pageSize,
                     limit: pageSize,
+                    currentPage: i,
                 },
             })
         }

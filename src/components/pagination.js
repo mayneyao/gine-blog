@@ -48,10 +48,12 @@ function TextButtons (props) {
             {
                 allPage.map(
                     page => (
-                        <MyLink to={`page/${page}`}>
+                        <MyLink to={`page/${page}`} key={page}>
                             <Button color="secondary"
                                     className={classes.pageButton}
-                                    variant={page === currentPage && 'outlined'}
+                                    variant={page === currentPage
+                                        ? 'outlined'
+                                        : 'text'}
                             >
                                 {page}
                             </Button>

@@ -21,7 +21,7 @@ const styles = theme => ({
 class Index extends React.Component {
     render () {
         const {classes, data} = this.props
-        const currentPage = parseInt(window.location.pathname.split('/')[2])
+        const {currentPage} = this.props.pageContext
         return (
             <Layout>
                 <div className={classes.index}>
