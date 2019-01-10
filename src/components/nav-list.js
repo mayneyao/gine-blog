@@ -9,6 +9,7 @@ import InboxIcon from '@material-ui/icons/Inbox'
 import HomeIcon from '@material-ui/icons/Home'
 import CardMedia from '@material-ui/core/CardMedia'
 import { Link } from 'gatsby'
+import avatar from '../static/41546411364_.pic.jpg'
 
 const styles = theme => ({
     root: {
@@ -31,7 +32,7 @@ function SimpleList (props) {
             <MyLink to={'/page/1'}>
                 <CardMedia
                     className={classes.media}
-                    image="https://v3-8-0.material-ui.com/static/images/cards/contemplative-reptile.jpg"
+                    image={avatar}
                     title="Contemplative Reptile"
                 />
             </MyLink>

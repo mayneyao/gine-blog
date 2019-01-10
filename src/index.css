@@ -6,3 +6,21 @@ a {
 img {
     width: 100%;
 }
+
+/* override markdown css*/
+
+blockquote {
+    border-left: 5px solid #652828;
+    margin: 0;
+    padding-left: 1em;
+    font-size: 1.2em;
+    font-weight: 500;
+}
+
+/*code[class*='language-text'] {*/
+    /*background: #eee !important;*/
+    /*color: red !important;;*/
+    /*margin: 0 5px !important;;*/
+/*}*/
+
+/* */
