@@ -1,6 +1,7 @@
 ---
 title: gine blog 测试文章
 date: 2019/01/10
+image: https://www.notion.so/images/page-cover/met_cezanne_1890.jpg
 tags: [测试, Blog]
 ---
 
