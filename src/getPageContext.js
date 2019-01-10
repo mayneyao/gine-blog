@@ -6,7 +6,7 @@ import {
     createMuiTheme,
 } from '@material-ui/core/styles'
 import purple from '@material-ui/core/colors/purple'
-import green from '@material-ui/core/colors/green'
+import teal from '@material-ui/core/colors/teal'
 
 // A theme with custom primary and secondary color.
 // It's optional.
@@ -18,9 +18,9 @@ const theme = createMuiTheme({
             dark: purple[700],
         },
         secondary: {
-            light: green[300],
-            main: green[500],
-            dark: green[700],
+            light: teal[300],
+            main: teal[500],
+            dark: teal[700],
         },
     },
     typography: {

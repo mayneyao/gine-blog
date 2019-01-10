@@ -3,9 +3,6 @@ import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import withRoot from '../withRoot'
 import Layout from '../components/layout'
-import PostListItem from '../components/post-list-item'
-
-const PAGESIZE = 5
 
 const styles = theme => ({
     root: {
@@ -20,22 +17,17 @@ const styles = theme => ({
 })
 
 class Index extends React.Component {
+    componentDidMount () {
+        window.location.href = '/page/1'
+    }
+
     render () {
         const {classes, data} = this.props
 
         return (
             <Layout>
                 <div className={classes.index}>
-                    {/*<h4>{data.allMarkdownRemark.totalCount} Posts</h4>*/}
-                    {data.allMarkdownRemark.edges.map(({node}) => (
-                        <PostListItem title={node.frontmatter.title}
-                                      key={node.id}
-                                      content={node.excerpt}
-                                      slug={`posts${node.fields.slug}`}
-                                      image={node.frontmatter.image}
-                                      tags={node.frontmatter.tags}
-                        />
-                    ))}
+                    <div>跳转</div>
                 </div>
             </Layout>
         )
@@ -47,30 +39,3 @@ Index.propTypes = {
 }
 
 export default withRoot(withStyles(styles)(Index))
-
-export const query = graphql`
-  {
-  allMarkdownRemark {
-    edges{
-      node{
-        id
-        frontmatter{
-          title
-          image
-          tags
-        }
-        excerpt
-        wordCount {
-          paragraphs
-          sentences
-          words
-        }
-        fields {
-          slug
-        }
-      }
-    }
-    totalCount
-  }
-}
-`

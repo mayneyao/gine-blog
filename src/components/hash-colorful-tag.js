@@ -1,20 +1,15 @@
-import React from 'react';
-
-import deepOrange from '@material-ui/core/colors/deepOrange';
-import deepPurple from '@material-ui/core/colors/deepPurple';
-
+import React from 'react'
 
 String.prototype.hashCode = function () {
-    var hash = 0, i, chr;
-    if (this.length === 0) return hash;
+    var hash = 0, i, chr
+    if (this.length === 0) return hash
     for (i = 0; i < this.length; i++) {
-        chr = this.charCodeAt(i);
-        hash = ((hash << 5) - hash) + chr;
-        hash |= 0; // Convert to 32bit integer
+        chr = this.charCodeAt(i)
+        hash = ((hash << 5) - hash) + chr
+        hash |= 0 // Convert to 32bit integer
     }
-    return hash;
-};
-
+    return hash
+}
 
 const hashColorMap = [
     '#f44336',
@@ -24,7 +19,7 @@ const hashColorMap = [
     '#3f51b5',
     '#2196f3',
     '#009688',
-    '#ff5722'
+    '#ff5722',
 ]
 
 const ColorfulTag = (props) => {
@@ -42,10 +37,10 @@ const ColorfulTag = (props) => {
         fontSize: '14px',
         lineHeight: '120%',
         fontWeight: '400',
-        margin: '0px 6px 6px 0px'
+        margin: '0px 6px 6px 0px',
     }}>{
-            props.tag
-        }</div>
+        props.tag
+    }</div>
 }
 
 export default ColorfulTag

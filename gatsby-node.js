@@ -19,7 +19,13 @@ exports.createPages = ({graphql, actions}) => {
     const {createPage} = actions
     return graphql(`
     {
+      site{
+        siteMetadata {
+          pageSize
+        }
+      }
       allMarkdownRemark {
+        totalCount
         edges {
           node {
             fields {
@@ -31,7 +37,24 @@ exports.createPages = ({graphql, actions}) => {
     }
   `,
     ).then(result => {
-        result.data.allMarkdownRemark.edges.forEach(({node}) => {
+        const {totalCount, edges} = result.data.allMarkdownRemark
+
+        const {pageSize} = result.data.site.siteMetadata
+        // 创建分页
+        const pageCount = Math.ceil(totalCount / pageSize)
+        for (let i = 1; i <= pageCount; i++) {
+            createPage({
+                path: `page/${i}`,
+                component: path.resolve(`./src/components/post-page.js`),
+                context: {
+                    skip: (i - 1) * pageSize,
+                    limit: pageSize,
+                },
+            })
+        }
+
+        // 创建文章详情页
+        edges.forEach(({node}) => {
             createPage({
                 path: `posts${node.fields.slug}`,
                 component: path.resolve(`./src/components/blog-post.js`),

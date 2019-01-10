@@ -28,7 +28,7 @@ function SimpleList (props) {
 
     return (
         <div className={classes.root}>
-            <MyLink to={'/'}>
+            <MyLink to={'/page/1'}>
                 <CardMedia
                     className={classes.media}
                     image="https://v3-8-0.material-ui.com/static/images/cards/contemplative-reptile.jpg"
@@ -36,7 +36,7 @@ function SimpleList (props) {
                 />
             </MyLink>
             <List component="nav">
-                <MyLink to={'/'}>
+                <MyLink to={'/page/1'}>
                     <ListItem button>
                         <ListItemIcon>
                             <HomeIcon/>
