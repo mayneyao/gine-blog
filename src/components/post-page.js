@@ -32,6 +32,7 @@ class Index extends React.Component {
                                       slug={`posts${node.fields.slug}`}
                                       image={node.frontmatter.image}
                                       tags={node.frontmatter.tags}
+                                      date={node.frontmatter.date}
                         />
                     ))}
                     <Pagination totalCount={data.allMarkdownRemark.totalCount}

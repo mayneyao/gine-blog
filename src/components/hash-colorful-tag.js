@@ -1,4 +1,6 @@
 import React from 'react'
+import { Link } from 'gatsby'
+
 
 String.prototype.hashCode = function () {
     var hash = 0, i, chr
@@ -24,23 +26,27 @@ const hashColorMap = [
 
 const ColorfulTag = (props) => {
     let color = hashColorMap[props.tag.charCodeAt() % 7]
-    return <div style={{
-        background: color,
-        color: '#fff',
-        display: 'flex',
-        alignItems: 'center',
-        flexShrink: 0,
-        height: '24px',
-        borderRadius: '3px',
-        paddingLeft: '8px',
-        paddingRight: '8px',
-        fontSize: '14px',
-        lineHeight: '120%',
-        fontWeight: '400',
-        margin: '0px 6px 6px 0px',
-    }}>{
-        props.tag
-    }</div>
+    return <Link to={`tags/${props.tag}`}>
+        <div style={{
+            background: color,
+            color: '#fff',
+            display: 'flex',
+            alignItems: 'center',
+            flexShrink: 0,
+            height: '24px',
+            borderRadius: '3px',
+            paddingLeft: '8px',
+            paddingRight: '8px',
+            fontSize: '14px',
+            lineHeight: '120%',
+            fontWeight: '400',
+            margin: '0px 6px 6px 0px',
+        }}>{
+                props.tag
+            }</div>
+    </Link>
+
+
 }
 
 export default ColorfulTag

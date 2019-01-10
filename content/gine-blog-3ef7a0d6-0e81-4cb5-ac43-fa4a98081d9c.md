@@ -37,3 +37,7 @@ def testfun(a,b):
 ## 引用
 
 > 一个人最大的幸福莫过于在人生的中途、富有创造力的壮年，发现自己此生的使命。 ——斯蒂芬·茨威格
+
+## spotify歌单
+
+<iframe src="https://open.spotify.com/embed/user/31nomook7b2tcrybz2y3d6w2hyue/playlist/1wnpAldeThRiudRp1le1J3" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>

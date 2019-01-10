@@ -24,8 +24,8 @@ const styles = theme => ({
 
 const MyLink = props => <Link {...props} />
 
-function SimpleList (props) {
-    const {classes} = props
+function SimpleList(props) {
+    const { classes } = props
 
     return (
         <div className={classes.root}>
@@ -40,17 +40,17 @@ function SimpleList (props) {
                 <MyLink to={'/page/1'}>
                     <ListItem button>
                         <ListItemIcon>
-                            <HomeIcon/>
+                            <HomeIcon />
                         </ListItemIcon>
-                        <ListItemText primary="主页"/>
+                        <ListItemText primary="主页" />
                     </ListItem>
                 </MyLink>
                 <MyLink to={'about'}>
                     <ListItem button>
                         <ListItemIcon>
-                            <InboxIcon/>
+                            <InboxIcon />
                         </ListItemIcon>
-                        <ListItemText primary="关于"/>
+                        <ListItemText primary="关于" />
                     </ListItem>
                 </MyLink>
             </List>

@@ -23,10 +23,9 @@ const styles = {
     },
 }
 
-function ImgMediaCard (props) {
-    const {classes, title, content, slug, image, tags} = props
+function ImgMediaCard(props) {
+    const { classes, title, content, slug, image, tags, date } = props
     const MyLink = props => <Link to={slug} {...props} />
-    console.log(slug, slug.hashCode(), slug.hashCode() % 8)
     return (
         <Card className={classes.card}>
             <CardActionArea component={MyLink}>
@@ -48,8 +47,23 @@ function ImgMediaCard (props) {
                 </CardContent>
             </CardActionArea>
             <CardActions>
+                <div style={{
+                    background: '#eee',
+                    color: '#000',
+                    display: 'flex',
+                    alignItems: 'center',
+                    flexShrink: 0,
+                    height: '24px',
+                    borderRadius: '3px',
+                    paddingLeft: '8px',
+                    paddingRight: '8px',
+                    fontSize: '14px',
+                    lineHeight: '120%',
+                    fontWeight: '400',
+                    margin: '0px 6px 6px 0px',
+                }}>{date}</div>
                 {
-                    tags && tags.map(tag => <ColorfulTag tag={tag} key={tag}/>)
+                    tags && tags.map(tag => <ColorfulTag tag={tag} key={tag} />)
                 }
             </CardActions>
         </Card>

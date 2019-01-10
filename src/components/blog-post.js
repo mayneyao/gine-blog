@@ -11,7 +11,7 @@ import getImageByName from '../utils/notion-hash-image'
 
 class BlogPost extends React.Component {
 
-    componentDidMount () {
+    componentDidMount() {
         // let disqus_config = function () {
         //     this.page.url = window.location.href  // Replace PAGE_URL with your page's canonical URL variable
         //     this.page.identifier = window.location.pathname // Replace PAGE_IDENTIFIER with your page's unique identifier variable
@@ -23,38 +23,53 @@ class BlogPost extends React.Component {
         // (d.head || d.body).appendChild(s)
     }
 
-    render () {
-        const {data} = this.props
+    render() {
+        const { data } = this.props
         const post = data.markdownRemark
         console.log(post.fields.slug)
-        const {tags} = post.frontmatter
+        const { tags, date } = post.frontmatter
         return (
             <div>
-                <ScrollProgress/>
+                <ScrollProgress />
                 <Layout>
                     <div style={{
                         width: '100%',
                         background: `url(${post.frontmatter.image ||
-                        getImageByName(`posts${post.fields.slug}`)})`,
+                            getImageByName(`posts${post.fields.slug}`)})`,
                         height: '400px',
                         backgroundSize: '100%',
                         backgroundPosition: 'bottom',
-                    }}/>
+                    }} />
                     <main style={{
                         maxWidth: 900,
                         margin: '0 auto',
                         marginTop: -100,
                         marginBottom: 100,
                     }}>
-                        <div role='meta' style={{display: 'flex'}}>
+                        <div role='meta' style={{ display: 'flex' }}>
+                            <div style={{
+                                background: '#eee',
+                                color: '#000',
+                                display: 'flex',
+                                alignItems: 'center',
+                                flexShrink: 0,
+                                height: '24px',
+                                borderRadius: '3px',
+                                paddingLeft: '8px',
+                                paddingRight: '8px',
+                                fontSize: '14px',
+                                lineHeight: '120%',
+                                fontWeight: '400',
+                                margin: '0px 6px 6px 0px',
+                            }}>{date}</div>
                             {
                                 tags && tags.map(
-                                    tag => <ColorfulTag tag={tag}/>)
+                                    tag => <ColorfulTag tag={tag} />)
                             }
                         </div>
                         <Paper>
                             <h1>{post.frontmatter.title}</h1>
-                            <div dangerouslySetInnerHTML={{__html: post.html}}/>
+                            <div dangerouslySetInnerHTML={{ __html: post.html }} />
                         </Paper>
                     </main>
                 </Layout>
@@ -74,6 +89,7 @@ export const query = graphql`
         title
         image
         tags
+        date
       }
       fields{
         slug

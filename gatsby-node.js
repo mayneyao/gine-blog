@@ -31,6 +31,9 @@ exports.createPages = ({graphql, actions}) => {
             fields {
               slug
             }
+            frontmatter {
+              tags
+            }
           }
         }
       }
@@ -66,5 +69,24 @@ exports.createPages = ({graphql, actions}) => {
                 },
             })
         })
+        // 创建tag详情页
+        let allTags = new Set()
+        edges.forEach(({node}) => {
+            console.log(node)
+            node.frontmatter.tags.map(tag=>allTags.add(tag))
+        })
+
+        Array.from(allTags).map(tag=>{
+            createPage({
+                path: `tags/${tag}`,
+                component: path.resolve(`./src/components/tag-page.js`),
+                context: {
+                    // Data passed to context is available
+                    // in page queries as GraphQL variables.
+                    tag: tag,
+                },
+            })
+        })
+
     })
 }
