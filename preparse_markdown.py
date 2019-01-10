@@ -1,3 +1,8 @@
+"""
+处理notion导出来markdown文件，等notion开发api后，这里作废
+notion导出的markdown会丢失code lang的信息，需要手工处理一下代码块
+"""
+
 import os
 import re
 
