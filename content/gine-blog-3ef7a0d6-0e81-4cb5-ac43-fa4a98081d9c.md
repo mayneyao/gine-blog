@@ -28,7 +28,7 @@ import this
 def testfun(a,b):
     print(a+b)
     return a+b
-```python
+```
 
 ## 内联代码
 
