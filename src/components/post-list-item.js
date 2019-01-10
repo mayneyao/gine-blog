@@ -6,34 +6,32 @@ import CardActionArea from '@material-ui/core/CardActionArea'
 import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
 import CardMedia from '@material-ui/core/CardMedia'
-import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
 import { Link } from 'gatsby'
 
 import ColorfulTag from './hash-colorful-tag'
 
-
 const colorImage = [
-    "https://www.notion.so/images/page-cover/thumbs/solid_red.png",
-    "https://www.notion.so/images/page-cover/thumbs/solid_yellow.png",
-    "https://www.notion.so/images/page-cover/thumbs/solid_blue.png",
-    "https://www.notion.so/images/page-cover/thumbs/solid_beige.png",
-    "https://www.notion.so/images/page-cover/thumbs/gradients_11.jpg",
-    "https://www.notion.so/images/page-cover/thumbs/gradients_10.jpg",
-    "https://www.notion.so/images/page-cover/thumbs/gradients_5.png",
-    "https://www.notion.so/images/page-cover/thumbs/gradients_3.png"
+    'https://www.notion.so/images/page-cover/thumbs/solid_red.png',
+    'https://www.notion.so/images/page-cover/thumbs/solid_yellow.png',
+    'https://www.notion.so/images/page-cover/thumbs/solid_blue.png',
+    'https://www.notion.so/images/page-cover/thumbs/solid_beige.png',
+    'https://www.notion.so/images/page-cover/thumbs/gradients_11.jpg',
+    'https://www.notion.so/images/page-cover/thumbs/gradients_10.jpg',
+    'https://www.notion.so/images/page-cover/thumbs/gradients_5.png',
+    'https://www.notion.so/images/page-cover/thumbs/gradients_3.png',
 ]
 
 String.prototype.hashCode = function () {
-    var hash = 0, i, chr;
-    if (this.length === 0) return hash;
+    var hash = 0, i, chr
+    if (this.length === 0) return hash
     for (i = 0; i < this.length; i++) {
-        chr = this.charCodeAt(i);
-        hash = ((hash << 5) - hash) + chr;
-        hash |= 0; // Convert to 32bit integer
+        chr = this.charCodeAt(i)
+        hash = ((hash << 5) - hash) + chr
+        hash |= 0 // Convert to 32bit integer
     }
-    return hash;
-};
+    return hash
+}
 
 const styles = {
     card: {
@@ -46,8 +44,8 @@ const styles = {
     },
 }
 
-function ImgMediaCard(props) {
-    const { classes, title, content, slug, image, tags } = props
+function ImgMediaCard (props) {
+    const {classes, title, content, slug, image, tags} = props
     const MyLink = props => <Link to={slug} {...props} />
     console.log(slug, slug.hashCode(), slug.hashCode() % 8)
     return (
@@ -72,7 +70,7 @@ function ImgMediaCard(props) {
             </CardActionArea>
             <CardActions>
                 {
-                    tags.map(tag => <ColorfulTag tag={tag} />)
+                    tags && tags.map(tag => <ColorfulTag tag={tag}/>)
                 }
             </CardActions>
         </Card>

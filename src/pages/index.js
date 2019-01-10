@@ -5,7 +5,7 @@ import withRoot from '../withRoot'
 import Layout from '../components/layout'
 import PostListItem from '../components/post-list-item'
 
-const PageSize = 5
+const PAGESIZE = 5
 
 const styles = theme => ({
     root: {
@@ -14,35 +14,19 @@ const styles = theme => ({
     },
     index: {
         margin: '0 auto',
-        maxWidth: 900,
+        maxWidth: 800,
+        marginTop: '3em',
     },
 })
 
 class Index extends React.Component {
-    state = {
-        open: false,
-    }
-
-    handleClose = () => {
-        this.setState({
-            open: false,
-        })
-    }
-
-    handleClick = () => {
-        this.setState({
-            open: true,
-        })
-    }
-
     render () {
         const {classes, data} = this.props
-        const {open} = this.state
 
         return (
             <Layout>
                 <div className={classes.index}>
-                    <h4>{data.allMarkdownRemark.totalCount} Posts</h4>
+                    {/*<h4>{data.allMarkdownRemark.totalCount} Posts</h4>*/}
                     {data.allMarkdownRemark.edges.map(({node}) => (
                         <PostListItem title={node.frontmatter.title}
                                       key={node.id}
@@ -50,7 +34,7 @@ class Index extends React.Component {
                                       slug={`posts${node.fields.slug}`}
                                       image={node.frontmatter.image}
                                       tags={node.frontmatter.tags}
-                                      />
+                        />
                     ))}
                 </div>
             </Layout>
@@ -81,11 +65,10 @@ export const query = graphql`
           sentences
           words
         }
-              fields {
-        slug
+        fields {
+          slug
+        }
       }
-      }
-
     }
     totalCount
   }

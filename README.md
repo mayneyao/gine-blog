@@ -1,8 +1,17 @@
 # Gatsby example
 
-## How to use
+gatsby react material-ui
+## TODO
 
-Download the example [or clone the repo](https://github.com/mui-org/material-ui):
++ 列表页
+    + 分页组件
++ 文章页
+    + 头图
+    + tags
+    + 评论
++ 底部
++ 全部标页
++ 标签详情页
 
 ```sh
 curl https://codeload.github.com/mui-org/material-ui/tar.gz/master | tar -xz --strip=2  material-ui-master/examples/gatsby

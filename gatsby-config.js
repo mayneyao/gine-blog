@@ -32,7 +32,7 @@ module.exports = {
                             // stripping.
                             // A suggested value for English speakers is the non-ascii
                             // character '›'.
-                            inlineCodeMarker: { sh: "bash" },
+                            inlineCodeMarker: {sh: 'bash'},
                             // This lets you set up language aliases.  For example,
                             // setting this to '{ sh: "bash" }' will let you use
                             // the language "sh" which will highlight using the
@@ -45,7 +45,7 @@ module.exports = {
                             // Defaults to false.
                             // If you wish to only show line numbers on certain code blocks,
                             // leave false and use the {numberLines: true} syntax below
-                            showLineNumbers: true,
+                            showLineNumbers: false,
                             // If setting this to true, the parser won't handle and highlight inline
                             // code used in markdown i.e. single backtick code like `this`.
                             noInlineHighlight: false,
