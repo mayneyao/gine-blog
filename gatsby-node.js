@@ -1,10 +1,11 @@
-const {createFilePath} = require(`gatsby-source-filesystem`)
+const { createFilePath } = require(`gatsby-source-filesystem`)
 const path = require(`path`)
+const fs = require("fs");
 
-exports.onCreateNode = ({node, getNode, actions}) => {
-    const {createNodeField} = actions
+exports.onCreateNode = ({ node, getNode, actions }) => {
+    const { createNodeField } = actions
     if (node.internal.type === `MarkdownRemark`) {
-        const slug = createFilePath({node, getNode, basePath: `pages`})
+        const slug = createFilePath({ node, getNode, basePath: `pages` })
         createNodeField({
             node,
             name: `slug`,
@@ -13,15 +14,24 @@ exports.onCreateNode = ({node, getNode, actions}) => {
     }
 }
 
-exports.createPages = ({graphql, actions}) => {
+exports.createPages = ({ graphql, actions }) => {
     // **Note:** The graphql function call returns a Promise
     // see: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise for more info
-    const {createPage} = actions
+    const { createPage } = actions
     return graphql(`
     {
       site{
         siteMetadata {
           pageSize
+        }
+      }
+      allAphorismsCsv {
+        edges {
+          node {
+            content
+            person
+            source
+          }
         }
       }
       allMarkdownRemark {
@@ -40,10 +50,19 @@ exports.createPages = ({graphql, actions}) => {
     }
   `,
     ).then(result => {
-        const {totalCount, edges} = result.data.allMarkdownRemark
 
-        const {pageSize} = result.data.site.siteMetadata
+        // 创建格言json
+        const aphorismsData = JSON.stringify(result.data.allAphorismsCsv)
+        fs.writeFile('public/aphorisms.json', aphorismsData, function (err) {
+            if (err) {
+                console.error(err)
+            }
+        })
+
+        
         // 创建分页
+        const { totalCount, edges } = result.data.allMarkdownRemark
+        const { pageSize } = result.data.site.siteMetadata
         const pageCount = Math.ceil(totalCount / pageSize)
         for (let i = 1; i <= pageCount; i++) {
             createPage({
@@ -58,7 +77,7 @@ exports.createPages = ({graphql, actions}) => {
         }
 
         // 创建文章详情页
-        edges.forEach(({node}) => {
+        edges.forEach(({ node }) => {
             createPage({
                 path: `posts${node.fields.slug}`,
                 component: path.resolve(`./src/components/blog-post.js`),
@@ -71,18 +90,15 @@ exports.createPages = ({graphql, actions}) => {
         })
         // 创建tag详情页
         let allTags = new Set()
-        edges.forEach(({node}) => {
-            console.log(node)
-            node.frontmatter.tags.map(tag=>allTags.add(tag))
+        edges.forEach(({ node }) => {
+            node.frontmatter.tags.map(tag => allTags.add(tag))
         })
 
-        Array.from(allTags).map(tag=>{
+        Array.from(allTags).map(tag => {
             createPage({
                 path: `tags/${tag}`,
                 component: path.resolve(`./src/components/tag-page.js`),
                 context: {
-                    // Data passed to context is available
-                    // in page queries as GraphQL variables.
                     tag: tag,
                 },
             })

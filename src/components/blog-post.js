@@ -26,7 +26,6 @@ class BlogPost extends React.Component {
     render() {
         const { data } = this.props
         const post = data.markdownRemark
-        console.log(post.fields.slug)
         const { tags, date } = post.frontmatter
         return (
             <div>
@@ -64,7 +63,7 @@ class BlogPost extends React.Component {
                             }}>{date}</div>
                             {
                                 tags && tags.map(
-                                    tag => <ColorfulTag tag={tag} />)
+                                    tag => <ColorfulTag tag={tag} key={tag} />)
                             }
                         </div>
                         <Paper>
