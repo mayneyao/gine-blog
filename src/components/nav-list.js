@@ -8,6 +8,7 @@ import ListItemText from '@material-ui/core/ListItemText'
 import HomeIcon from '@material-ui/icons/Home'
 import TagIcon from '@material-ui/icons/Bookmark'
 import AboutIcon from '@material-ui/icons/Person'
+import ArchiveIcon from '@material-ui/icons/Archive'
 import CardMedia from '@material-ui/core/CardMedia'
 import { Link } from 'gatsby'
 import avatar from '../static/41546411364_.pic.jpg'
@@ -46,6 +47,7 @@ function SimpleList (props) {
                         <ListItemText primary="主页"/>
                     </ListItem>
                 </MyLink>
+
                 <MyLink to={'tags'}>
                     <ListItem button>
                         <ListItemIcon>
@@ -54,10 +56,20 @@ function SimpleList (props) {
                         <ListItemText primary="标签"/>
                     </ListItem>
                 </MyLink>
+
+                <MyLink to={'archives'}>
+                    <ListItem button>
+                        <ListItemIcon>
+                            <ArchiveIcon style={{color: '#f44336'}}/>
+                        </ListItemIcon>
+                        <ListItemText primary="归档"/>
+                    </ListItem>
+                </MyLink>
+
                 <MyLink to={'about'}>
                     <ListItem button>
                         <ListItemIcon>
-                            <AboutIcon style={{color: '#f44336'}}/>
+                            <AboutIcon style={{color: '#ffc107'}}/>
                         </ListItemIcon>
                         <ListItemText primary="关于"/>
                     </ListItem>
