@@ -4,7 +4,6 @@ import '../index.css'
 import { withStyles } from '@material-ui/core/styles'
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer'
 import 'typeface-roboto'
-
 import NavList from './nav-list'
 
 const styles = {
@@ -29,7 +28,7 @@ class Layout extends React.Component {
         })
     }
 
-    constructor (props) {
+    constructor(props) {
         super(props)
         this.state = {
             open: false,
@@ -38,7 +37,7 @@ class Layout extends React.Component {
         }
     }
 
-    componentDidMount () {
+    componentDidMount() {
         const iOS = process.browser &&
             /iPad|iPhone|iPod/.test(navigator.userAgent)
 
@@ -51,9 +50,9 @@ class Layout extends React.Component {
         })
     }
 
-    render () {
-        const {open, iOS, height} = this.state
-        const {classes} = this.props
+    render() {
+        const { open, iOS, height } = this.state
+        const { classes } = this.props
         return (
             <div>
                 <SwipeableDrawer
@@ -61,7 +60,7 @@ class Layout extends React.Component {
                     disableDiscovery={iOS}
                     open={open}
                     onOpen={this.toggleDrawer(true)}
-                    SwipeAreaProps={{onMouseEnter: this.toggleDrawer(true)}}
+                    SwipeAreaProps={{ onMouseEnter: this.toggleDrawer(true) }}
                     onClose={this.toggleDrawer(false)}>
                     <div
                         className={classes.drawer}
@@ -70,14 +69,14 @@ class Layout extends React.Component {
                         onClick={this.toggleDrawer(false)}
                         onKeyDown={this.toggleDrawer(false)}
                     >
-                        <NavList/>
+                        <NavList />
                     </div>
                 </SwipeableDrawer>
 
-                <div style={{margin: `0 auto`}}>
+                <div style={{ margin: `0 auto` }}>
                     {this.props.children}
                 </div>
-                <Bottom/>
+                <Bottom />
             </div>
         )
     }
