@@ -1,6 +1,7 @@
 
 a {
     text-decoration: none;
+    color: #009688
 }
 
 img {
@@ -18,9 +19,9 @@ blockquote {
 }
 
 /*code[class*='language-text'] {*/
-    /*background: #eee !important;*/
-    /*color: red !important;;*/
-    /*margin: 0 5px !important;;*/
+/*background: #eee !important;*/
+/*color: red !important;;*/
+/*margin: 0 5px !important;;*/
 /*}*/
 
 /* */

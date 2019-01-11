@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import withRoot from '../withRoot'
 import Layout from '../components/layout'
+import LinearProgress from '@material-ui/core/LinearProgress'
 
 const styles = theme => ({
     root: {
@@ -22,12 +23,12 @@ class Index extends React.Component {
     }
 
     render () {
-        const {classes, data} = this.props
+        const {classes} = this.props
 
         return (
             <Layout>
                 <div className={classes.index}>
-                    <div>跳转</div>
+                    <LinearProgress/>
                 </div>
             </Layout>
         )

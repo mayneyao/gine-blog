@@ -40,7 +40,7 @@ function SimpleList(props) {
                 <MyLink to={'/page/1'}>
                     <ListItem button>
                         <ListItemIcon>
-                            <HomeIcon />
+                            <HomeIcon color={'primary'}/>
                         </ListItemIcon>
                         <ListItemText primary="主页" />
                     </ListItem>

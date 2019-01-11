@@ -8,6 +8,7 @@
     "@material-ui/lab": "^3.0.0-alpha.28",
     "axios": "^0.18.0",
     "gatsby": "latest",
+    "gatsby-plugin-google-analytics": "^2.0.9",
     "gatsby-plugin-sharp": "^2.0.17",
     "gatsby-remark-images": "^3.0.1",
     "gatsby-remark-prismjs": "^3.2.0",
@@ -21,7 +22,8 @@
     "react": "latest",
     "react-dom": "latest",
     "react-jss": "^8.1.0",
-    "scrollprogress": "^3.0.2"
+    "scrollprogress": "^3.0.2",
+    "typeface-roboto": "^0.0.54"
   },
   "scripts": {
     "develop": "gatsby develop",

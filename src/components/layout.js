@@ -1,10 +1,9 @@
 import React from 'react'
 import Bottom from './bottom'
 import '../index.css'
-import Drawer from '@material-ui/core/Drawer'
-import IconButton from '@material-ui/core/IconButton'
-import MenuIcon from '@material-ui/icons/Menu'
 import { withStyles } from '@material-ui/core/styles'
+import SwipeableDrawer from '@material-ui/core/SwipeableDrawer'
+import 'typeface-roboto'
 
 import NavList from './nav-list'
 
@@ -24,6 +23,7 @@ const styles = {
 
 class Layout extends React.Component {
     toggleDrawer = (open) => () => {
+        console.log('11111')
         this.setState({
             open: open,
         })
@@ -33,16 +33,30 @@ class Layout extends React.Component {
         super(props)
         this.state = {
             open: false,
+            iOS: undefined,
         }
     }
 
+    componentDidMount () {
+        const iOS = process.browser &&
+            /iPad|iPhone|iPod/.test(navigator.userAgent)
+        this.setState({
+            iOS,
+        })
+    }
+
     render () {
-        const {open} = this.state
+        const {open, iOS} = this.state
         const {classes} = this.props
         return (
             <div>
-                <Drawer open={open}
-                        onClose={this.toggleDrawer(false)}>
+                <SwipeableDrawer
+                    disableBackdropTransition={!iOS}
+                    disableDiscovery={iOS}
+                    open={open}
+                    onOpen={this.toggleDrawer(true)}
+                    SwipeAreaProps={{onMouseEnter: this.toggleDrawer(true)}}
+                    onClose={this.toggleDrawer(false)}>
                     <div
                         className={classes.drawer}
                         tabIndex={0}
@@ -52,20 +66,8 @@ class Layout extends React.Component {
                     >
                         <NavList/>
                     </div>
-                </Drawer>
-                <div className={classes.root}>
+                </SwipeableDrawer>
 
-                    <IconButton className={classes.menuButton}
-                                color="inherit"
-                                aria-label="Menu"
-                                onClick={this.toggleDrawer(true)}
-                                onMouseEnter={this.toggleDrawer(true)}
-                    >
-                        <MenuIcon/>
-                    </IconButton>
-
-
-                </div>
                 <div style={{margin: `0 auto`}}>
                     {this.props.children}
                 </div>
