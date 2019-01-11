@@ -34,19 +34,25 @@ class Layout extends React.Component {
         this.state = {
             open: false,
             iOS: undefined,
+            height: 0,
         }
     }
 
     componentDidMount () {
         const iOS = process.browser &&
             /iPad|iPhone|iPod/.test(navigator.userAgent)
+
+        let height = window.innerHeight || document.body.clientHeight ||
+            document.documentElement.clientHeight
+
         this.setState({
             iOS,
+            height,
         })
     }
 
     render () {
-        const {open, iOS} = this.state
+        const {open, iOS, height} = this.state
         const {classes} = this.props
         return (
             <div>

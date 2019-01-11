@@ -5,8 +5,9 @@ import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
-import InboxIcon from '@material-ui/icons/Inbox'
 import HomeIcon from '@material-ui/icons/Home'
+import TagIcon from '@material-ui/icons/Bookmark'
+import AboutIcon from '@material-ui/icons/Person'
 import CardMedia from '@material-ui/core/CardMedia'
 import { Link } from 'gatsby'
 import avatar from '../static/41546411364_.pic.jpg'
@@ -24,8 +25,8 @@ const styles = theme => ({
 
 const MyLink = props => <Link {...props} />
 
-function SimpleList(props) {
-    const { classes } = props
+function SimpleList (props) {
+    const {classes} = props
 
     return (
         <div className={classes.root}>
@@ -42,15 +43,23 @@ function SimpleList(props) {
                         <ListItemIcon>
                             <HomeIcon color={'primary'}/>
                         </ListItemIcon>
-                        <ListItemText primary="主页" />
+                        <ListItemText primary="主页"/>
+                    </ListItem>
+                </MyLink>
+                <MyLink to={'tags'}>
+                    <ListItem button>
+                        <ListItemIcon>
+                            <TagIcon style={{color: '#673ab7'}}/>
+                        </ListItemIcon>
+                        <ListItemText primary="标签"/>
                     </ListItem>
                 </MyLink>
                 <MyLink to={'about'}>
                     <ListItem button>
                         <ListItemIcon>
-                            <InboxIcon />
+                            <AboutIcon style={{color: '#f44336'}}/>
                         </ListItemIcon>
-                        <ListItemText primary="关于" />
+                        <ListItemText primary="关于"/>
                     </ListItem>
                 </MyLink>
             </List>
