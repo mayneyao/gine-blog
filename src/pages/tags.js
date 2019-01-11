@@ -5,6 +5,7 @@ import withRoot from '../withRoot'
 import Layout from '../components/layout'
 import countBy from 'lodash/countBy'
 import ColorfulTag from '../components/hash-colorful-tag'
+import { graphql } from 'gatsby'
 
 const styles = theme => ({
     index: {

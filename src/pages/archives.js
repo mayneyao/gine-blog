@@ -4,6 +4,7 @@ import { withStyles } from '@material-ui/core/styles'
 import withRoot from '../withRoot'
 import Layout from '../components/layout'
 import { Link } from 'gatsby'
+import { graphql } from 'gatsby'
 
 const styles = theme => ({
     index: {
@@ -14,13 +15,13 @@ const styles = theme => ({
 })
 
 class Tags extends React.Component {
-    render () {
-        const {classes, data: {allMarkdownRemark: {edges}}} = this.props
+    render() {
+        const { classes, data: { allMarkdownRemark: { edges } } } = this.props
 
         let allPosts = {}
         let allYears = new Set()
         edges.forEach(
-            ({node}) => {
+            ({ node }) => {
                 let [year, month, day] = node.frontmatter.date.split('/')
                 allYears.add(year)
                 if (!Boolean(allPosts[year])) {
@@ -36,12 +37,13 @@ class Tags extends React.Component {
                             return <div>
                                 <h3>{year}</h3>
                                 {
-                                    allPosts[year].map(post =>
-                                        <li>
-                                            <Link
-                                                to={`posts${post.fields.slug}`}>{post.frontmatter.title}</Link>
-                                        </li>,
-                                    )
+                                    allPosts[year].map(post => {
+                                        let [year, month, day] = post.frontmatter.date.split('/')
+                                        return <li>
+                                            {`${month}-${day} `}<Link to={`posts${post.fields.slug}`}>{post.frontmatter.title}</Link>
+                                        </li>
+
+                                    })
                                 }
                             </div>
                         })
