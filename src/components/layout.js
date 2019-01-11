@@ -57,7 +57,11 @@ class Layout extends React.Component {
         return (
             <div>
                 <Helmet defaultTitle={`Mayne's Blog`}>
+                    <html lang="zh-cmn-Hans" />
                     <meta name="description" content="Mayne's blog 博客 python react gine" />
+                    <noscript>
+                        为了更好的浏览体验，请不要在本页面禁用 Javascript 🙂
+                    </noscript>
                 </Helmet>
                 <SwipeableDrawer
                     disableBackdropTransition={!iOS}
