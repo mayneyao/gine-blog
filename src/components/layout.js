@@ -5,6 +5,7 @@ import { withStyles } from '@material-ui/core/styles'
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer'
 import 'typeface-roboto'
 import NavList from './nav-list'
+import { Helmet } from "react-helmet"
 
 const styles = {
     root: {
@@ -55,6 +56,9 @@ class Layout extends React.Component {
         const { classes } = this.props
         return (
             <div>
+                <Helmet defaultTitle={`Mayne's Blog`}>
+                    <meta name="description" content="Mayne's blog 博客 python react gine" />
+                </Helmet>
                 <SwipeableDrawer
                     disableBackdropTransition={!iOS}
                     disableDiscovery={iOS}
