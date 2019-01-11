@@ -6,6 +6,7 @@ import axios from 'axios'
 import Typography from '@material-ui/core/Typography';
 
 
+const WIKI = (props) => <a href={`https://${props.lang}.wikipedia.org/wiki/${props.title}`} target='__blank'>{props.title}</a>
 
 class Aphorisms extends React.Component {
 
@@ -33,7 +34,9 @@ class Aphorisms extends React.Component {
 
         return <Typography variant="h6">
             {
-                (person && content && source) && `${content} —— ${person} 《${source}》`
+                (person && content && source) && <div>
+                    {content} —— <WIKI lang="zh" title={person}/> 《<WIKI lang="zh" title={source}/>》
+                </div>
             }
         </Typography>
     }
