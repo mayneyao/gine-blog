@@ -18,6 +18,9 @@ blockquote {
     font-weight: 500;
 }
 
+#c1 > div {
+    margin-left: -50px;
+}
 /*code[class*='language-text'] {*/
 /*background: #eee !important;*/
 /*color: red !important;;*/
