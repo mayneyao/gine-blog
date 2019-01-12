@@ -5,6 +5,7 @@ import withRoot from '../withRoot'
 import Layout from '../components/layout'
 import PostListItem from '../components/post-list-item'
 import Pagination from './pagination'
+import { graphql } from 'gatsby'
 
 const styles = theme => ({
     root: {
@@ -13,8 +14,8 @@ const styles = theme => ({
     },
     index: {
         margin: '0 auto',
-        maxWidth: 800,
-        marginTop: '3em',
+        maxWidth: 700,
+        marginTop: '1em',
     },
 })
 

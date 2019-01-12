@@ -21,7 +21,6 @@ class Aphorisms extends React.Component {
 
     componentDidMount() {
         axios.get('/aphorisms.json').then(res => {
-            console.log(res)
             const data = res.data
             const aphorisms = data.edges[Math.floor(Math.random() * 10 % data.edges.length)]
             this.setState({

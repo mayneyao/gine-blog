@@ -59,7 +59,7 @@ exports.createPages = ({ graphql, actions }) => {
             }
         })
 
-        
+
         // 创建分页
         const { totalCount, edges } = result.data.allMarkdownRemark
         const { pageSize } = result.data.site.siteMetadata
@@ -105,4 +105,21 @@ exports.createPages = ({ graphql, actions }) => {
         })
 
     })
+}
+
+
+// fix antv build error
+exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
+    if (stage === "build-html") {
+        actions.setWebpackConfig({
+            module: {
+                rules: [
+                    {
+                        test: /@antv/,
+                        use: loaders.null(),
+                    },
+                ],
+            },
+        })
+    }
 }

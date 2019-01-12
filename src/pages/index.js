@@ -13,7 +13,7 @@ const styles = theme => ({
     index: {
         margin: '0 auto',
         maxWidth: 800,
-        marginTop: '3em',
+        marginTop: '1em',
     },
 })
 

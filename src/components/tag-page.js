@@ -5,6 +5,7 @@ import withRoot from '../withRoot'
 import Layout from '../components/layout'
 import PostListItem from '../components/post-list-item'
 import ColorfulTag from './hash-colorful-tag'
+import { graphql } from 'gatsby'
 
 const styles = theme => ({
     root: {

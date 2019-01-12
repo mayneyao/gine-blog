@@ -5,12 +5,15 @@ import withRoot from '../withRoot'
 import Layout from '../components/layout'
 import { Link } from 'gatsby'
 import { graphql } from 'gatsby'
+import Typography from '@material-ui/core/Typography'
+import Paper from '../components/paper'
+
 
 const styles = theme => ({
     index: {
         margin: '0 auto',
-        maxWidth: 300,
-        marginTop: '3em',
+        maxWidth: 800,
+        marginTop: '1em',
     },
 })
 
@@ -32,22 +35,32 @@ class Tags extends React.Component {
         return (
             <Layout>
                 <div className={classes.index}>
-                    {
-                        Array.from(allYears).map(year => {
-                            return <div>
-                                <h3>{year}</h3>
-                                {
-                                    allPosts[year].map(post => {
-                                        let [year, month, day] = post.frontmatter.date.split('/')
-                                        return <li>
-                                            {`${month}-${day} `}<Link to={`posts${post.fields.slug}`}>{post.frontmatter.title}</Link>
-                                        </li>
+                    <Paper>
+                        {
+                            Array.from(allYears).map(year => {
+                                return <div>
+                                    <Typography variant="h4">{year}</Typography>
+                                    <ul style={{ paddingLeft: '1em' }}>
+                                        {
+                                            allPosts[year].map(post => {
+                                                let [year, month, day] = post.frontmatter.date.split('/')
+                                                return <li style={{
+                                                    listStyle: 'none',
+                                                    borderLeft: '2px solid #999',
+                                                    padding: '5px 0 5px 1em'
+                                                }}>
+                                                    <Typography variant="h6">{`${month}-${day} `}<Link to={`posts${post.fields.slug}`}>{post.frontmatter.title}</Link></Typography>
+                                                </li>
 
-                                    })
-                                }
-                            </div>
-                        })
-                    }
+                                            })
+                                        }
+                                    </ul>
+
+                                </div>
+                            })
+                        }
+                    </Paper>
+
                 </div>
             </Layout>
         )
