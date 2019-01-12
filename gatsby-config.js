@@ -2,9 +2,13 @@ module.exports = {
     siteMetadata: {
         title: `Mayne's Blog`,
         pageSize: 3,
+        description: `All things about Mayne`,
         siteUrl: `https:blog.gine.me`
     },
     plugins: [
+        {
+            resolve: `gatsby-plugin-feed`
+        },
         {
             resolve: `gatsby-plugin-google-analytics`,
             options: {

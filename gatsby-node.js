@@ -50,6 +50,14 @@ exports.createPages = ({ graphql, actions }) => {
     }
   `,
     ).then(result => {
+        // netlify 域名重定向
+        const _redirects = 'https://gine.netlify.com/* https://gine.me/:splat 301!'
+
+        fs.writeFile('public/_redirects', _redirects, function (err) {
+            if (err) {
+                console.error(err)
+            }
+        })
 
         // 创建格言json
         const aphorismsData = JSON.stringify(result.data.allAphorismsCsv)
