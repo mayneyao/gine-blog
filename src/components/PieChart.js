@@ -46,7 +46,7 @@ export default class App extends React.Component {
     }
     render() {
         return (
-            <div id="c1"></div>
+            <div id="c1" style={{marginLeft:'-50px'}}></div>
         );
     }
 }
