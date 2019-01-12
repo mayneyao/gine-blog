@@ -46,7 +46,7 @@ class Layout extends React.Component {
             document.documentElement.clientHeight
         
         // 优化移动端滚动
-        document.addEventListener('touchstart', onTouchStart, {passive: true});
+        // document.addEventListener('touchstart', onTouchStart, {passive: true});
 
         this.setState({
             iOS,
