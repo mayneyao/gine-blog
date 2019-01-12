@@ -6,12 +6,16 @@ module.exports = {
     },
     plugins: [
         {
+            resolve: `gatsby-plugin-google-analytics`,
+            options: {
+                trackingId: "UA-89592481-3",
+                head: true,
+            },
+        },
+        {
             resolve: `gatsby-plugin-sitemap`,
             options: {
                 output: `/sitemap.xml`,
-                // Exclude specific pages or groups of pages using glob parameters
-                // See: https://github.com/isaacs/minimatch
-                // The example below will exclude the single `path/to/page` and all routes beginning with `category`
                 exclude: [],
                 query: `
                 {
@@ -47,30 +51,6 @@ module.exports = {
         },
         `gatsby-plugin-offline`,
         `gatsby-plugin-react-helmet`,
-        {
-            resolve: `gatsby-plugin-google-analytics`,
-            options: {
-                trackingId: "UA-89592481-3",
-                // Puts tracking script in the head instead of the body
-                head: true,
-                // Setting this parameter is optional
-                anonymize: true,
-                // Setting this parameter is also optional
-                respectDNT: true,
-                // Avoids sending pageview hits from custom paths
-                exclude: [],
-                // Enables Google Optimize using your container Id
-                // optimizeId: "YOUR_GOOGLE_OPTIMIZE_TRACKING_ID",
-                // Enables Google Optimize Experiment ID
-                // experimentId: "YOUR_GOOGLE_EXPERIMENT_ID",
-                // Set Variation ID. 0 for original 1,2,3....
-                // variationId: "YOUR_GOOGLE_OPTIMIZE_VARIATION_ID",
-                // Any additional create only fields (optional)
-                sampleRate: 5,
-                siteSpeedSampleRate: 10,
-                // cookieDomain: "auto",
-            },
-        },
         {
             resolve: `gatsby-source-filesystem`,
             options: {

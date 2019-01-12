@@ -8,25 +8,39 @@ import 'prismjs/plugins/line-numbers/prism-line-numbers.css'
 import ScrollProgress from './scroll-progress'
 import ColorfulTag from './hash-colorful-tag'
 import getImageByName from '../utils/notion-hash-image'
+import Disqus from 'disqus-react';
+
 
 class BlogPost extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            disqusShortname: undefined,
+            disqusConfig: undefined
+        }
+    }
 
     componentDidMount() {
-        // let disqus_config = function () {
-        //     this.page.url = window.location.href  // Replace PAGE_URL with your page's canonical URL variable
-        //     this.page.identifier = window.location.pathname // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-        // }
-        //
-        // let d = document, s = d.createElement('script')
-        // s.src = 'https://maynes-blog.disqus.com/embed.js'
-        // s.setAttribute('data-timestamp', +new Date());
-        // (d.head || d.body).appendChild(s)
+        const { data } = this.props
+        const post = data.markdownRemark
+        const disqusShortname = 'maynes-blog';
+        const disqusConfig = {
+            url: window.location.href,
+            identifier: window.location.pathname,
+            title: post.frontmatter.title,
+        }
+        this.setState({
+            disqusShortname,
+            disqusConfig
+        })
     }
 
     render() {
         const { data } = this.props
         const post = data.markdownRemark
         const { tags, date } = post.frontmatter
+        const { disqusShortname, disqusConfig } = this.state
+
         return (
             <div>
                 <ScrollProgress />
@@ -69,6 +83,10 @@ class BlogPost extends React.Component {
                         <Paper>
                             <h1>{post.frontmatter.title}</h1>
                             <div dangerouslySetInnerHTML={{ __html: post.html }} />
+                            {
+                                (disqusShortname && disqusConfig) && <Disqus.DiscussionEmbed shortname={disqusShortname} config={disqusConfig} />
+                            }
+
                         </Paper>
                     </main>
                 </Layout>

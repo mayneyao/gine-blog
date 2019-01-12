@@ -8,6 +8,7 @@
     "@material-ui/icons": "^3.0.2",
     "@material-ui/lab": "^3.0.0-alpha.28",
     "axios": "^0.18.0",
+    "disqus-react": "^1.0.5",
     "gatsby": "latest",
     "gatsby-plugin-google-analytics": "^2.0.9",
     "gatsby-plugin-manifest": "^2.0.13",
