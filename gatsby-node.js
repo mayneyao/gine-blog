@@ -87,7 +87,7 @@ exports.createPages = ({ graphql, actions }) => {
         // 创建文章详情页
         edges.forEach(({ node }) => {
             createPage({
-                path: `posts${node.fields.slug}`,
+                path: node.fields.slug,
                 component: path.resolve(`./src/components/blog-post.js`),
                 context: {
                     // Data passed to context is available

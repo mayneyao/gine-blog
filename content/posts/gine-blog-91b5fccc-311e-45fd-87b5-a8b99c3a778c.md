@@ -1,10 +1,11 @@
 ---
-title: gine-blog 挖坑详情
-tags: [Blog,轮子]
-desc: 基于 gatsby,react,material-ui 的静态blog程序
-date: 2019/01/12
+title: gine-blog 挖坑
+date: 2019/01/15
+tags: [Blog]
 ---
 
+tags: Blog
+update_time: Jan 15, 2019 9:33 PM
 
 ## 为什么又要造轮子
 
@@ -13,7 +14,8 @@ date: 2019/01/12
 - 静态页面优点
     - SEO友好
     - 速度快
-- hexo的ejs就像老奶奶的裹脚布，希望用熟悉的技术栈来构建自己的blog
+- hexo的ejs就像老奶奶的裹脚布
+- 希望用熟悉的技术栈来构建自己的blog
 - `gatsby` 的模式深得我❤️
 - `notion` 可以用来写作，但是不适合分享给别人看，也不适合交流
 - `notion` ~~马上(可能是明年吧，鸽鸽鸽~)~~要开api了，云端协作，自动同步岂不美哉😆
@@ -24,7 +26,7 @@ date: 2019/01/12
 
     理想的情况是以 `notion` 作为协作的后端。文章发布后（share public access ），webhook发 `netlify` 的build 动作, `gatsby` build 的时候拉取 `notion` 的文章数据编译成静态页面。
 
-    ![](sequence_diagram-ccfc0122-aaf0-4c74-96e5-7e32680cde38.png)
+    ![](Untitled-05660695-d9bf-47a6-9937-358d23c90be9.png)
 
     鉴于目前notion开放api的日程一直在推后(疯狂摸鱼)，对基于官方API的自动化部署不抱太大的希望
 
@@ -56,16 +58,7 @@ A > B > C 目前是C方案，开三个分支慢慢搞。两开花两开花💐
 - 可以结合远程 api 做成静态+动态内容
 - 如果 api 数据较少，可以直接 graphql 缓存下来
 
-## Lighthouse Report
-
-![](TIM截图20190112015050.png)
-
-是不是很香2333
-
-## Roadmap
-
-- 代码地址： [https://github.com/mayneyao/gine-blog](https://github.com/mayneyao/gine-blog)
-- demo地址：[https://blog.gine.me/page/1](https://blog.gine.me/page/1)
+## 项目详情
 
 - TODO
     - [x]  列表页
@@ -73,22 +66,24 @@ A > B > C 目前是C方案，开三个分支慢慢搞。两开花两开花💐
     - [x]  文章页
         - [x]  头图
         - [x]  tags
-        - [ ]  评论
+        - [x]  评论
         - [x]  发布时间
         - [ ]  TOC
     - [x]  底部
         - [x]  格言
     - [x]  全部标页——标签云
         - 用了标签后，就不用分类了。2者功能重叠，tag扁平一点。
-        - [ ]  better css
+        - 现在的标签用的饼状图，g2的颜色映射不是很清楚。跟自己搞的tag color不一致
+        - [x]  better css
     - [x]  归档——timeline
-        - [ ]  better css
+        - [x]  better css
     - [x]  标签详情页 关于该标签的所有文章全部列出来
     - [x]  404
-    - [ ]  集成 google analytics
+    - [x]  集成 google analytics
     - [ ]  友链
-    - [ ]  about me
+    - [x]  about me
     - [x]  域名 https
     - [x]  PWA 离线体验
     - [x]  sitemap SEO优化
-    - [ ]  RSS
+    - [x]  RSS
+    - [ ]  画廊相册

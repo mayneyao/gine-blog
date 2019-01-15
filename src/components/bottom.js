@@ -6,6 +6,13 @@ import axios from 'axios'
 import Typography from '@material-ui/core/Typography';
 
 
+function isChineseChar(str) {
+    var reg = /[\u4E00-\u9FA5\uF900-\uFA2D]/;
+    return reg.test(str);
+}
+
+
+
 const WIKI = (props) => <a href={`https://${props.lang}.wikipedia.org/wiki/${props.title}`} target='__blank'>{props.title}</a>
 
 class Aphorisms extends React.Component {
@@ -31,11 +38,18 @@ class Aphorisms extends React.Component {
     render() {
         const { person, content, source } = this.state
 
+        const getRender = (person, content, source) => {
+            if (person && content && source) {
+                let personLang = isChineseChar(person) ? 'zh' : 'en'
+                let sourceLang = isChineseChar(source) ? 'zh' : 'en'
+                return <div>
+                    {content} —— <WIKI lang={personLang} title={person} /> 《<WIKI lang={sourceLang} title={source} />》
+                </div>
+            }
+        }
         return <Typography variant="h6">
             {
-                (person && content && source) && <div>
-                    {content} —— <WIKI lang="zh" title={person}/> 《<WIKI lang="zh" title={source}/>》
-                </div>
+                getRender(person, content, source)
             }
         </Typography>
     }

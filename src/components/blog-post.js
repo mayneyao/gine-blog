@@ -47,8 +47,7 @@ class BlogPost extends React.Component {
                 <Layout>
                     <div style={{
                         width: '100%',
-                        background: `url(${post.frontmatter.image ||
-                            getImageByName(`posts${post.fields.slug}`)})`,
+                        background: `url(${post.frontmatter.image || getImageByName(post.fields.slug)}`,
                         height: '400px',
                         backgroundSize: '100%',
                         backgroundPosition: 'bottom',
@@ -104,7 +103,6 @@ export const query = graphql`
       html
       frontmatter {
         title
-        image
         tags
         date
       }

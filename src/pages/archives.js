@@ -49,7 +49,7 @@ class Tags extends React.Component {
                                                     borderLeft: '2px solid #999',
                                                     padding: '5px 0 5px 1em'
                                                 }}>
-                                                    <Typography variant="h6">{`${month}-${day} `}<Link to={`posts${post.fields.slug}`}>{post.frontmatter.title}</Link></Typography>
+                                                    <Typography variant="h6">{`${month}-${day} `}<Link to={post.fields.slug}>{post.frontmatter.title}</Link></Typography>
                                                 </li>
 
                                             })

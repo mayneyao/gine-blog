@@ -34,7 +34,7 @@ class Index extends React.Component {
                         <PostListItem title={node.frontmatter.title}
                             key={node.id}
                             content={node.excerpt}
-                            slug={`posts${node.fields.slug}`}
+                            slug={node.fields.slug}
                             image={node.frontmatter.image}
                             tags={node.frontmatter.tags}
                             date={node.frontmatter.date}
