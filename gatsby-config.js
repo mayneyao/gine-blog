@@ -3,7 +3,7 @@ module.exports = {
         title: `Mayne's Blog`,
         pageSize: 3,
         description: `All things about Mayne`,
-        siteUrl: `https:blog.gine.me`
+        siteUrl: `https://gine.me`
     },
     plugins: [
         {
