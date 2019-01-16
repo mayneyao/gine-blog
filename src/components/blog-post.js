@@ -9,6 +9,7 @@ import ScrollProgress from './scroll-progress'
 import ColorfulTag from './hash-colorful-tag'
 import getImageByName from '../utils/notion-hash-image'
 import Disqus from 'disqus-react';
+import { Helmet } from "react-helmet"
 
 
 class BlogPost extends React.Component {
@@ -52,6 +53,9 @@ class BlogPost extends React.Component {
                         backgroundSize: '100%',
                         backgroundPosition: 'bottom',
                     }} />
+                    <Helmet defaultTitle={`Mayne's Blog - ${post.frontmatter.title}`}>
+                        <meta name="description" content={`Mayne's blog 博客 python react gine ${post.frontmatter.title}`} />
+                    </Helmet>
                     <main style={{
                         maxWidth: 900,
                         margin: '0 auto',
