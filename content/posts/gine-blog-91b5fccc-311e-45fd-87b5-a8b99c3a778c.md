@@ -1,11 +1,10 @@
 ---
-title: gine-blog 挖坑
+title: gine-blog 挖坑详情
 date: 2019/01/15
 tags: [Blog]
 ---
 
-tags: Blog
-update_time: Jan 15, 2019 9:33 PM
+
 
 ## 为什么又要造轮子
 
@@ -44,6 +43,7 @@ A > B > C 目前是C方案，开三个分支慢慢搞。两开花两开花💐
     - 继续优化
 - [ ]  Plan B
     - 开新的分支实验一下api
+    - 这个工作量太大了，吃力不讨好，废弃
 - [ ]  Plan A
     - 等notion开放api
 
@@ -57,6 +57,13 @@ A > B > C 目前是C方案，开三个分支慢慢搞。两开花两开花💐
 - 可以从任意数据源生成 graphql 数据
 - 可以结合远程 api 做成静态+动态内容
 - 如果 api 数据较少，可以直接 graphql 缓存下来
+
+## notion 导出 markdown 存在的问题
+
+- 代码模块中缺少lang信息，前端没法代码高亮
+    - 已反馈，后续会改进mardkown导出
+- 需要通过脚本处理头部的meta信息
+    - 现在是用python写的，后续改成node，在create node时预处理md文件
 
 ## 项目详情
 
