@@ -111,6 +111,12 @@ exports.createPages = ({ graphql, actions }) => {
                 },
             })
         })
+        // music 
+        createPage({
+            path: `music`,
+            component: path.resolve(`./src/components/music/top.js`),
+            context: {},
+        })
 
     })
 }

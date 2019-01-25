@@ -13,6 +13,7 @@ import CardMedia from '@material-ui/core/CardMedia'
 import { Link } from 'gatsby'
 import avatar from '../static/41546411364_.pic.jpg'
 
+
 const styles = theme => ({
     root: {
         width: '100%',

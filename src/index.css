@@ -28,3 +28,22 @@ blockquote {
 /*}*/
 
 /* */
+
+.animate {
+    padding-left: 20px;
+    font-size: 18px;
+    display: inline-block;
+    white-space: nowrap;
+    animation: 15s wordsLoop linear infinite normal;
+}
+
+@keyframes wordsLoop {
+    0% {
+        transform: translateX(0px);
+        -webkit-transform: translateX(0px);
+    }
+    100% {
+        transform: translateX(-100%);
+        -webkit-transform: translateX(-100%);
+    }
+}

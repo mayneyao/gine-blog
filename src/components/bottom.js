@@ -5,7 +5,6 @@ import ULink from './link-without-underline'
 import axios from 'axios'
 import Typography from '@material-ui/core/Typography';
 
-
 function isChineseChar(str) {
     var reg = /[\u4E00-\u9FA5\uF900-\uFA2D]/;
     return reg.test(str);
@@ -58,7 +57,6 @@ class Aphorisms extends React.Component {
 
 export default () => (
     <div style={{ margin: `1em 0 auto auto`, textAlign: 'center', paddingBottom: '1em' }}>
-
         <Aphorisms />
         <Typography variant="subtitle1">
             Build with <ULink href="https://www.gatsbyjs.org" text="gatsby" />,
