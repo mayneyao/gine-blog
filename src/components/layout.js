@@ -9,6 +9,10 @@ import { Helmet } from "react-helmet"
 import PlayingMusic from './music/CurrentPlayingMusic'
 import PlayingGame from './game/CurrentPlayingGame'
 import Divider from '@material-ui/core/Divider';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
 
 import throttle from 'lodash/throttle'
 import Axios from "axios"
@@ -19,8 +23,8 @@ const styles = {
         top: 0,
     },
     menuButton: {
-        marginLeft: 10,
-        marginRight: 10,
+        marginLeft: -12,
+        marginRight: 20,
     },
     drawer: {
         width: 300,
@@ -109,7 +113,13 @@ class Layout extends React.Component {
                         <PlayingGame data={game} />
                     </div>
                 </SwipeableDrawer>
-
+                <AppBar position="static">
+                    <Toolbar style={{ minHeight: 48}}>
+                        <IconButton className={classes.menuButton} color="inherit" aria-label="Menu" onClick={this.toggleDrawer(true)}>
+                            <MenuIcon />
+                        </IconButton>
+                    </Toolbar>
+                </AppBar>
                 <div style={{ margin: `0 auto` }}>
                     {this.props.children}
                 </div>
