@@ -1,9 +1,59 @@
 const { createFilePath } = require(`gatsby-source-filesystem`)
 const path = require(`path`)
-const fs = require("fs");
+const fs = require("fs")
+const axios = require('axios')
+const download = require('image-downloader')
+
+
+exports.sourceNodes = ({ actions, createNodeId, createContentDigest }) => {
+    const { createNode } = actions
+    return (axios.get('http://space.bilibili.com/ajax/Bangumi/getList?mid=22539301&page=1').then(res => {
+        res.data.data.result.map(myData => {
+            // Data can come from anywhere, but for now create it manually
+            console.log(myData)
+
+
+            let coverUrl = myData.cover
+            let coverPath = `public/static/${coverUrl.split('/').pop()}`
+            let options = {
+                url: coverUrl,
+                dest: coverPath
+            }
+
+            download.image(options)
+                .then(({ filename, image }) => {
+                    console.log('File saved to', filename)
+                })
+                .catch((err) => {
+                    console.error(err)
+                })
+
+            const nodeContent = JSON.stringify(myData)
+
+            const nodeMeta = {
+                id: createNodeId(myData.season_id),
+                parent: null,
+                children: [],
+                internal: {
+                    type: `Bangumi`,
+                    mediaType: `text/html`,
+                    content: nodeContent,
+                    contentDigest: createContentDigest(myData)
+                }
+            }
+
+            const node = Object.assign({}, myData, nodeMeta)
+            createNode(node)
+        })
+    }))
+}
+
 
 exports.onCreateNode = ({ node, getNode, actions }) => {
     const { createNodeField } = actions
+    if (node.internal.type === `Bangumi`) {
+        console.log(node)
+    }
     if (node.internal.type === `MarkdownRemark`) {
         const slug = createFilePath({ node, getNode, basePath: `pages` })
         createNodeField({
@@ -115,6 +165,13 @@ exports.createPages = ({ graphql, actions }) => {
         createPage({
             path: `music`,
             component: path.resolve(`./src/components/music/top.js`),
+            context: {},
+        })
+
+        // bangumi
+        createPage({
+            path: `bangumi`,
+            component: path.resolve(`./src/components/bangumi/all.js`),
             context: {},
         })
 
