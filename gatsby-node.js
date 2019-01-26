@@ -10,9 +10,6 @@ exports.sourceNodes = ({ actions, createNodeId, createContentDigest }) => {
     return (axios.get('http://space.bilibili.com/ajax/Bangumi/getList?mid=22539301&page=1').then(res => {
         res.data.data.result.map(myData => {
             // Data can come from anywhere, but for now create it manually
-            console.log(myData)
-
-
             let coverUrl = myData.cover
             let coverPath = `public/static/${coverUrl.split('/').pop()}`
             let options = {

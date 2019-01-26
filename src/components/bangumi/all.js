@@ -15,7 +15,7 @@ class AllBangumi extends React.Component {
         return <Layout>
             <div style={{ display: 'flex', flexWrap: 'wrap', maxWidth: 1100, margin: '0 auto' }}>
                 {
-                    data.allBangumi.edges.map(item => {
+                    data.allBangumi.edges.sort((a, b) => parseInt(a.node.season_id) < parseInt(b.node.season_id) ? 1 : -1 ).map(item => {
                         return <BangumiCard data={item.node} key={item.node.id}></BangumiCard>
                     })
                 }
