@@ -6,6 +6,16 @@ import SwipeableDrawer from '@material-ui/core/SwipeableDrawer'
 import 'typeface-roboto'
 import NavList from './nav-list'
 import { Helmet } from "react-helmet"
+import PlayingMusic from './music/CurrentPlayingMusic'
+import PlayingGame from './game/CurrentPlayingGame'
+import Divider from '@material-ui/core/Divider';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
+
+import throttle from 'lodash/throttle'
+import Axios from "axios"
 
 const styles = {
     root: {
@@ -13,8 +23,8 @@ const styles = {
         top: 0,
     },
     menuButton: {
-        marginLeft: 10,
-        marginRight: 10,
+        marginLeft: -12,
+        marginRight: 20,
     },
     drawer: {
         width: 300,
@@ -23,10 +33,10 @@ const styles = {
 
 class Layout extends React.Component {
     toggleDrawer = (open) => () => {
-        console.log('11111')
         this.setState({
             open: open,
         })
+        this.fetchData()
     }
 
     constructor(props) {
@@ -35,7 +45,22 @@ class Layout extends React.Component {
             open: false,
             iOS: undefined,
             height: 0,
+            data: {
+                music: {},
+                game: {}
+
+            }
         }
+        this.fetchData = throttle(this._fetchData, 10000)
+    }
+
+    _fetchData = () => {
+        Axios.get('https://api.gine.me/currently_playing').then(res => {
+            console.log(res)
+            this.setState({
+                data: res.data
+            })
+        })
     }
 
     componentDidMount() {
@@ -44,7 +69,7 @@ class Layout extends React.Component {
 
         let height = window.innerHeight || document.body.clientHeight ||
             document.documentElement.clientHeight
-        
+
         // 优化移动端滚动
         // document.addEventListener('touchstart', onTouchStart, {passive: true});
 
@@ -52,10 +77,12 @@ class Layout extends React.Component {
             iOS,
             height,
         })
+        this.fetchData()
     }
 
+
     render() {
-        const { open, iOS, height } = this.state
+        const { open, iOS, height, data: { music, game } } = this.state
         const { classes } = this.props
         return (
             <div>
@@ -81,9 +108,18 @@ class Layout extends React.Component {
                         onKeyDown={this.toggleDrawer(false)}
                     >
                         <NavList />
+                        <Divider />
+                        <PlayingMusic data={music} />
+                        <PlayingGame data={game} />
                     </div>
                 </SwipeableDrawer>
-
+                <AppBar position="static">
+                    <Toolbar style={{ minHeight: 48}}>
+                        <IconButton className={classes.menuButton} color="inherit" aria-label="Menu" onClick={this.toggleDrawer(true)}>
+                            <MenuIcon />
+                        </IconButton>
+                    </Toolbar>
+                </AppBar>
                 <div style={{ margin: `0 auto` }}>
                     {this.props.children}
                 </div>

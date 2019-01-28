@@ -5721,6 +5721,13 @@ ignore@^4.0.6:
   version "4.0.6"
   resolved "https://registry.npmjs.org/ignore/-/ignore-4.0.6.tgz#750e3db5862087b4737ebac8207ffd1ef27b25fc"
 
+image-downloader@^3.4.2:
+  version "3.4.2"
+  resolved "https://registry.yarnpkg.com/image-downloader/-/image-downloader-3.4.2.tgz#0b1909f2437899583286a46fe55691df8ced5f83"
+  integrity sha512-2nAJuZVn9nRqYuX1cT9iBlb6RviI1HGfGa0cL2H8HupbSkFDWOooa5x2oYzydjnQEV+R/YVum2uRXst2UII0yw==
+  dependencies:
+    request "^2.88.0"
+
 imagemin-mozjpeg@^8.0.0:
   version "8.0.0"
   resolved "https://registry.npmjs.org/imagemin-mozjpeg/-/imagemin-mozjpeg-8.0.0.tgz#d2ca4e8c982c7c6eda55069af89dee4c1cebcdfd"
@@ -9216,7 +9223,7 @@ replace-ext@1.0.0, replace-ext@^1.0.0:
   version "1.0.0"
   resolved "https://registry.npmjs.org/replace-ext/-/replace-ext-1.0.0.tgz#de63128373fcbf7c3ccfa4de5a480c45a67958eb"
 
-request@^2.65.0, request@^2.83.0, request@^2.85.0:
+request@^2.65.0, request@^2.83.0, request@^2.85.0, request@^2.88.0:
   version "2.88.0"
   resolved "https://registry.npmjs.org/request/-/request-2.88.0.tgz#9c2fca4f7d35b592efe57c7f0a55e81052124fef"
   dependencies:
