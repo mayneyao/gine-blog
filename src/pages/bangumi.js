@@ -1,10 +1,10 @@
 import Axios from "axios"
 import React from 'react'
-import BangumiCard from './BangumiCard'
+import BangumiCard from '../components/bangumi/BangumiCard'
 import { graphql } from 'gatsby'
-import Layout from '../layout'
+import Layout from '../components/layout'
 import { withStyles } from '@material-ui/core/styles'
-import withRoot from '../../withRoot'
+import withRoot from '../withRoot'
 
 
 class AllBangumi extends React.Component {

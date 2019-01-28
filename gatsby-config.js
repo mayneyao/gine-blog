@@ -60,7 +60,6 @@ module.exports = {
                 path: `${__dirname}/content`,
             },
         },
-        `gatsby-transformer-csv`,
         `gatsby-plugin-sharp`,
         {
             resolve: 'gatsby-source-filesystem',

@@ -26,11 +26,9 @@ class Aphorisms extends React.Component {
     }
 
     componentDidMount() {
-        axios.get('/aphorisms.json').then(res => {
-            const data = res.data
-            const aphorisms = data.edges[Math.floor(Math.random() * 10 % data.edges.length)]
+        axios.get('https://api.gine.me/notion/b23848d867974c36a2902ec4cb833453/29915c889d4c415cbfb9e9bf7dd49afd?random_one=1').then(res => {
             this.setState({
-                ...aphorisms.node
+                ...res.data
             })
         })
     }
@@ -46,7 +44,7 @@ class Aphorisms extends React.Component {
                 </div>
             }
         }
-        return <Typography variant="h6">
+        return <Typography variant="subtitle1">
             {
                 getRender(person, content, source)
             }

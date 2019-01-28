@@ -113,8 +113,8 @@ class Layout extends React.Component {
                         <PlayingGame data={game} />
                     </div>
                 </SwipeableDrawer>
-                <AppBar position="static">
-                    <Toolbar style={{ minHeight: 48}}>
+                <AppBar position="sticky">
+                    <Toolbar style={{ minHeight: 48 }}>
                         <IconButton className={classes.menuButton} color="inherit" aria-label="Menu" onClick={this.toggleDrawer(true)}>
                             <MenuIcon />
                         </IconButton>

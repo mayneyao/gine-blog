@@ -1,7 +1,8 @@
 
 a {
     text-decoration: none;
-    color: #009688
+    color: #009688;
+    overflow-wrap: break-word;
 }
 
 img {
@@ -21,13 +22,6 @@ blockquote {
 #c1 > div {
     margin-left: -50px;
 }
-/*code[class*='language-text'] {*/
-/*background: #eee !important;*/
-/*color: red !important;;*/
-/*margin: 0 5px !important;;*/
-/*}*/
-
-/* */
 
 .animate {
     padding-left: 20px;

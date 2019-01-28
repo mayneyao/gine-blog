@@ -16,14 +16,15 @@ exports.sourceNodes = ({ actions, createNodeId, createContentDigest }) => {
                 url: coverUrl,
                 dest: coverPath
             }
-
-            download.image(options)
-                .then(({ filename, image }) => {
-                    console.log('File saved to', filename)
-                })
-                .catch((err) => {
-                    console.error(err)
-                })
+            if (!fs.existsSync(coverPath)) {
+                download.image(options)
+                    .then(({ filename, image }) => {
+                        console.log('File saved to', filename)
+                    })
+                    .catch((err) => {
+                        console.error(err)
+                    })
+            }
 
             const nodeContent = JSON.stringify(myData)
 
@@ -48,9 +49,6 @@ exports.sourceNodes = ({ actions, createNodeId, createContentDigest }) => {
 
 exports.onCreateNode = ({ node, getNode, actions }) => {
     const { createNodeField } = actions
-    if (node.internal.type === `Bangumi`) {
-        console.log(node)
-    }
     if (node.internal.type === `MarkdownRemark`) {
         const slug = createFilePath({ node, getNode, basePath: `pages` })
         createNodeField({
@@ -72,15 +70,6 @@ exports.createPages = ({ graphql, actions }) => {
           pageSize
         }
       }
-      allAphorismsCsv {
-        edges {
-          node {
-            content
-            person
-            source
-          }
-        }
-      }
       allMarkdownRemark {
         totalCount
         edges {
@@ -94,9 +83,7 @@ exports.createPages = ({ graphql, actions }) => {
           }
         }
       }
-    }
-  `,
-    ).then(result => {
+    }`).then(result => {
         // netlify 域名重定向
         const _redirects = 'https://gine.netlify.com/* https://gine.me/:splat 301!'
 
@@ -105,15 +92,6 @@ exports.createPages = ({ graphql, actions }) => {
                 console.error(err)
             }
         })
-
-        // 创建格言json
-        const aphorismsData = JSON.stringify(result.data.allAphorismsCsv)
-        fs.writeFile('public/aphorisms.json', aphorismsData, function (err) {
-            if (err) {
-                console.error(err)
-            }
-        })
-
 
         // 创建分页
         const { totalCount, edges } = result.data.allMarkdownRemark
@@ -158,20 +136,12 @@ exports.createPages = ({ graphql, actions }) => {
                 },
             })
         })
-        // music 
+        // music
         createPage({
             path: `music`,
             component: path.resolve(`./src/components/music/top.js`),
             context: {},
         })
-
-        // bangumi
-        createPage({
-            path: `bangumi`,
-            component: path.resolve(`./src/components/bangumi/all.js`),
-            context: {},
-        })
-
     })
 }
 
