@@ -19,13 +19,13 @@ const styles = theme => ({
 
 class Tags extends React.Component {
     render() {
-        const { classes, data: { allMarkdownRemark: { edges } } } = this.props
+        const { classes, data: { allPost: { edges } } } = this.props
 
         let allPosts = {}
         let allYears = new Set()
         edges.forEach(
             ({ node }) => {
-                let [year, month, day] = node.frontmatter.date.split('/')
+                let [year, month, day] = node.public_date.split('-')
                 allYears.add(year)
                 if (!Boolean(allPosts[year])) {
                     allPosts[year] = []
@@ -43,13 +43,13 @@ class Tags extends React.Component {
                                     <ul style={{ paddingLeft: '1em' }}>
                                         {
                                             allPosts[year].map(post => {
-                                                let [year, month, day] = post.frontmatter.date.split('/')
+                                                let [year, month, day] = post.public_date.split('-')
                                                 return <li style={{
                                                     listStyle: 'none',
                                                     borderLeft: '2px solid #999',
                                                     padding: '5px 0 5px 1em'
                                                 }}>
-                                                    <Typography variant="h6">{`${month}-${day} `}<Link to={post.fields.slug}>{post.frontmatter.title}</Link></Typography>
+                                                    <Typography variant="h6">{`${month}-${day} `}<Link to={post.slug}>{post.name}</Link></Typography>
                                                 </li>
 
                                             })
@@ -75,16 +75,14 @@ export default withRoot(withStyles(styles)(Tags))
 
 export const query = graphql`
 {
-  allMarkdownRemark(sort: {fields: [frontmatter___date], order: DESC}) {
+  allPost(sort: {fields: [public_date], order: DESC}) {
     edges {
       node {
-        frontmatter {
-          date
-          title
-        }
-        fields {
-          slug
-        }
+        id
+        name
+        tags
+        public_date
+        slug
       }
     }
   }

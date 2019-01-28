@@ -53,12 +53,10 @@ export default withRoot(withStyles(styles)(Tags))
 
 export const query = graphql`
   {
-  allMarkdownRemark {
+  allPost{
     edges {
       node {
-        frontmatter {
-          tags
-        }
+        tags
       }
     }
   }

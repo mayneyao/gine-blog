@@ -53,47 +53,5 @@ module.exports = {
         },
         `gatsby-plugin-offline`,
         `gatsby-plugin-react-helmet`,
-        {
-            resolve: `gatsby-source-filesystem`,
-            options: {
-                name: `content`,
-                path: `${__dirname}/content`,
-            },
-        },
-        `gatsby-plugin-sharp`,
-        {
-            resolve: 'gatsby-source-filesystem',
-            options: {
-                path: `${__dirname}/content`,
-                name: 'content',
-            },
-        },
-        `gatsby-transformer-remark`,
-        {
-            resolve: `gatsby-transformer-remark`,
-            options: {
-                plugins: [
-                    {
-                        resolve: `gatsby-remark-relative-images`,
-                    },
-                    {
-                        resolve: `gatsby-remark-images`,
-                        options: {
-                            maxWidth: 590,
-                        },
-                    },
-                    {
-                        resolve: `gatsby-remark-prismjs`,
-                        options: {
-                            classPrefix: 'language-',
-                            inlineCodeMarker: {sh: 'bash'},
-                            aliases: {},
-                            showLineNumbers: false,
-                            noInlineHighlight: false,
-                        },
-                    },
-                ],
-            },
-        },
     ],
 }

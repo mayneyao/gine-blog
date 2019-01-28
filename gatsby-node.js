@@ -5,58 +5,76 @@ const axios = require('axios')
 const download = require('image-downloader')
 
 
-exports.sourceNodes = ({ actions, createNodeId, createContentDigest }) => {
-    const { createNode } = actions
-    return (axios.get('http://space.bilibili.com/ajax/Bangumi/getList?mid=22539301&page=1').then(res => {
-        res.data.data.result.map(myData => {
-            // Data can come from anywhere, but for now create it manually
-            let coverUrl = myData.cover
-            let coverPath = `public/static/${coverUrl.split('/').pop()}`
-            let options = {
-                url: coverUrl,
-                dest: coverPath
-            }
-            if (!fs.existsSync(coverPath)) {
-                download.image(options)
-                    .then(({ filename, image }) => {
-                        console.log('File saved to', filename)
-                    })
-                    .catch((err) => {
-                        console.error(err)
-                    })
-            }
+async function genBangumiData(createNode, createNodeId, createContentDigest) {
+    const res = await axios.get('http://space.bilibili.com/ajax/Bangumi/getList?mid=22539301&page=1')
+    console.log('获取bangumi数据')
+    res.data.data.result.map(myData => {
+        // Data can come from anywhere, but for now create it manually
+        let coverUrl = myData.cover
+        let coverPath = `public/static/${coverUrl.split('/').pop()}`
+        let options = {
+            url: coverUrl,
+            dest: coverPath
+        }
+        if (!fs.existsSync(coverPath)) {
+            download.image(options)
+                .then(({ filename, image }) => {
+                    console.log('File saved to', filename)
+                })
+                .catch((err) => {
+                    console.error(err)
+                })
+        }
 
-            const nodeContent = JSON.stringify(myData)
+        const nodeContent = JSON.stringify(myData)
 
-            const nodeMeta = {
-                id: createNodeId(myData.season_id),
-                parent: null,
-                children: [],
-                internal: {
-                    type: `Bangumi`,
-                    mediaType: `text/html`,
-                    content: nodeContent,
-                    contentDigest: createContentDigest(myData)
-                }
+        const nodeMeta = {
+            id: createNodeId(myData.season_id),
+            parent: null,
+            children: [],
+            internal: {
+                type: `Bangumi`,
+                mediaType: `text/html`,
+                content: nodeContent,
+                contentDigest: createContentDigest(myData)
             }
+        }
 
-            const node = Object.assign({}, myData, nodeMeta)
-            createNode(node)
-        })
-    }))
+        const node = Object.assign({}, myData, nodeMeta)
+        createNode(node)
+    })
+}
+
+async function genPostData(createNode, createNodeId, createContentDigest) {
+    const res = await axios.get('http://127.0.0.1:5000/notion/blog')
+    console.log('获取post数据')
+    res.data.map(postData => {
+        const nodeContent = JSON.stringify(postData)
+        const nodeMeta = {
+            id: createNodeId(postData.slug),
+            parent: null,
+            children: [],
+            internal: {
+                type: `Post`,
+                mediaType: `text/html`,
+                content: nodeContent,
+                contentDigest: createContentDigest(postData)
+            }
+        }
+        const node = Object.assign({}, postData, nodeMeta)
+        createNode(node)
+    })
+}
+
+exports.sourceNodes = async ({ actions, createNodeId, createContentDigest }) => {
+    const { createNode } = actions;
+    await genBangumiData(createNode, createNodeId, createContentDigest);
+    await genPostData(createNode, createNodeId, createContentDigest);
 }
 
 
 exports.onCreateNode = ({ node, getNode, actions }) => {
     const { createNodeField } = actions
-    if (node.internal.type === `MarkdownRemark`) {
-        const slug = createFilePath({ node, getNode, basePath: `pages` })
-        createNodeField({
-            node,
-            name: `slug`,
-            value: slug,
-        })
-    }
 }
 
 exports.createPages = ({ graphql, actions }) => {
@@ -70,16 +88,12 @@ exports.createPages = ({ graphql, actions }) => {
           pageSize
         }
       }
-      allMarkdownRemark {
+      allPost {
         totalCount
         edges {
           node {
-            fields {
               slug
-            }
-            frontmatter {
               tags
-            }
           }
         }
       }
@@ -94,7 +108,7 @@ exports.createPages = ({ graphql, actions }) => {
         })
 
         // 创建分页
-        const { totalCount, edges } = result.data.allMarkdownRemark
+        const { totalCount, edges } = result.data.allPost
         const { pageSize } = result.data.site.siteMetadata
         const pageCount = Math.ceil(totalCount / pageSize)
         for (let i = 1; i <= pageCount; i++) {
@@ -112,19 +126,19 @@ exports.createPages = ({ graphql, actions }) => {
         // 创建文章详情页
         edges.forEach(({ node }) => {
             createPage({
-                path: node.fields.slug,
+                path: node.slug,
                 component: path.resolve(`./src/components/blog-post.js`),
                 context: {
                     // Data passed to context is available
                     // in page queries as GraphQL variables.
-                    slug: node.fields.slug,
+                    slug: node.slug,
                 },
             })
         })
         // 创建tag详情页
         let allTags = new Set()
         edges.forEach(({ node }) => {
-            node.frontmatter.tags.map(tag => allTags.add(tag))
+            node.tags.map(tag => allTags.add(tag))
         })
 
         Array.from(allTags).map(tag => {

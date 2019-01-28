@@ -54,21 +54,17 @@ export default withRoot(withStyles(styles)(Index))
 
 export const query = graphql`
 query ($tag: String!){
-    allMarkdownRemark(filter: {frontmatter: {tags: {in: [$tag]}}}, sort: {fields: [frontmatter___date], order: DESC}) {
-      edges {
-        node {
-          excerpt
-          frontmatter {
-            title
+    allPost(filter:{tags: {in: [$tag]}},sort: { fields: [public_date], order: DESC }) {
+        edges{
+          node{
+            id
+            name
             tags
-            date
-          }
-          fields {
+            public_date
             slug
           }
         }
+        totalCount
       }
-      totalCount
-    }
   }
 `

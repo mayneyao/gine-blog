@@ -23,12 +23,12 @@ class BlogPost extends React.Component {
 
     componentDidMount() {
         const { data } = this.props
-        const post = data.markdownRemark
+        const post = data.post
         const disqusShortname = 'maynes-blog';
         const disqusConfig = {
             url: window.location.href,
             identifier: window.location.pathname,
-            title: post.frontmatter.title,
+            title: post.name,
         }
         this.setState({
             disqusShortname,
@@ -38,8 +38,13 @@ class BlogPost extends React.Component {
 
     render() {
         const { data } = this.props
-        const post = data.markdownRemark
-        const { tags, date } = post.frontmatter
+        const post = data.post
+        const { public_date,
+            update_time,
+            name,
+            tags,
+            html,
+            slug } = post
         const { disqusShortname, disqusConfig } = this.state
 
         return (
@@ -50,9 +55,9 @@ class BlogPost extends React.Component {
                         width: '100%',
                         height: '400px',
                         objectFit: 'cover'
-                    }} src={post.frontmatter.image || getImageByName(post.fields.slug)} />
-                    <Helmet defaultTitle={`Mayne's Blog - ${post.frontmatter.title}`}>
-                        <meta name="description" content={`Mayne's blog 博客 python react gine ${post.frontmatter.title}`} />
+                    }} src={post.image || getImageByName(slug)} />
+                    <Helmet defaultTitle={`Mayne's Blog - ${name}`}>
+                        <meta name="description" content={`Mayne's blog 博客 python react gine ${name}`} />
                     </Helmet>
                     <main style={{
                         maxWidth: 900,
@@ -76,15 +81,15 @@ class BlogPost extends React.Component {
                                 lineHeight: '120%',
                                 fontWeight: '400',
                                 margin: '0px 6px 6px 0px',
-                            }}>{date}</div>
+                            }}>{public_date}</div>
                             {
                                 tags && tags.map(
                                     tag => <ColorfulTag tag={tag} key={tag} />)
                             }
                         </div>
                         <Paper>
-                            <h1>{post.frontmatter.title}</h1>
-                            <div dangerouslySetInnerHTML={{ __html: post.html }} />
+                            <h1>{name}</h1>
+                            <div dangerouslySetInnerHTML={{ __html: html }} />
                             {
                                 (disqusShortname && disqusConfig) && <Disqus.DiscussionEmbed shortname={disqusShortname} config={disqusConfig} />
                             }
@@ -102,16 +107,13 @@ export default withRoot(BlogPost)
 
 export const query = graphql`
   query($slug: String!) {
-    markdownRemark(fields: { slug: { eq: $slug } }) {
-      html
-      frontmatter {
-        title
+    post(slug: { eq: $slug } ) {
+        public_date
+        update_time
+        name
         tags
-        date
-      }
-      fields{
+        html
         slug
-      }
     }
   }
 `
