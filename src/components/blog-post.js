@@ -46,13 +46,11 @@ class BlogPost extends React.Component {
             <div>
                 <ScrollProgress />
                 <Layout>
-                    <div style={{
+                    <img style={{
                         width: '100%',
-                        background: `url(${post.frontmatter.image || getImageByName(post.fields.slug)}`,
                         height: '400px',
-                        backgroundSize: '100%',
-                        backgroundPosition: 'bottom',
-                    }} />
+                        objectFit: 'cover'
+                    }} src={post.frontmatter.image || getImageByName(post.fields.slug)} />
                     <Helmet defaultTitle={`Mayne's Blog - ${post.frontmatter.title}`}>
                         <meta name="description" content={`Mayne's blog 博客 python react gine ${post.frontmatter.title}`} />
                     </Helmet>
@@ -61,6 +59,7 @@ class BlogPost extends React.Component {
                         margin: '0 auto',
                         marginTop: -100,
                         marginBottom: 100,
+                        position: 'sticky',
                     }}>
                         <div role='meta' style={{ display: 'flex' }}>
                             <div style={{
