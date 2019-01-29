@@ -23,8 +23,10 @@ const styles = {
         top: 0,
     },
     menuButton: {
-        marginLeft: -12,
+        top: 5,
+        marginLeft: 5,
         marginRight: 20,
+        position: 'fixed'
     },
     drawer: {
         width: 300,
@@ -113,13 +115,13 @@ class Layout extends React.Component {
                         <PlayingGame data={game} />
                     </div>
                 </SwipeableDrawer>
-                <AppBar position="sticky">
-                    <Toolbar style={{ minHeight: 48 }}>
-                        <IconButton className={classes.menuButton} color="inherit" aria-label="Menu" onClick={this.toggleDrawer(true)}>
-                            <MenuIcon />
-                        </IconButton>
-                    </Toolbar>
-                </AppBar>
+                {/* <AppBar position="sticky">
+                    <Toolbar style={{ minHeight: 48 }}> */}
+                <IconButton className={classes.menuButton} color="inherit" aria-label="Menu" onClick={this.toggleDrawer(true)}>
+                    <MenuIcon />
+                </IconButton>
+                {/* </Toolbar>
+                </AppBar> */}
                 <div style={{ margin: `0 auto` }}>
                     {this.props.children}
                 </div>

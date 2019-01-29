@@ -68,7 +68,7 @@ function SimpleList(props) {
                     </ListItem>
                 </MyLink>
 
-                <MyLink to={'posts/about-75e97121-85e7-414e-838b-a4fd283f5616/'}>
+                <MyLink to={'posts/10a70927d25a43d19acf14e0d36354e7/'}>
                     <ListItem button>
                         <ListItemIcon>
                             <AboutIcon style={{ color: '#ffc107' }} />
