@@ -28,6 +28,7 @@
     "lodash": "^4.17.11",
     "prismjs": "^1.15.0",
     "prop-types": "latest",
+    "puppeteer": "^1.11.0",
     "react": "latest",
     "react-dom": "latest",
     "react-helmet": "^5.2.0",

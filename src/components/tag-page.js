@@ -27,17 +27,17 @@ class Index extends React.Component {
             <Layout>
                 <div className={classes.index}>
                     <div style={{ display: 'flex' }}>
-                        <span>共有{data.allMarkdownRemark.totalCount}篇关于 </span> <ColorfulTag tag={tag} /> <span>的文章</span>
+                        <span>共有{data.allPost.totalCount}篇关于 </span> <ColorfulTag tag={tag} /> <span>的文章</span>
                     </div>
 
-                    {data.allMarkdownRemark.edges.map(({ node }) => (
-                        <PostListItem title={node.frontmatter.title}
+                    {data.allPost.edges.map(({ node }) => (
+                        <PostListItem title={node.name}
                             key={node.id}
-                            content={node.excerpt}
-                            slug={node.fields.slug}
-                            image={node.frontmatter.image}
-                            tags={node.frontmatter.tags}
-                            date={node.frontmatter.date}
+                            content={node.brief}
+                            slug={node.slug}
+                            image={node.image}
+                            tags={node.tags}
+                            date={node.public_date}
                         />
                     ))}
                 </div>
@@ -62,6 +62,7 @@ query ($tag: String!){
             tags
             public_date
             slug
+            brief
           }
         }
         totalCount

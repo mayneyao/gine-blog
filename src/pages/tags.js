@@ -20,7 +20,7 @@ const styles = theme => ({
 
 class Tags extends React.Component {
     render() {
-        const { classes, data: { allMarkdownRemark: { edges } } } = this.props
+        const { classes, data: { allPost: { edges } } } = this.props
         let allTags = []
         edges.forEach(
             ({ node }) => allTags = allTags.concat(node.frontmatter.tags))

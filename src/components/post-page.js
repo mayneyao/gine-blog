@@ -29,7 +29,7 @@ class Index extends React.Component {
                     {data.allPost.edges.map(({ node }) => (
                         <PostListItem title={node.name}
                             key={node.id}
-                            content={node.name}
+                            content={node.brief}
                             slug={node.slug}
                             image={node.image}
                             tags={node.tags}
@@ -68,6 +68,7 @@ export const query = graphql`
         tags
         public_date
         slug
+        brief
       }
     }
     totalCount

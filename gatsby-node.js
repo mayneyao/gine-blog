@@ -3,7 +3,7 @@ const path = require(`path`)
 const fs = require("fs")
 const axios = require('axios')
 const download = require('image-downloader')
-
+const notion = require('./src/notion/syncBlog')
 
 async function genBangumiData(createNode, createNodeId, createContentDigest) {
     const res = await axios.get('http://space.bilibili.com/ajax/Bangumi/getList?mid=22539301&page=1')
@@ -69,7 +69,7 @@ async function genPostData(createNode, createNodeId, createContentDigest) {
 exports.sourceNodes = async ({ actions, createNodeId, createContentDigest }) => {
     const { createNode } = actions;
     await genBangumiData(createNode, createNodeId, createContentDigest);
-    await genPostData(createNode, createNodeId, createContentDigest);
+    await notion.syncNotionBlogData({ createNode, createNodeId, createContentDigest });
 }
 
 
