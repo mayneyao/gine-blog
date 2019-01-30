@@ -9,8 +9,6 @@ import { Helmet } from "react-helmet"
 import PlayingMusic from './music/CurrentPlayingMusic'
 import PlayingGame from './game/CurrentPlayingGame'
 import Divider from '@material-ui/core/Divider';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 
