@@ -70,6 +70,7 @@ module.exports = {
                         serialize: ({ query: { site, allPost } }) => {
                             return allPost.edges.map(edge => {
                                 return {
+                                    title: edge.node.name,
                                     description: edge.node.brief,
                                     date: edge.node.public_date,
                                     url: site.siteMetadata.siteUrl + '/' + edge.node.slug,
