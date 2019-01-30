@@ -18,13 +18,13 @@ export default class extends React.Component {
         const { data } = this.props
         return <div>
             {
-                data && data.item && <div>
+                <div>
                     <ListItem button>
                         <ListItemIcon>
                             <MuiscIcon style={{ color: '#2196f3' }} />
                         </ListItemIcon>
                         <ListItemText
-                            primary={<a href={data.item.external_urls.spotify} target="_blank"> {data.item.name}</a>}
+                            primary={data && data.item && <a href={data.item.external_urls.spotify} target="_blank"> {data.item.name}</a>}
                             secondary={'Spotify'}
                         />
                     </ListItem>
