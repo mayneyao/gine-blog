@@ -26,7 +26,8 @@ const styles = {
         top: 5,
         marginLeft: 5,
         marginRight: 20,
-        position: 'fixed'
+        position: 'fixed',
+        zIndex: 100
     },
     drawer: {
         width: 300,
