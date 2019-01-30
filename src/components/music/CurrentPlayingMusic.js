@@ -20,7 +20,7 @@ export default class extends React.Component {
                 console.log(data)
                 const { item } = data
                 return <span>
-                    <a href={item.external_urls.spotify} target="_blank"> {item.name}</a> —— {
+                    <div><a href={item.external_urls.spotify} target="_blank"> {item.name}</a> </div><div style={{ fontSize: '0.9em' }}>{
                         item.artists.lengths === 1 ? <a href={artist.external_urls.spotify} target="_blank">{artist.name}</a>
                             :
                             item.artists.map((artist, index) => {
@@ -31,6 +31,7 @@ export default class extends React.Component {
                                 }
                             })
                     }
+                    </div>
                 </span>
 
             }
