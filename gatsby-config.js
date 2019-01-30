@@ -50,5 +50,54 @@ module.exports = {
         },
         `gatsby-plugin-offline`,
         `gatsby-plugin-react-helmet`,
+        {
+            resolve: `gatsby-plugin-feed`,
+            options: {
+                query: `
+                {
+                  site {
+                    siteMetadata {
+                      title
+                      description
+                      siteUrl
+                      site_url: siteUrl
+                    }
+                  }
+                }
+              `,
+                feeds: [
+                    {
+                        serialize: ({ query: { site, allPost } }) => {
+                            return allPost.edges.map(edge => {
+                                return {
+                                    description: edge.node.brief,
+                                    date: edge.node.public_date,
+                                    url: site.siteMetadata.siteUrl + '/' + edge.node.slug,
+                                    guid: site.siteMetadata.siteUrl + '/' + edge.node.slug,
+                                    custom_elements: [{ "content:encoded": edge.node.html }],
+                                }
+                            })
+                        },
+                        query: `
+                    {
+                      allPost(limit: 1000,sort: { order: DESC, fields: [public_date] },) {
+                        edges {
+                          node {
+                            brief
+                            html
+                            slug 
+                            name
+                            public_date
+                          }
+                        }
+                      }
+                    }
+                  `,
+                        output: "/rss.xml",
+                        title: "GiNE RSS Feed",
+                    },
+                ],
+            },
+        },
     ],
 }

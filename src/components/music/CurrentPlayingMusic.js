@@ -17,7 +17,6 @@ export default class extends React.Component {
         const { data } = this.props
         const get_name_artists = (data) => {
             if (data && data.item) {
-                console.log(data)
                 const { item } = data
                 return <span>
                     <div><a href={item.external_urls.spotify} target="_blank"> {item.name}</a> </div><div style={{ fontSize: '0.9em' }}>{
