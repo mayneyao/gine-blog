@@ -14,23 +14,17 @@ export default class extends React.Component {
     }
 
     render() {
-
         const { data } = this.props
         return <div>
-            {
-                data && data.response && <div>
-                    <ListItem button>
-                        <ListItemIcon>
-                            <GamepadIcon style={{ color: '#e91e63' }} />
-                        </ListItemIcon>
-                        <ListItemText
-                            primary={<a target='_blank' href={`https://store.steampowered.com/app/${data.response.players[0].gameid}`}>{data.response.players[0].gameextrainfo}</a>}
-                            secondary={'Steam'}
-                        />
-                    </ListItem>
-                </div>
-            }
+            <ListItem button>
+                <ListItemIcon>
+                    <GamepadIcon style={{ color: '#e91e63' }} />
+                </ListItemIcon>
+                <ListItemText
+                    primary={<a target='_blank' href={data && data.response && `https://store.steampowered.com/app/${data.response.players[0].gameid}`}>{data && data.response && data.response.players[0].gameextrainfo}</a>}
+                    secondary={'Steam'}
+                />
+            </ListItem>
         </div>
     }
-
 }
