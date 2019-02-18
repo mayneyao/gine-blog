@@ -4,6 +4,26 @@ const fs = require("fs")
 const axios = require('axios')
 const download = require('image-downloader')
 const notion = require('./src/notion/syncBlog')
+const notionApi = require('./src/notion/api')
+
+function genApiData(data, type, key, createNode, createNodeId, createContentDigest) {
+    data.map(itemData => {
+        const nodeContent = JSON.stringify(itemData)
+        const nodeMeta = {
+            id: createNodeId(itemData[key]),
+            parent: null,
+            children: [],
+            internal: {
+                type,
+                mediaType: `text/html`,
+                content: nodeContent,
+                contentDigest: createContentDigest(itemData)
+            }
+        }
+        const node = Object.assign({}, itemData, nodeMeta)
+        createNode(node)
+    })
+}
 
 async function genBangumiData(createNode, createNodeId, createContentDigest) {
     const res = await axios.get('http://space.bilibili.com/ajax/Bangumi/getList?mid=22539301&page=1')
@@ -45,29 +65,10 @@ async function genBangumiData(createNode, createNodeId, createContentDigest) {
     })
 }
 
-async function genPostData(createNode, createNodeId, createContentDigest) {
-    const res = await axios.get('http://127.0.0.1:5000/notion/blog')
-    console.log('获取post数据')
-    res.data.map(postData => {
-        const nodeContent = JSON.stringify(postData)
-        const nodeMeta = {
-            id: createNodeId(postData.slug),
-            parent: null,
-            children: [],
-            internal: {
-                type: `Post`,
-                mediaType: `text/html`,
-                content: nodeContent,
-                contentDigest: createContentDigest(postData)
-            }
-        }
-        const node = Object.assign({}, postData, nodeMeta)
-        createNode(node)
-    })
-}
-
 exports.sourceNodes = async ({ actions, createNodeId, createContentDigest }) => {
     const { createNode } = actions;
+    const linkData = await notionApi.queryCollection('https://www.notion.so/0e59694e75ee4357963695d6195ceeb3?v=52e8f7f022f240d8899ae26b83458ee6')
+    genApiData(linkData, 'Link', 'name', createNode, createNodeId, createContentDigest)
     await genBangumiData(createNode, createNodeId, createContentDigest);
     await notion.syncNotionBlogData({ createNode, createNodeId, createContentDigest });
 }
