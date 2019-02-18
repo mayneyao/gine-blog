@@ -10,6 +10,7 @@ import TagIcon from '@material-ui/icons/Bookmark'
 import AboutIcon from '@material-ui/icons/Person'
 import SubscriptionsIcon from '@material-ui/icons/Subscriptions'
 import ArchiveIcon from '@material-ui/icons/Archive'
+import MusicIcon from '@material-ui/icons/Headset'
 import CardMedia from '@material-ui/core/CardMedia'
 import { Link } from 'gatsby'
 import avatar from '../static/41546411364_.pic.jpg'
@@ -74,6 +75,15 @@ function SimpleList(props) {
                             <AboutIcon style={{ color: '#ffc107' }} />
                         </ListItemIcon>
                         <ListItemText primary="关于" />
+                    </ListItem>
+                </MyLink>
+
+                <MyLink to={'music'}>
+                    <ListItem button>
+                        <ListItemIcon>
+                            <MusicIcon style={{ color: '#00bfa5' }} />
+                        </ListItemIcon>
+                        <ListItemText primary="音乐" />
                     </ListItem>
                 </MyLink>
 

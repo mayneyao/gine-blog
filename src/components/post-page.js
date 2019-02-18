@@ -15,7 +15,6 @@ const styles = theme => ({
     index: {
         margin: '0 auto',
         maxWidth: 700,
-        marginTop: '1em',
     },
 })
 

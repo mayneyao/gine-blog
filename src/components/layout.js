@@ -21,8 +21,8 @@ const styles = {
         top: 0,
     },
     menuButton: {
-        top: 5,
-        marginLeft: 5,
+        top: 0,
+        marginLeft: 0,
         marginRight: 20,
         position: 'fixed',
         zIndex: 100
