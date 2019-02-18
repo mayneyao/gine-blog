@@ -51,22 +51,22 @@ class RecipeReviewCard extends React.Component {
     };
 
     render() {
-        const { classes, data:{icon,name,desc,url} } = this.props;
+        const { classes, data: { icon, name, desc, url } } = this.props;
 
         return (
             <Card className={classes.card}>
                 <CardHeader
                     avatar={
-                        <Avatar aria-label="Recipe" className={classes.avatar} src={icon}/>
-                    }
-                    action={
-                        <IconButton>
-                            <MoreVertIcon />
-                        </IconButton>
+                        <Avatar aria-label="Recipe" className={classes.avatar} src={icon} />
                     }
                     title={name}
                     subheader={desc}
                 />
+                <CardActions>
+                    <Button size="small" color="primary" href={url} target="_blank">
+                        去瞧瞧
+                    </Button>
+                </CardActions>
             </Card>
         );
     }

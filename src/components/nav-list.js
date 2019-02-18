@@ -11,6 +11,9 @@ import AboutIcon from '@material-ui/icons/Person'
 import SubscriptionsIcon from '@material-ui/icons/Subscriptions'
 import ArchiveIcon from '@material-ui/icons/Archive'
 import MusicIcon from '@material-ui/icons/Headset'
+import FriendIcon from '@material-ui/icons/People'
+
+
 import CardMedia from '@material-ui/core/CardMedia'
 import { Link } from 'gatsby'
 import avatar from '../static/41546411364_.pic.jpg'
@@ -95,8 +98,14 @@ function SimpleList(props) {
                         <ListItemText primary="番剧" />
                     </ListItem>
                 </MyLink>
-
-
+                <MyLink to={'links'}>
+                    <ListItem button>
+                        <ListItemIcon>
+                            <FriendIcon style={{ color: '#e91e63' }} />
+                        </ListItemIcon>
+                        <ListItemText primary="友链" />
+                    </ListItem>
+                </MyLink>
             </List>
         </div>
     )
