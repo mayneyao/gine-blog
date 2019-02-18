@@ -1,5 +1,5 @@
 const axios = require('axios')
-const URLSearchParams = require('url-search-params-polyfill')
+const { URLSearchParams } = require('url')
 
 const getFullBlockId = (blockId) => {
     if (typeof blockId !== 'string') {
@@ -59,6 +59,6 @@ queryCollection = async (url) => {
     return data
 }
 
-// console.log(queryCollection('https://www.notion.so/0e59694e75ee4357963695d6195ceeb3?v=52e8f7f022f240d8899ae26b83458ee6'))
+console.log(queryCollection('https://www.notion.so/0e59694e75ee4357963695d6195ceeb3?v=52e8f7f022f240d8899ae26b83458ee6'))
 
 module.exports = { queryCollection }
