@@ -46,21 +46,6 @@ function TextButtons (props) {
                     </MyLink>
             }
             {
-                allPage.map(
-                    page => (
-                        <MyLink to={`page/${page}`} key={page}>
-                            <Button color="secondary"
-                                    className={classes.pageButton}
-                                    variant={page === currentPage
-                                        ? 'outlined'
-                                        : 'text'}
-                            >
-                                {page}
-                            </Button>
-                        </MyLink>
-                    ))
-            }
-            {
                 currentPage === pageCount ?
                     <Button className={classes.button} color="primary" disabled>
                         下一页
