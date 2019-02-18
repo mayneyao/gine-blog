@@ -1,4 +1,5 @@
 const axios = require('axios')
+const URLSearchParams = require('url-search-params-polyfill')
 
 const getFullBlockId = (blockId) => {
     if (typeof blockId !== 'string') {

@@ -34,7 +34,8 @@
     "react-helmet": "^5.2.0",
     "react-jss": "^8.1.0",
     "scrollprogress": "^3.0.2",
-    "typeface-roboto": "^0.0.54"
+    "typeface-roboto": "^0.0.54",
+    "url-search-params-polyfill": "^5.0.0"
   },
   "scripts": {
     "develop": "gatsby develop",
