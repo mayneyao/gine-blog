@@ -12,6 +12,7 @@ import Button from '@material-ui/core/Button';
 const styles = theme => ({
     card: {
         minWidth: 400,
+        margin: '0 auto',
         marginBottom: '1em'
     },
     media: {

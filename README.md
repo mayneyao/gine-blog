@@ -2,6 +2,6 @@
 
 又一个blog轮子，基于gatsby,react,material-ui
 
-## 项目进展
+## 项目详情
 
-[https://www.notion.so/gine/gatsby-blog-ae7fc5a6164f478982f8f9e38b2c5e23](https://www.notion.so/gine/gatsby-blog-ae7fc5a6164f478982f8f9e38b2c5e23)
+[https://gine.me/posts/54fc4aaa38434d92afddf5d4b75b76b0](https://gine.me/posts/54fc4aaa38434d92afddf5d4b75b76b0)
