@@ -20,6 +20,10 @@ import { Link } from 'gatsby'
 import avatar from '../static/41546411364_.pic.jpg'
 
 
+function ListItemLink(props) {
+    return <ListItem button component="a" {...props} />
+}
+
 const styles = theme => ({
     root: {
         width: '100%',
@@ -82,13 +86,12 @@ function SimpleList(props) {
                     </ListItem>
                 </MyLink>
 
-
-                <ListItem button href='https://www.notion.so/98717bf8ad57434eafd9a65277403c33?v=fa4f00bb9b5b492fb23157f8d5df471f' target="_blank">
+                <ListItemLink href='https://www.notion.so/98717bf8ad57434eafd9a65277403c33?v=fa4f00bb9b5b492fb23157f8d5df471f' target="_blank">
                     <ListItemIcon>
                         <BookListIcon style={{ color: '#607d8b' }} />
                     </ListItemIcon>
                     <ListItemText primary="书单" />
-                </ListItem>
+                </ListItemLink>
 
                 <MyLink to={'music'}>
                     <ListItem button>
