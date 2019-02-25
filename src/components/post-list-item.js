@@ -15,7 +15,7 @@ import ColorfulTag from './hash-colorful-tag'
 const styles = {
     card: {
         maxWidth: 800,
-        marginBottom: '2em',
+        margin: '1em auto',
     },
     media: {
         // ⚠️ object-fit is not supported by IE 11.
