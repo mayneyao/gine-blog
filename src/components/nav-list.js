@@ -81,6 +81,15 @@ function SimpleList(props) {
                     </ListItem>
                 </MyLink>
 
+                <MyLink to={'https://www.notion.so/98717bf8ad57434eafd9a65277403c33?v=fa4f00bb9b5b492fb23157f8d5df471f'}>
+                    <ListItem button>
+                        <ListItemIcon>
+                            <MusicIcon style={{ color: '#607d8b' }} />
+                        </ListItemIcon>
+                        <ListItemText primary="书单" />
+                    </ListItem>
+                </MyLink>
+
                 <MyLink to={'music'}>
                     <ListItem button>
                         <ListItemIcon>
