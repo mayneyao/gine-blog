@@ -8,6 +8,7 @@ import ListItemText from '@material-ui/core/ListItemText'
 import HomeIcon from '@material-ui/icons/Home'
 import TagIcon from '@material-ui/icons/Bookmark'
 import AboutIcon from '@material-ui/icons/Person'
+import BookListIcon from '@material-ui/icons/LibraryBooks'
 import SubscriptionsIcon from '@material-ui/icons/Subscriptions'
 import ArchiveIcon from '@material-ui/icons/Archive'
 import MusicIcon from '@material-ui/icons/Headset'
@@ -81,14 +82,13 @@ function SimpleList(props) {
                     </ListItem>
                 </MyLink>
 
-                <MyLink to={'https://www.notion.so/98717bf8ad57434eafd9a65277403c33?v=fa4f00bb9b5b492fb23157f8d5df471f'}>
-                    <ListItem button>
-                        <ListItemIcon>
-                            <MusicIcon style={{ color: '#607d8b' }} />
-                        </ListItemIcon>
-                        <ListItemText primary="书单" />
-                    </ListItem>
-                </MyLink>
+
+                <ListItem button href='https://www.notion.so/98717bf8ad57434eafd9a65277403c33?v=fa4f00bb9b5b492fb23157f8d5df471f' target="_blank">
+                    <ListItemIcon>
+                        <BookListIcon style={{ color: '#607d8b' }} />
+                    </ListItemIcon>
+                    <ListItemText primary="书单" />
+                </ListItem>
 
                 <MyLink to={'music'}>
                     <ListItem button>
