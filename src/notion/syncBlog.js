@@ -1,5 +1,8 @@
 const puppeteer = require('puppeteer');
 const Axios = require('axios');
+const GitHub = require('../github/api');
+const dayjs = require('dayjs');
+
 
 syncBlogData = async (url) => {
     const browser = await puppeteer.launch();
@@ -26,12 +29,53 @@ syncBlogData = async (url) => {
 }
 
 
+uploadBlogData2Github = async (item, blogData) => {
+    let blogKey = `${item.slug}.json`
+    let now = dayjs()
+
+    let d = {
+        'update_time': now.toISOString(),
+        'content': blogData
+    }
+    let res = await updateOrCreate(blogKey, JSON.stringify(d))
+    if (res) {
+        console.log(`${item.name} 更新到github成功`)
+    } else {
+        console.log(`${item.name} 更新到github失败`)
+    }
+}
+
 exports.syncNotionBlogData = async ({ createNode, createNodeId, createContentDigest }) => {
     let apiUrl = 'https://api.gine.me/notion/blog'
     let res = await Axios.get(apiUrl)
+
+    let allBlogInfo = await GitHub.getAllBlogInfo()
+
     for (let item of res.data) {
-        let blogData = await syncBlogData(item.url);
-        console.log(`开始同步文章:${item.name}\n`)
+        let blogData
+        let blogKey = `${item.slug}.json`
+        let blogSha = allBlogInfo[blogKey]
+        if (blogSha) {
+            // 存在旧blog数据
+            let githubBlogData = GitHub.getBlogData(blogSha)
+            if (dayjs(item.update_time) > dayjs(githubBlogData.update_time)) {
+                // 文章需要更新
+                console.log(`开始同步文章:${item.name} from notion \n`)
+                blogData = await syncBlogData(item.url);
+                await uploadBlogData2Github(item, blogData)
+
+            } else {
+                // 文章不需要更新，获取来自github的缓存数据
+                blogData = githubBlogData.content
+            }
+
+        } else {
+            // 不存在blog 数据
+            console.log(`开始同步文章:${item.name} from notion \n`)
+            blogData = await syncBlogData(item.url);
+            await uploadBlogData2Github(item, blogData)
+        }
+
         if (blogData) {
             let data = { ...item, slug: `posts/${item.slug}`, html: blogData.html, brief: blogData.brief }
             const nodeContent = JSON.stringify(data)
