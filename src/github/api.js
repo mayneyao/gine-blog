@@ -1,16 +1,22 @@
-
 const GitHub = require('github-api');
+const config = require('../../config').config
+
+const {
+    username,
+    repo,
+    branch
+} = config.blog.github
 
 const gh = new GitHub({
     token: process.env.GitHubToken
 });
 
 
-const blogRepo = gh.getRepo('mayneyao', 'blog')
+const blogRepo = gh.getRepo(username, repo)
 
 
 async function getAllBlogInfo() {
-    const res = await blogRepo.getTree('master')
+    const res = await blogRepo.getTree(branch)
     let blogList = res.data.tree
     let d = {}
     blogList.map(item => {
@@ -27,7 +33,7 @@ async function getBlogData(sha) {
 
 
 async function updateOrCreate(path, data) {
-    let res = await blogRepo.writeFile('master', path, data, 'update blog data from notion', {})
+    let res = await blogRepo.writeFile(branch, path, data, 'update blog data from notion', {})
     if (res.status == 200 || res.status == 201) {
         return true
     } else {
@@ -38,11 +44,3 @@ async function updateOrCreate(path, data) {
 exports.getAllBlogInfo = getAllBlogInfo
 exports.getBlogData = getBlogData
 exports.updateOrCreate = updateOrCreate
-
-// blogRepo.getTree('master').then(res=>{
-//     console.log(res.data)
-// })
-
-
-
-

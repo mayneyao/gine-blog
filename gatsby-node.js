@@ -5,6 +5,7 @@ const axios = require('axios')
 const download = require('image-downloader')
 const notion = require('./src/notion/syncBlog')
 const notionApi = require('./src/notion/api')
+const config = require('./config').config
 
 function genApiData(data, type, key, createNode, createNodeId, createContentDigest) {
     data.map(itemData => {
@@ -26,8 +27,8 @@ function genApiData(data, type, key, createNode, createNodeId, createContentDige
 }
 
 async function genBangumiData(createNode, createNodeId, createContentDigest) {
-    const res = await axios.get('http://space.bilibili.com/ajax/Bangumi/getList?mid=22539301&page=1')
-    console.log('获取bangumi数据')
+    const res = await axios.get(config.bangumi.url)
+    console.log('>>>获取bangumi数据')
     res.data.data.result.map(myData => {
         // Data can come from anywhere, but for now create it manually
         let coverUrl = myData.cover
@@ -67,9 +68,29 @@ async function genBangumiData(createNode, createNodeId, createContentDigest) {
 
 exports.sourceNodes = async ({ actions, createNodeId, createContentDigest }) => {
     const { createNode } = actions;
-    const linkData = await notionApi.queryCollection('https://www.notion.so/0e59694e75ee4357963695d6195ceeb3?v=52e8f7f022f240d8899ae26b83458ee6')
-    genApiData(linkData, 'Link', 'name', createNode, createNodeId, createContentDigest)
-    await genBangumiData(createNode, createNodeId, createContentDigest);
+
+    let linkData
+    if (config.friendLink.open){
+        if (config.friendLink.sourceType === 'notion'){
+            linkData = await notionApi.queryCollection(config.friendLink.url)
+        }else{
+            // 如果你的友链数据不是通过 notion表格获取的,你可以在这里直接定义，或者从其他地方获取。数据格式如下
+            linkData = [
+                {
+                    desc: "Mayne's Blog",
+                    icon: "https://gine.me/icons/icon-48x48.png",
+                    url: "https://gine.me",
+                    name: "Mayne" 
+                },
+            ]
+        }
+        genApiData(linkData, 'Link', 'name', createNode, createNodeId, createContentDigest)
+    }
+    
+
+    if (config.bangumi.open){
+        await genBangumiData(createNode, createNodeId, createContentDigest);
+    }
     await notion.syncNotionBlogData({ createNode, createNodeId, createContentDigest });
 }
 
@@ -100,13 +121,15 @@ exports.createPages = ({ graphql, actions }) => {
       }
     }`).then(result => {
         // netlify 域名重定向
-        const _redirects = 'https://gine.netlify.com/* https://gine.me/:splat 301!'
-
-        fs.writeFile('public/_redirects', _redirects, function (err) {
-            if (err) {
-                console.error(err)
-            }
-        })
+        if (config.seo.open){
+            // 如果站点是部署在 netlify上，开启此选项可以优化seo结果
+            const _redirects = `${config.seo.netlifyUrl}/* ${config.seo.siteUrl}/:splat 301!`
+            fs.writeFile('public/_redirects', _redirects, function (err) {
+                if (err) {
+                    console.error(err)
+                }
+            })
+        }
 
         // 创建分页
         const { totalCount, edges } = result.data.allPost
@@ -152,11 +175,13 @@ exports.createPages = ({ graphql, actions }) => {
             })
         })
         // music
-        createPage({
-            path: `music`,
-            component: path.resolve(`./src/components/music/top.js`),
-            context: {},
-        })
+        if (config.music.open){
+            createPage({
+                path: `music`,
+                component: path.resolve(`./src/components/music/top.js`),
+                context: {},
+            })
+        }
     })
 }
 

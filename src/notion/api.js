@@ -1,4 +1,5 @@
 const axios = require('axios')
+const dayjs = require('dayjs')
 const { URLSearchParams } = require('url')
 
 const getFullBlockId = (blockId) => {
@@ -17,7 +18,7 @@ const getFullBlockId = (blockId) => {
 }
 
 getPageCollectionId = async (pageId) => {
-    console.log(pageId)
+    // console.log(pageId)
     let res = await axios.post('https://www.notion.so/api/v3/loadPageChunk',
         { "pageId": getFullBlockId(pageId), "limit": 50, "cursor": { "stack": [] }, "chunkNumber": 0, "verticalColumns": false },
         {
@@ -26,12 +27,16 @@ getPageCollectionId = async (pageId) => {
     let collectionId = Object.entries(res.data.recordMap.collection)[0][0]
     return collectionId
 }
+
+getBrowseableUrl = (blockID) =>{
+    return `https://notion.so/${blockID.split('-').join('')}`
+}
 queryCollection = async (url) => {
     let [base, params] = url.split('?')
     let p = new URLSearchParams(params)
     baseUrlList = base.split('/')
     let collectionId = await getPageCollectionId(baseUrlList[baseUrlList.length - 1])
-    console.log(collectionId)
+    // console.log(collectionId)
     let collectionViewId = getFullBlockId(p.get('v'))
     let res = await axios.post('https://www.notion.so/api/v3/queryCollection', {
         collectionId,
@@ -46,19 +51,32 @@ queryCollection = async (url) => {
     const { value: { schema } } = collection[collectionId]
     blockIds.map(blockId => {
         let blockData = res.data.recordMap.block[blockId].value
-
         let parsedBlockData = {}
         Object.entries(blockData.properties).map(item => {
             let [key, val] = item
-            let newKey = schema[key].name
-            parsedBlockData[newKey] = val[0][0]
+            let r = schema[key]
+            if (r){
+                parsedBlockData.slug = blockId.split('-').join('')
+                parsedBlockData.browseableUrl = getBrowseableUrl(blockId)
+                parsedBlockData.created_time = dayjs(blockData.created_time).toISOString()
+                parsedBlockData.last_edited_time = dayjs(blockData.last_edited_time).toISOString()
+                let newKey = r.name
+                if (r.type === 'date'){
+                    parsedBlockData[newKey] = val[0][1][0][1].start_date
+                }else if (r.type === 'multi_select'){
+                    parsedBlockData[newKey] = val[0]
+                }else{
+                    parsedBlockData[newKey] = val[0][0]
+                }
+            }
         })
         data.push(parsedBlockData)
     })
-    console.log(data)
+    // console.log(data)
     return data
 }
 
-// console.log(queryCollection('https://www.notion.so/0e59694e75ee4357963695d6195ceeb3?v=52e8f7f022f240d8899ae26b83458ee6'))
+
+// console.log(queryCollection('https://www.notion.so/b8081728310b49fea0ff1d14e190b3fb?v=dbd9df2e8f784aa7bf8db977d82ee635'))
 
 module.exports = { queryCollection }

@@ -4,6 +4,9 @@ import CopyrightIcon from '@material-ui/icons/Copyright'
 import ULink from './link-without-underline'
 import axios from 'axios'
 import Typography from '@material-ui/core/Typography';
+import conf from '../../config'
+
+const {config} = conf
 
 function isChineseChar(str) {
     var reg = /[\u4E00-\u9FA5\uF900-\uFA2D]/;
@@ -26,7 +29,8 @@ class Aphorisms extends React.Component {
     }
 
     componentDidMount() {
-        axios.get('https://api.gine.me/notion/b23848d867974c36a2902ec4cb833453/29915c889d4c415cbfb9e9bf7dd49afd?random_one=1').then(res => {
+        const { url } = config.aphorisms
+        axios.get(url).then(res => {
             this.setState({
                 ...res.data
             })
@@ -55,7 +59,7 @@ class Aphorisms extends React.Component {
 
 export default () => (
     <div style={{ margin: `1em 0 auto auto`, textAlign: 'center', paddingBottom: '1em' }}>
-        <Aphorisms />
+        {config.aphorisms.open && <Aphorisms />}
         <Typography variant="subtitle1">
             Build with <ULink href="https://www.gatsbyjs.org" text="gatsby" />,
         <ULink href="https://reactjs.org" text="react" />,

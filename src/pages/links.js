@@ -21,9 +21,7 @@ class AllLink extends React.Component {
                 }
             </div>
         </Layout>
-
     }
-
 }
 export default withRoot(AllLink)
 

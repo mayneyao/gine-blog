@@ -21,9 +21,7 @@ class AllBangumi extends React.Component {
                 }
             </div>
         </Layout>
-
     }
-
 }
 export default withRoot(AllBangumi)
 
