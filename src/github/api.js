@@ -12,32 +12,32 @@ const blogRepo = gh.getRepo('mayneyao', 'blog')
 async function getAllBlogInfo() {
     const res = await blogRepo.getTree('master')
     let blogList = res.data.tree
-    let res = {}
+    let d = {}
     blogList.map(item => {
-        res[item.path] = item.sha
+        d[item.path] = item.sha
     })
-    return res
+    return d
 }
 
 
 async function getBlogData(sha) {
-    res = blogRepo.getBlob('453835395ad73c40fb28a1bde28aa8c22fef37a5')
-    return JSON.parse(res.data)
+    let res =  await blogRepo.getBlob(sha)
+    return res.data
 }
 
 
 async function updateOrCreate(path, data) {
-    blogRepo.writeFile('master', path, data, 'update blog data from notion', {}).then(res => {
-        if (res.status == 200 || res.status == 201) {
-            return true
-        } else {
-            return false
-        }
-    })
+    let res = await blogRepo.writeFile('master', path, data, 'update blog data from notion', {})
+    if (res.status == 200 || res.status == 201) {
+        return true
+    } else {
+        return false
+    }
 }
 
 exports.getAllBlogInfo = getAllBlogInfo
 exports.getBlogData = getBlogData
+exports.updateOrCreate = updateOrCreate
 
 // blogRepo.getTree('master').then(res=>{
 //     console.log(res.data)

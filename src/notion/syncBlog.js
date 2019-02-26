@@ -37,7 +37,7 @@ uploadBlogData2Github = async (item, blogData) => {
         'update_time': now.toISOString(),
         'content': blogData
     }
-    let res = await updateOrCreate(blogKey, JSON.stringify(d))
+    let res = await GitHub.updateOrCreate(blogKey, JSON.stringify(d))
     if (res) {
         console.log(`${item.name} 更新到github成功`)
     } else {
@@ -55,13 +55,15 @@ exports.syncNotionBlogData = async ({ createNode, createNodeId, createContentDig
         let blogData
         let blogKey = `${item.slug}.json`
         let blogSha = allBlogInfo[blogKey]
+        let isFromGithubCache = true
         if (blogSha) {
             // 存在旧blog数据
-            let githubBlogData = GitHub.getBlogData(blogSha)
-            if (dayjs(item.update_time) > dayjs(githubBlogData.update_time)) {
+            let githubBlogData = await GitHub.getBlogData(blogSha)
+            if (dayjs(`${item.update_time}Z`) > dayjs(githubBlogData.update_time)) {
                 // 文章需要更新
                 console.log(`开始同步文章:${item.name} from notion \n`)
                 blogData = await syncBlogData(item.url);
+                isFromGithubCache = false
                 await uploadBlogData2Github(item, blogData)
 
             } else {
@@ -73,10 +75,14 @@ exports.syncNotionBlogData = async ({ createNode, createNodeId, createContentDig
             // 不存在blog 数据
             console.log(`开始同步文章:${item.name} from notion \n`)
             blogData = await syncBlogData(item.url);
+            isFromGithubCache = false
             await uploadBlogData2Github(item, blogData)
         }
 
         if (blogData) {
+            if (isFromGithubCache) {
+                console.log(`从github获取缓存Blog数据: ${item.name}`)
+            }
             let data = { ...item, slug: `posts/${item.slug}`, html: blogData.html, brief: blogData.brief }
             const nodeContent = JSON.stringify(data)
             const nodeMeta = {
