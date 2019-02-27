@@ -1,5 +1,5 @@
 const GitHub = require('github-api');
-const config = require('../../config').config
+const config = require('../../config')
 
 const {
     username,
@@ -27,7 +27,7 @@ async function getAllBlogInfo() {
 
 
 async function getBlogData(sha) {
-    let res =  await blogRepo.getBlob(sha)
+    let res = await blogRepo.getBlob(sha)
     return res.data
 }
 

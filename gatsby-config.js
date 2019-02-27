@@ -1,5 +1,5 @@
 
-const config = require('./config.js').config
+const config = require('./config.js')
 
 conf = {
     siteMetadata: config.blogMeta,
@@ -61,7 +61,7 @@ if (config.rss.open) {
 }
 
 
-if (config.blog.openGithubCache &&  !process.env.GitHubToken){
+if (config.blog.openGithubCache && !process.env.GitHubToken) {
     throw Error('因为您开启了github仓库缓存notion文章，请配置环境变量 GitHubToken')
 }
 

@@ -10,6 +10,7 @@ import ColorfulTag from './hash-colorful-tag'
 import getImageByName from '../utils/notion-hash-image'
 import Disqus from 'disqus-react';
 import { Helmet } from "react-helmet"
+import config from '../../config'
 
 
 class BlogPost extends React.Component {
@@ -24,7 +25,7 @@ class BlogPost extends React.Component {
     componentDidMount() {
         const { data } = this.props
         const post = data.post
-        const disqusShortname = 'maynes-blog';
+        const { disqusShortname } = config.comment.disqus;
         const disqusConfig = {
             url: window.location.href,
             identifier: window.location.pathname,
@@ -91,7 +92,7 @@ class BlogPost extends React.Component {
                             <h1>{name}</h1>
                             <div dangerouslySetInnerHTML={{ __html: html }} />
                             {
-                                (disqusShortname && disqusConfig) && <Disqus.DiscussionEmbed shortname={disqusShortname} config={disqusConfig} />
+                                (config.comment.open && disqusShortname && disqusConfig) && <Disqus.DiscussionEmbed shortname={disqusShortname} config={disqusConfig} />
                             }
 
                         </Paper>

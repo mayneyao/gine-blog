@@ -14,6 +14,8 @@ import MenuIcon from '@material-ui/icons/Menu';
 
 import throttle from 'lodash/throttle'
 import Axios from "axios"
+import config from '../../config'
+
 
 const styles = {
     root: {
@@ -78,7 +80,9 @@ class Layout extends React.Component {
             iOS,
             height,
         })
-        this.fetchData()
+        if (config.now.open) {
+            this.fetchData()
+        }
     }
 
 
@@ -110,8 +114,12 @@ class Layout extends React.Component {
                     >
                         <NavList />
                         <Divider />
-                        <PlayingMusic data={music} />
-                        <PlayingGame data={game} />
+                        {
+                            config.now.open && <div>
+                                <PlayingMusic data={music} />
+                                <PlayingGame data={game} />
+                            </div>
+                        }
                     </div>
                 </SwipeableDrawer>
                 {/* <AppBar position="sticky">
