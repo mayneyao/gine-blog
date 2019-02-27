@@ -56,10 +56,34 @@ clone 下面这2个notion表格模板到自己的notion中。
     # 本地访问 build之后
     yarn serve
 
+
+
 ## 配置说明
 
-### 评论
+### comment 开启评论
 
 评论模块采用的是disqus，开启后填上自己的短域名即可
 
+
+### blog 开启github缓存文章加速build 
+
+你需要新建一个仓库用来缓存blog文章内容。
+
+访问 https://github.com/settings/tokens 获取token 
+
+加入token到环境变量
+
+```
+export GitHubToken='yourtokenhere'
+```
+
+### bangumi 开启番剧模块
+
+填个b站的链接就好了，会把你订阅的番剧数据爬下来，以卡片形式按番剧发行时间顺序展示。
+
 待续...
+
+## FAQ
+
+### 为什么安装依赖这么慢？
+初次安装依赖，会安装puppetter，所以比较慢
