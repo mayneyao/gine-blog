@@ -26,7 +26,7 @@ module.exports = {
 
     // 评论
     comment: {
-        open: true, //默认关闭，仅适配disqus
+        open: false, //默认关闭，仅适配disqus
         sourceType: 'disqus', 
         disqus: {
             disqusShortname: 'maynes-blog'
