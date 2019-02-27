@@ -4,9 +4,8 @@ import CopyrightIcon from '@material-ui/icons/Copyright'
 import ULink from './link-without-underline'
 import axios from 'axios'
 import Typography from '@material-ui/core/Typography';
-import conf from '../../config'
+import config from '../../config'
 
-const {config} = conf
 
 function isChineseChar(str) {
     var reg = /[\u4E00-\u9FA5\uF900-\uFA2D]/;

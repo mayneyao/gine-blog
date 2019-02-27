@@ -1,11 +1,10 @@
 import Axios from "axios"
 import React from 'react'
-import BangumiCard from '../components/bangumi/BangumiCard'
-import { graphql } from 'gatsby'
-import Layout from '../components/layout'
-import { withStyles } from '@material-ui/core/styles'
-import withRoot from '../withRoot'
-
+import BangumiCard from './BangumiCard'
+import { StaticQuery, graphql } from "gatsby"
+import Layout from '../../components/layout'
+import withRoot from '../../withRoot'
+import config from '../../../config'
 
 class AllBangumi extends React.Component {
     render() {
@@ -15,7 +14,7 @@ class AllBangumi extends React.Component {
         return <Layout>
             <div style={{ display: 'flex', flexWrap: 'wrap', maxWidth: 1100, margin: '0 auto' }}>
                 {
-                    data.allBangumi.edges.sort((a, b) => parseInt(a.node.season_id) < parseInt(b.node.season_id) ? 1 : -1 ).map(item => {
+                    data.allBangumi.edges.sort((a, b) => parseInt(a.node.season_id) < parseInt(b.node.season_id) ? 1 : -1).map(item => {
                         return <BangumiCard data={item.node} key={item.node.id}></BangumiCard>
                     })
                 }
@@ -39,5 +38,5 @@ export const query = graphql`
         }
       }
     }
-  }  
+}  
 `

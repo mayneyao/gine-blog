@@ -17,7 +17,9 @@ import FriendIcon from '@material-ui/icons/People'
 
 import CardMedia from '@material-ui/core/CardMedia'
 import { Link } from 'gatsby'
-import avatar from '../static/41546411364_.pic.jpg'
+
+import avatar from '../static/41546411364_.pic.jpg' // 需要自定义头像修改此处
+import config from '../../config'
 
 
 function ListItemLink(props) {
@@ -77,7 +79,7 @@ function SimpleList(props) {
                     </ListItem>
                 </MyLink>
 
-                <MyLink to={'posts/10a70927d25a43d19acf14e0d36354e7/'}>
+                <MyLink to={`posts/${config.blogMeta.aboutPostSlug}/`}>
                     <ListItem button>
                         <ListItemIcon>
                             <AboutIcon style={{ color: '#ffc107' }} />
@@ -86,30 +88,38 @@ function SimpleList(props) {
                     </ListItem>
                 </MyLink>
 
-                <ListItemLink href='https://www.notion.so/98717bf8ad57434eafd9a65277403c33?v=fa4f00bb9b5b492fb23157f8d5df471f' target="_blank">
-                    <ListItemIcon>
-                        <BookListIcon style={{ color: '#607d8b' }} />
-                    </ListItemIcon>
-                    <ListItemText primary="书单" />
-                </ListItemLink>
-
-                <MyLink to={'music'}>
-                    <ListItem button>
+                {
+                    config.book.open && <ListItemLink href={config.book.url} target="_blank">
                         <ListItemIcon>
-                            <MusicIcon style={{ color: '#00bfa5' }} />
+                            <BookListIcon style={{ color: '#607d8b' }} />
                         </ListItemIcon>
-                        <ListItemText primary="音乐" />
-                    </ListItem>
-                </MyLink>
+                        <ListItemText primary="书单" />
+                    </ListItemLink>
+                }
 
-                <MyLink to={'bangumi'}>
-                    <ListItem button>
-                        <ListItemIcon>
-                            <SubscriptionsIcon style={{ color: '#af52bf' }} />
-                        </ListItemIcon>
-                        <ListItemText primary="番剧" />
-                    </ListItem>
-                </MyLink>
+
+                {
+                    config.music.open && <MyLink to={'music'}>
+                        <ListItem button>
+                            <ListItemIcon>
+                                <MusicIcon style={{ color: '#00bfa5' }} />
+                            </ListItemIcon>
+                            <ListItemText primary="音乐" />
+                        </ListItem>
+                    </MyLink>
+                }
+
+                {
+                    config.bangumi.open && <MyLink to={'bangumi'}>
+                        <ListItem button>
+                            <ListItemIcon>
+                                <SubscriptionsIcon style={{ color: '#af52bf' }} />
+                            </ListItemIcon>
+                            <ListItemText primary="番剧" />
+                        </ListItem>
+                    </MyLink>
+                }
+
                 <MyLink to={'links'}>
                     <ListItem button>
                         <ListItemIcon>
@@ -118,6 +128,7 @@ function SimpleList(props) {
                         <ListItemText primary="友链" />
                     </ListItem>
                 </MyLink>
+
             </List>
         </div>
     )

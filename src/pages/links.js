@@ -1,11 +1,8 @@
-import Axios from "axios"
 import React from 'react'
 import LinkCard from '../components/LinkCard'
-import { graphql } from 'gatsby'
+import { graphql } from "gatsby"
 import Layout from '../components/layout'
-import { withStyles } from '@material-ui/core/styles'
 import withRoot from '../withRoot'
-
 
 class AllLink extends React.Component {
     render() {
@@ -41,3 +38,4 @@ export const query = graphql`
     }
   }  
 `
+

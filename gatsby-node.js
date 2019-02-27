@@ -5,7 +5,7 @@ const axios = require('axios')
 const download = require('image-downloader')
 const notion = require('./src/notion/syncBlog')
 const notionApi = require('./src/notion/api')
-const config = require('./config').config
+const config = require('./config')
 
 function genApiData(data, type, key, createNode, createNodeId, createContentDigest) {
     data.map(itemData => {
@@ -27,8 +27,36 @@ function genApiData(data, type, key, createNode, createNodeId, createContentDige
 }
 
 async function genBangumiData(createNode, createNodeId, createContentDigest) {
-    const res = await axios.get(config.bangumi.url)
+    let res
     console.log('>>>获取bangumi数据')
+
+    if (config.bangumi.open) {
+        res = await axios.get(config.bangumi.url)
+    } else {
+        // 站位数据，没有实际意义，为了保证build通过
+        res = {
+            data: {
+                data: {
+                    result: [
+                        {
+                            brief: "史莱姆生活，开始了。↵上班族的三上悟在道路上被歹徒给刺杀身亡后，回过神来发现自己转生到了异世界。↵不...",
+                            cover: "http://i0.hdslb.com/bfs/bangumi/a4c0e0ccc44fe3949a734f546cf5bb07da925bad.png",
+                            evaluate: "",
+                            favorites: 4396396,
+                            is_finish: 0,
+                            last_ep_index: 0,
+                            newest_ep_index: 21,
+                            season_id: "25739",
+                            share_url: "http://bangumi.bilibili.com/anime/25739/",
+                            title: "关于我转生变成史莱姆这档事",
+                            total_count: 0,
+                        }
+                    ]
+                }
+            }
+        }
+    }
+
     res.data.data.result.map(myData => {
         // Data can come from anywhere, but for now create it manually
         let coverUrl = myData.cover
@@ -69,28 +97,27 @@ async function genBangumiData(createNode, createNodeId, createContentDigest) {
 exports.sourceNodes = async ({ actions, createNodeId, createContentDigest }) => {
     const { createNode } = actions;
 
+    // 生成友链数据
     let linkData
-    if (config.friendLink.open){
-        if (config.friendLink.sourceType === 'notion'){
-            linkData = await notionApi.queryCollection(config.friendLink.url)
-        }else{
-            // 如果你的友链数据不是通过 notion表格获取的,你可以在这里直接定义，或者从其他地方获取。数据格式如下
-            linkData = [
-                {
-                    desc: "Mayne's Blog",
-                    icon: "https://gine.me/icons/icon-48x48.png",
-                    url: "https://gine.me",
-                    name: "Mayne" 
-                },
-            ]
-        }
-        genApiData(linkData, 'Link', 'name', createNode, createNodeId, createContentDigest)
+    if (config.friendLink.sourceType === 'notion') {
+        linkData = await notionApi.queryCollection(config.friendLink.url)
+    } else {
+        // 如果你的友链数据不是通过 notion表格获取的,你可以在这里直接定义，或者从其他地方获取。数据格式如下
+        linkData = [
+            {
+                desc: "Mayne's Blog",
+                icon: "https://gine.me/icons/icon-48x48.png",
+                url: "https://gine.me",
+                name: "Mayne"
+            },
+        ]
     }
-    
+    genApiData(linkData, 'Link', 'name', createNode, createNodeId, createContentDigest)
 
-    if (config.bangumi.open){
-        await genBangumiData(createNode, createNodeId, createContentDigest);
-    }
+    // 生成番剧数据。不管是不是开启，都需要有bangumi数据，否则编译会报错    
+    await genBangumiData(createNode, createNodeId, createContentDigest);
+
+    // 生成blog post数据
     await notion.syncNotionBlogData({ createNode, createNodeId, createContentDigest });
 }
 
@@ -121,7 +148,7 @@ exports.createPages = ({ graphql, actions }) => {
       }
     }`).then(result => {
         // netlify 域名重定向
-        if (config.seo.open){
+        if (config.seo.open) {
             // 如果站点是部署在 netlify上，开启此选项可以优化seo结果
             const _redirects = `${config.seo.netlifyUrl}/* ${config.seo.siteUrl}/:splat 301!`
             fs.writeFile('public/_redirects', _redirects, function (err) {
@@ -175,10 +202,18 @@ exports.createPages = ({ graphql, actions }) => {
             })
         })
         // music
-        if (config.music.open){
+        if (config.music.open) {
             createPage({
                 path: `music`,
                 component: path.resolve(`./src/components/music/top.js`),
+                context: {},
+            })
+        }
+        // bangumi
+        if (config.bangumi.open) {
+            createPage({
+                path: `bangumi`,
+                component: path.resolve(`./src/components/bangumi/index.js`),
                 context: {},
             })
         }

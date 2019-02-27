@@ -64,7 +64,7 @@ queryCollection = async (url) => {
                 if (r.type === 'date'){
                     parsedBlockData[newKey] = val[0][1][0][1].start_date
                 }else if (r.type === 'multi_select'){
-                    parsedBlockData[newKey] = val[0]
+                    parsedBlockData[newKey] = val[0][0].split(',')
                 }else{
                     parsedBlockData[newKey] = val[0][0]
                 }
