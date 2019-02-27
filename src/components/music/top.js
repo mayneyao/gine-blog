@@ -11,7 +11,7 @@ import Layout from '../layout'
 import TrackCard from './TrackCard'
 import max from 'lodash/max'
 import CircularProgress from '@material-ui/core/CircularProgress';
-
+import config from '../../../config'
 
 export default class extends React.Component {
     constructor(props) {
@@ -40,7 +40,7 @@ export default class extends React.Component {
     componentDidMount() {
         let maxWidth = document.getElementById('MyTopMusic').offsetWidth
 
-        Axios.get('https://api.gine.me').then(res => {
+        Axios.get(config.music.url).then(res => {
             console.log(res)
             let maxTrackPopularity = max(res.data.items.map(item => item.popularity))
             this.setState({

@@ -16,6 +16,8 @@ module.exports = {
         sourceType: 'notion',
         url: 'https://www.notion.so/99623ef9630940cdb8524ba355831677?v=8366741ca7dd4b339c19484712e13563',
         // 建议开启，可以大大提高build速度
+        // 访问 https://github.com/settings/tokens 获取token 
+        // export GitHubToken='yourtokenhere'
         openGithubCache: false, // 开启此配置后，notion页面的数据会缓存到github仓库。需要在环境变量中配置 GitHubToken
         github: {
             username: 'mayneyao', // github 用户名
@@ -24,14 +26,6 @@ module.exports = {
         },
     },
 
-    // 评论
-    comment: {
-        open: false, //默认关闭，仅适配disqus
-        sourceType: 'disqus', 
-        disqus: {
-            disqusShortname: 'maynes-blog'
-        }
-    },
     // 友链
     friendLink: {
         sourceType: 'notion',
@@ -39,6 +33,15 @@ module.exports = {
     },
 
     // 下面的是可选组件
+    // 评论
+    comment: {
+        open: false, //默认关闭，仅适配disqus
+        sourceType: 'disqus',
+        disqus: {
+            disqusShortname: 'maynes-blog' // 你的短域名
+        }
+    },
+
     // 番剧
     bangumi: {
         open: false, // 默认关闭
@@ -51,7 +54,7 @@ module.exports = {
         open: false, // 默认关闭 需要api
         sourceType: 'api',
         url: 'https://api.gine.me/notion/b23848d867974c36a2902ec4cb833453/29915c889d4c415cbfb9e9bf7dd49afd?random_one=1',
-        // 返回格式参见 
+        // 返回格式参见上面链接的内容
     },
 
     // 正在播放的音乐
@@ -64,9 +67,11 @@ module.exports = {
         open: false, // 默认关闭
         url: 'https://www.notion.so/98717bf8ad57434eafd9a65277403c33?v=fa4f00bb9b5b492fb23157f8d5df471f', // 目前仅仅是外链
     },
+
     // music 
     music: {
         open: false, // 默认关闭。需要个人 spotify api
+        url: 'https://api.gine.me' // 数据格式可参考此链接内容
     },
 
     // game
@@ -87,7 +92,7 @@ module.exports = {
     },
     // Google Analytics
     ga: {
-        open: false,
+        open: false, // 默认关闭
         trackingId: 'UA-xxxxxxxx-x', // ga 分配的追踪代码
     },
     // PWA 优化 
