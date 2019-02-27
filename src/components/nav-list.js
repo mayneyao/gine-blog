@@ -8,12 +8,21 @@ import ListItemText from '@material-ui/core/ListItemText'
 import HomeIcon from '@material-ui/icons/Home'
 import TagIcon from '@material-ui/icons/Bookmark'
 import AboutIcon from '@material-ui/icons/Person'
+import BookListIcon from '@material-ui/icons/LibraryBooks'
 import SubscriptionsIcon from '@material-ui/icons/Subscriptions'
 import ArchiveIcon from '@material-ui/icons/Archive'
+import MusicIcon from '@material-ui/icons/Headset'
+import FriendIcon from '@material-ui/icons/People'
+
+
 import CardMedia from '@material-ui/core/CardMedia'
 import { Link } from 'gatsby'
 import avatar from '../static/41546411364_.pic.jpg'
 
+
+function ListItemLink(props) {
+    return <ListItem button component="a" {...props} />
+}
 
 const styles = theme => ({
     root: {
@@ -68,12 +77,28 @@ function SimpleList(props) {
                     </ListItem>
                 </MyLink>
 
-                <MyLink to={'posts/about-75e97121-85e7-414e-838b-a4fd283f5616/'}>
+                <MyLink to={'posts/10a70927d25a43d19acf14e0d36354e7/'}>
                     <ListItem button>
                         <ListItemIcon>
                             <AboutIcon style={{ color: '#ffc107' }} />
                         </ListItemIcon>
                         <ListItemText primary="关于" />
+                    </ListItem>
+                </MyLink>
+
+                <ListItemLink href='https://www.notion.so/98717bf8ad57434eafd9a65277403c33?v=fa4f00bb9b5b492fb23157f8d5df471f' target="_blank">
+                    <ListItemIcon>
+                        <BookListIcon style={{ color: '#607d8b' }} />
+                    </ListItemIcon>
+                    <ListItemText primary="书单" />
+                </ListItemLink>
+
+                <MyLink to={'music'}>
+                    <ListItem button>
+                        <ListItemIcon>
+                            <MusicIcon style={{ color: '#00bfa5' }} />
+                        </ListItemIcon>
+                        <ListItemText primary="音乐" />
                     </ListItem>
                 </MyLink>
 
@@ -85,8 +110,14 @@ function SimpleList(props) {
                         <ListItemText primary="番剧" />
                     </ListItem>
                 </MyLink>
-
-
+                <MyLink to={'links'}>
+                    <ListItem button>
+                        <ListItemIcon>
+                            <FriendIcon style={{ color: '#e91e63' }} />
+                        </ListItemIcon>
+                        <ListItemText primary="友链" />
+                    </ListItem>
+                </MyLink>
             </List>
         </div>
     )

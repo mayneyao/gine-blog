@@ -14,17 +14,37 @@ export default class extends React.Component {
     }
 
     render() {
-
         const { data } = this.props
+        const get_name_artists = (data) => {
+            if (data && data.item) {
+                const { item } = data
+                return <span>
+                    <div><a href={item.external_urls.spotify} target="_blank"> {item.name}</a> </div><div style={{ fontSize: '0.9em' }}>{
+                        item.artists.lengths === 1 ? <a href={artist.external_urls.spotify} target="_blank">{artist.name}</a>
+                            :
+                            item.artists.map((artist, index) => {
+                                if (index === (item.artists.length - 1)) {
+                                    return <a href={artist.external_urls.spotify} target="_blank">{artist.name}</a>
+                                } else {
+                                    return <span><a href={artist.external_urls.spotify} target="_blank">{artist.name}</a> / </span>
+                                }
+                            })
+                    }
+                    </div>
+                </span>
+
+            }
+        }
+
         return <div>
             {
-                data && data.item && <div>
+                <div>
                     <ListItem button>
                         <ListItemIcon>
                             <MuiscIcon style={{ color: '#2196f3' }} />
                         </ListItemIcon>
                         <ListItemText
-                            primary={<a href={data.item.external_urls.spotify} target="_blank"> {data.item.name}</a>}
+                            primary={get_name_artists(data)}
                             secondary={'Spotify'}
                         />
                     </ListItem>

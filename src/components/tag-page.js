@@ -27,17 +27,17 @@ class Index extends React.Component {
             <Layout>
                 <div className={classes.index}>
                     <div style={{ display: 'flex' }}>
-                        <span>共有{data.allMarkdownRemark.totalCount}篇关于 </span> <ColorfulTag tag={tag} /> <span>的文章</span>
+                        <span>共有{data.allPost.totalCount}篇关于 </span> <ColorfulTag tag={tag} /> <span>的文章</span>
                     </div>
 
-                    {data.allMarkdownRemark.edges.map(({ node }) => (
-                        <PostListItem title={node.frontmatter.title}
+                    {data.allPost.edges.map(({ node }) => (
+                        <PostListItem title={node.name}
                             key={node.id}
-                            content={node.excerpt}
-                            slug={node.fields.slug}
-                            image={node.frontmatter.image}
-                            tags={node.frontmatter.tags}
-                            date={node.frontmatter.date}
+                            content={node.brief}
+                            slug={node.slug}
+                            image={node.image}
+                            tags={node.tags}
+                            date={node.public_date}
                         />
                     ))}
                 </div>
@@ -54,21 +54,18 @@ export default withRoot(withStyles(styles)(Index))
 
 export const query = graphql`
 query ($tag: String!){
-    allMarkdownRemark(filter: {frontmatter: {tags: {in: [$tag]}}}, sort: {fields: [frontmatter___date], order: DESC}) {
-      edges {
-        node {
-          excerpt
-          frontmatter {
-            title
+    allPost(filter:{tags: {in: [$tag]}},sort: { fields: [public_date], order: DESC }) {
+        edges{
+          node{
+            id
+            name
             tags
-            date
-          }
-          fields {
+            public_date
             slug
+            brief
           }
         }
+        totalCount
       }
-      totalCount
-    }
   }
 `

@@ -14,7 +14,7 @@ import StateTag from './StateTag'
 const styles = {
     card: {
         maxWidth: 345,
-        margin: '10px auto'
+        margin: '1em auto'
     },
     media: {
         // ⚠️ object-fit is not supported by IE 11.

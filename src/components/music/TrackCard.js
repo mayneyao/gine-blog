@@ -38,10 +38,10 @@ const styles = theme => ({
 });
 
 function MediaControlCard(props) {
-    const { classes, theme, data } = props;
+    const { classes, theme, data, width, maxWidth } = props;
 
     return (
-        <Card className={classes.card}>
+        <div className={classes.card}>
             <CardMedia
                 className={classes.cover}
                 image={data.album.images[1].url}
@@ -50,18 +50,21 @@ function MediaControlCard(props) {
             <div className={classes.details}>
                 <div style={{
                     height: 64,
-                    width: `${data.popularity * 10}px`,
+                    width: width,
                     background: '#eee'
                 }}>
-                    <Typography variant="subtitle1" color="textSecondary">
+                    <Typography variant="subtitle1" color="textSecondary" style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', position: "absolute", maxWidth: maxWidth }}>
                         {
-                            data.preview_url ? <div><a target='_black' href={data.preview_url}> {data.name} </a> - {data.artists.map(item => item.name)}</div> :
-                                <div>{data.name} - {data.artists.map(item => item.name)}</div>
+                            data.preview_url ? <div><a target='_black' href={data.preview_url}> {data.name} </a></div> :
+                                <div>{data.name} </div>
                         }
+                        <div>
+                            {data.artists.map(item => item.name).join('/')}
+                        </div>
                     </Typography>
                 </div>
             </div>
-        </Card>
+        </div>
     );
 }
 

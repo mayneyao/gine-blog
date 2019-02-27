@@ -9,8 +9,6 @@ import { Helmet } from "react-helmet"
 import PlayingMusic from './music/CurrentPlayingMusic'
 import PlayingGame from './game/CurrentPlayingGame'
 import Divider from '@material-ui/core/Divider';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 
@@ -23,8 +21,11 @@ const styles = {
         top: 0,
     },
     menuButton: {
-        marginLeft: -12,
+        top: 0,
+        marginLeft: 0,
         marginRight: 20,
+        position: 'fixed',
+        zIndex: 100
     },
     drawer: {
         width: 300,
@@ -113,13 +114,13 @@ class Layout extends React.Component {
                         <PlayingGame data={game} />
                     </div>
                 </SwipeableDrawer>
-                <AppBar position="sticky">
-                    <Toolbar style={{ minHeight: 48 }}>
-                        <IconButton className={classes.menuButton} color="inherit" aria-label="Menu" onClick={this.toggleDrawer(true)}>
-                            <MenuIcon />
-                        </IconButton>
-                    </Toolbar>
-                </AppBar>
+                {/* <AppBar position="sticky">
+                    <Toolbar style={{ minHeight: 48 }}> */}
+                <IconButton className={classes.menuButton} color="inherit" aria-label="Menu" onClick={this.toggleDrawer(true)}>
+                    <MenuIcon />
+                </IconButton>
+                {/* </Toolbar>
+                </AppBar> */}
                 <div style={{ margin: `0 auto` }}>
                     {this.props.children}
                 </div>

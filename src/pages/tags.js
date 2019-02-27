@@ -20,10 +20,10 @@ const styles = theme => ({
 
 class Tags extends React.Component {
     render() {
-        const { classes, data: { allMarkdownRemark: { edges } } } = this.props
+        const { classes, data: { allPost: { edges } } } = this.props
         let allTags = []
         edges.forEach(
-            ({ node }) => allTags = allTags.concat(node.frontmatter.tags))
+            ({ node }) => allTags = allTags.concat(node.tags))
         const countTags = countBy(allTags)
         const sourceData = Object.entries(countTags).map(([tag, count]) => {
             return { item: tag, count: count, color: getHashColor(tag), percent: count / Object.entries(countTags).length }
@@ -53,12 +53,10 @@ export default withRoot(withStyles(styles)(Tags))
 
 export const query = graphql`
   {
-  allMarkdownRemark {
+  allPost{
     edges {
       node {
-        frontmatter {
-          tags
-        }
+        tags
       }
     }
   }

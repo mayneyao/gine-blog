@@ -15,30 +15,29 @@ const styles = theme => ({
     index: {
         margin: '0 auto',
         maxWidth: 700,
-        marginTop: '1em',
     },
 })
 
 class Index extends React.Component {
-    render () {
-        const {classes, data} = this.props
-        const {currentPage} = this.props.pageContext
+    render() {
+        const { classes, data } = this.props
+        const { currentPage } = this.props.pageContext
         return (
             <Layout>
                 <div className={classes.index}>
-                    {data.allMarkdownRemark.edges.map(({node}) => (
-                        <PostListItem title={node.frontmatter.title}
-                                      key={node.id}
-                                      content={node.excerpt}
-                                      slug={node.fields.slug}
-                                      image={node.frontmatter.image}
-                                      tags={node.frontmatter.tags}
-                                      date={node.frontmatter.date}
+                    {data.allPost.edges.map(({ node }) => (
+                        <PostListItem title={node.name}
+                            key={node.id}
+                            content={node.brief}
+                            slug={node.slug}
+                            image={node.image}
+                            tags={node.tags}
+                            date={node.public_date}
                         />
                     ))}
-                    <Pagination totalCount={data.allMarkdownRemark.totalCount}
-                                pageSize={data.site.siteMetadata.pageSize}
-                                currentPage={currentPage}
+                    <Pagination totalCount={data.allPost.totalCount}
+                        pageSize={data.site.siteMetadata.pageSize}
+                        currentPage={currentPage}
                     />
                 </div>
             </Layout>
@@ -60,24 +59,15 @@ export const query = graphql`
         pageSize
     }
   }
-  allMarkdownRemark(skip: $skip, limit: $limit,sort: { fields: [frontmatter___date], order: DESC }) {
+  allPost(skip: $skip, limit: $limit,sort: { fields: [public_date], order: DESC }) {
     edges{
       node{
         id
-        frontmatter{
-          title
-          tags
-          date
-        }
-        excerpt
-        wordCount {
-          paragraphs
-          sentences
-          words
-        }
-        fields {
-          slug
-        }
+        name
+        tags
+        public_date
+        slug
+        brief
       }
     }
     totalCount
