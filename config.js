@@ -15,6 +15,7 @@ module.exports = {
     blog: {
         sourceType: 'notion',
         url: 'https://www.notion.so/gine/b8081728310b49fea0ff1d14e190b3fb?v=dbd9df2e8f784aa7bf8db977d82ee635',
+
         // 建议开启，可以大大提高build速度
         // 访问 https://github.com/settings/tokens 获取token 
         // export GitHubToken='yourtokenhere'
@@ -30,6 +31,7 @@ module.exports = {
     friendLink: {
         sourceType: 'notion',
         url: 'https://www.notion.so/gine/0e59694e75ee4357963695d6195ceeb3?v=52e8f7f022f240d8899ae26b83458ee6', // 从notion表格读取数据
+
     },
 
     // 下面的是可选组件
