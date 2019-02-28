@@ -90,7 +90,7 @@ class Layout extends React.Component {
         const { open, iOS, height, data: { music, game } } = this.state
         const { classes } = this.props
         return (
-            <div>
+            <div style={{ background: '#f3f5f7' }}>
                 <Helmet defaultTitle={`Mayne's Blog`}>
                     <html lang="zh-cmn-Hans" />
                     <meta name="description" content="Mayne's blog 博客 python react gine" />

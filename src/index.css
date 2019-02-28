@@ -12,6 +12,15 @@ img {
     width: 100%;
 }
 
+#disqus_thread{
+    background: #f0f3f5;
+    margin-left: -24px;
+    margin-right: -24px;
+    margin-bottom: -16px;
+    border-radius: 5px;
+    padding: 1em;
+}
+
 /* override markdown css*/
 
 blockquote {
