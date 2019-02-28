@@ -4,10 +4,10 @@ gine-blog 是一个以notion为blog后端的,基于 React,Gatsby,Material-UI 的
 
 
 screenshot
-![](src/static/s3.png)
+![](https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F56495b11-eb1f-43b2-bef9-9a84c9822251%2Fs3.png?width=3840)
 
 lighthouse report
-![](src/static/gine-blog-lighthouse-report.png)
+![](https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F17135e4c-25f5-4599-8e22-7c77a11490d9%2Fgine-blog-lighthouse-report.png?width=1930)
 
 
 架构图如下
@@ -49,7 +49,7 @@ clone 下面这个page到自己的notion中,此页面包含了blog需要的2个�
 [https://www.notion.so/gine/share-blog-table-60e00520137944a4a45a437c7d089488](https://www.notion.so/gine/share-blog-table-60e00520137944a4a45a437c7d089488)
 
 如何clone notion模板
-![](src/static/how_to_copy_notion_page.gif)
+![](https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F7956cbc5-243f-4404-8943-db8b200f044e%2Fhow_to_copy_notion_page.gif)
 也可以参考此文章：[https://notionpages.com/how-to-copy-a-notion-template/](https://notionpages.com/how-to-copy-a-notion-template/)
 
 
