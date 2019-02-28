@@ -2,6 +2,16 @@
 
 gine-blog 是一个以notion为blog后端的,基于 React,Gatsby,Material-UI 的静态博客应用。
 
+
+截图
+
+![](src/static/s3.png)
+
+性能报告
+![](src/static/gine-blog-lighthouse-report.png)
+
+
+
 如果你想运行此程序，首先确保你已经有notion帐号。
 
 架构图如下
