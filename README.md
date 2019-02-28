@@ -3,22 +3,18 @@
 gine-blog 是一个以notion为blog后端的,基于 React,Gatsby,Material-UI 的静态博客应用。
 
 
-截图
-
+screenshot
 ![](src/static/s3.png)
 
-性能报告
+lighthouse report
 ![](src/static/gine-blog-lighthouse-report.png)
 
-
-
-如果你想运行此程序，首先确保你已经有notion帐号。
 
 架构图如下
 
 假装这里有图.jpg
 
-待画... 
+![给我也整一个](https://s3.us-west-2.amazonaws.com/secure.notion-static.com/4ba891b7-e685-40fa-89ee-0b8dd206b8a9/nse-1761695606568594205-852524620.jpg?AWSAccessKeyId=ASIAT73L2G45PON4DKY7&Expires=1551441911&Signature=LBy9umDqV4ZaO1IwcIcL3CeV7OU%3D&response-content-disposition=filename%20%3D%22nse-1761695606568594205-852524620.jpg%22&x-amz-security-token=FQoGZXIvYXdzEOL%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaDPTu56HwoFmTqdA%2FqyK3A5pmn%2FNvEOU2qyAXr0A%2BDMkqLXezoksK1DEihu3F5MR3Gc8t7Lf2YkCfv6Le0I1JJMTdVBmytyAHYMsLEWC6Ox87d26PWKjaxSZLOFbxLqLtJ%2BEWjluzXxd2Y3sxSZU7h0zrqp4rYfHHIfdCAL%2FWVZlvEfJ8MWD5giSxG9bpbzePJQuDhyFjoxFLaSsiE%2F6gZtHDWUID1CbWP3tkzNOU43tNGQo8DPU%2F%2FRpAGawmXNkdN5973NAuMOER2dTrRrOCgiPZBRaeSoY%2FKQ64DxlMy5ZTPPpOPtdFb8ztk4%2F9sPrLyXeMnXcOU%2Fkk29mcid%2F7bqvTrCA3L3%2F0gMXNdI%2FRaSWfK3XoKhKYaR8QczGaYaIGu5QYZWKmLEDUeSiFxRXCxmmQfnENt3iSXm96WkyLp46Xr8RW2enjtEFXJYBnXemzUYGC1PQZ01YDVUQl6f2jSpov%2FhlHgcoFqdIoRhewBhqnGtZrRYjTTa9yT%2BWTYjdJqvVA2Xc5nPQMjthsmw%2BcOfTiYCKMcmFoB29qCkdX2%2Fn9WaZ7z1deRzJYecaqa6EyOtDv4q1bqsoHxwUlyllT%2Bc9VgLiibW4ok7%2Fe4wU%3D)
 
 ## 安装
 
