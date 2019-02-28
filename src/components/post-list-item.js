@@ -23,6 +23,11 @@ const styles = {
     },
 }
 
+function notionImageResize(url, width) {
+    let encodedUrl = encodeURIComponent(url)
+    return `https://notion.so/image/${encodedUrl}?width=${width}`
+}
+
 function ImgMediaCard(props) {
     const { classes, title, content, slug, image, tags, date } = props
     const MyLink = props => <Link to={slug} {...props} />
@@ -34,7 +39,7 @@ function ImgMediaCard(props) {
                     alt="Contemplative Reptile"
                     className={classes.media}
                     height="140"
-                    image={image || getImageByName(slug)}
+                    image={image || notionImageResize(getImageByName(slug), 520)}
                     title="Contemplative Reptile"
                 />
                 <CardContent>
