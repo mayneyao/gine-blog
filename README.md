@@ -85,6 +85,10 @@ clone 下面这个page到自己的notion中,此页面包含了blog需要的2个�
 export GitHubToken='yourtokenhere'
 ```
 
+缓存机制
+
+![](https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F2a0ab0a6-886c-4361-98d3-c92a99e611ec%2Fgine-blog.png?width=3840)
+
 ### bangumi 开启番剧模块
 
 填个b站的链接就好了，会把你订阅的番剧数据爬下来，以卡片形式按番剧发行时间顺序展示。
