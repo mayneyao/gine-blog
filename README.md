@@ -28,13 +28,14 @@ git clone https://github.com/mayneyao/gine-blog.git
 
 ## 前置条件
 
-clone 下面这2个notion表格模板到自己的notion中。
+clone 下面这个page到自己的notion中,此页面包含了blog需要的2个表(文章表和友链)。后面你可以根据自己的喜好添加表格，做个性化的开发。
 
-如何clone notion模板，参见此文章：[https://notionpages.com/how-to-copy-a-notion-template/](https://notionpages.com/how-to-copy-a-notion-template/)
+[https://www.notion.so/gine/share-blog-table-60e00520137944a4a45a437c7d089488](https://www.notion.so/gine/share-blog-table-60e00520137944a4a45a437c7d089488)
 
-- 文章表： [https://www.notion.so/99623ef9630940cdb8524ba355831677?v=8366741ca7dd4b339c19484712e13563](https://www.notion.so/99623ef9630940cdb8524ba355831677?v=8366741ca7dd4b339c19484712e13563)
+如何clone notion模板
+![](src/static/how_to_copy_notion_page.gif)
+也可以参考此文章：[https://notionpages.com/how-to-copy-a-notion-template/](https://notionpages.com/how-to-copy-a-notion-template/)
 
-- 友链表： [https://www.notion.so/71d6656af07e418a92b3fe966a4ba087?v=1329463e9dfe45899caf28d317b84d50](https://www.notion.so/71d6656af07e418a92b3fe966a4ba087?v=1329463e9dfe45899caf28d317b84d50)
 
 ## 修改配置
 
