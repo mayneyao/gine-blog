@@ -10,9 +10,9 @@ lighthouse report
 ![](https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F17135e4c-25f5-4599-8e22-7c77a11490d9%2Fgine-blog-lighthouse-report.png?width=1930)
 
 
-架构图如下
+架构图
 
-假装这里有图.jpg
+![](https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F0cc8778b-ad42-4732-917e-7a69d3d801f3%2Fgine-blog.png?width=3840)
 
 ![给我也整一个](https://s3.us-west-2.amazonaws.com/secure.notion-static.com/4ba891b7-e685-40fa-89ee-0b8dd206b8a9/nse-1761695606568594205-852524620.jpg?AWSAccessKeyId=ASIAT73L2G45PON4DKY7&Expires=1551441911&Signature=LBy9umDqV4ZaO1IwcIcL3CeV7OU%3D&response-content-disposition=filename%20%3D%22nse-1761695606568594205-852524620.jpg%22&x-amz-security-token=FQoGZXIvYXdzEOL%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaDPTu56HwoFmTqdA%2FqyK3A5pmn%2FNvEOU2qyAXr0A%2BDMkqLXezoksK1DEihu3F5MR3Gc8t7Lf2YkCfv6Le0I1JJMTdVBmytyAHYMsLEWC6Ox87d26PWKjaxSZLOFbxLqLtJ%2BEWjluzXxd2Y3sxSZU7h0zrqp4rYfHHIfdCAL%2FWVZlvEfJ8MWD5giSxG9bpbzePJQuDhyFjoxFLaSsiE%2F6gZtHDWUID1CbWP3tkzNOU43tNGQo8DPU%2F%2FRpAGawmXNkdN5973NAuMOER2dTrRrOCgiPZBRaeSoY%2FKQ64DxlMy5ZTPPpOPtdFb8ztk4%2F9sPrLyXeMnXcOU%2Fkk29mcid%2F7bqvTrCA3L3%2F0gMXNdI%2FRaSWfK3XoKhKYaR8QczGaYaIGu5QYZWKmLEDUeSiFxRXCxmmQfnENt3iSXm96WkyLp46Xr8RW2enjtEFXJYBnXemzUYGC1PQZ01YDVUQl6f2jSpov%2FhlHgcoFqdIoRhewBhqnGtZrRYjTTa9yT%2BWTYjdJqvVA2Xc5nPQMjthsmw%2BcOfTiYCKMcmFoB29qCkdX2%2Fn9WaZ7z1deRzJYecaqa6EyOtDv4q1bqsoHxwUlyllT%2Bc9VgLiibW4ok7%2Fe4wU%3D)
 
@@ -84,6 +84,10 @@ clone 下面这个page到自己的notion中,此页面包含了blog需要的2个�
 ```
 export GitHubToken='yourtokenhere'
 ```
+
+缓存机制
+
+![](https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F2a0ab0a6-886c-4361-98d3-c92a99e611ec%2Fgine-blog.png?width=3840)
 
 ### bangumi 开启番剧模块
 
