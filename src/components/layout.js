@@ -91,9 +91,9 @@ class Layout extends React.Component {
         const { classes } = this.props
         return (
             <div style={{ background: '#f3f5f7' }}>
-                <Helmet defaultTitle={`Mayne's Blog`}>
+                <Helmet defaultTitle={config.blogMeta.title}>
                     <html lang="zh-cmn-Hans" />
-                    <meta name="description" content="Mayne's blog 博客 python react gine" />
+                    <meta name="description" content={`${config.blogMeta.title} 博客 python react gine`} />
                     <noscript>
                         为了更好的浏览体验，请不要在本页面禁用 Javascript 🙂
                     </noscript>

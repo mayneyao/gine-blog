@@ -57,8 +57,8 @@ class BlogPost extends React.Component {
                         height: '400px',
                         objectFit: 'cover'
                     }} src={post.image || getImageByName(slug)} />
-                    <Helmet defaultTitle={`Mayne's Blog - ${name}`}>
-                        <meta name="description" content={`Mayne's blog 博客 python react gine ${name}`} />
+                    <Helmet defaultTitle={`${config.blogMeta.title} - ${name}`}>
+                        <meta name="description" content={`{config.blogMeta.title} 博客 python react gine ${name}`} />
                     </Helmet>
                     <main style={{
                         maxWidth: 900,
