@@ -14,7 +14,7 @@ lighthouse report
 
 ![](https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F0cc8778b-ad42-4732-917e-7a69d3d801f3%2Fgine-blog.png?width=3840)
 
-![给我也整一个](https://s3.us-west-2.amazonaws.com/secure.notion-static.com/4ba891b7-e685-40fa-89ee-0b8dd206b8a9/nse-1761695606568594205-852524620.jpg?AWSAccessKeyId=ASIAT73L2G45PON4DKY7&Expires=1551441911&Signature=LBy9umDqV4ZaO1IwcIcL3CeV7OU%3D&response-content-disposition=filename%20%3D%22nse-1761695606568594205-852524620.jpg%22&x-amz-security-token=FQoGZXIvYXdzEOL%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaDPTu56HwoFmTqdA%2FqyK3A5pmn%2FNvEOU2qyAXr0A%2BDMkqLXezoksK1DEihu3F5MR3Gc8t7Lf2YkCfv6Le0I1JJMTdVBmytyAHYMsLEWC6Ox87d26PWKjaxSZLOFbxLqLtJ%2BEWjluzXxd2Y3sxSZU7h0zrqp4rYfHHIfdCAL%2FWVZlvEfJ8MWD5giSxG9bpbzePJQuDhyFjoxFLaSsiE%2F6gZtHDWUID1CbWP3tkzNOU43tNGQo8DPU%2F%2FRpAGawmXNkdN5973NAuMOER2dTrRrOCgiPZBRaeSoY%2FKQ64DxlMy5ZTPPpOPtdFb8ztk4%2F9sPrLyXeMnXcOU%2Fkk29mcid%2F7bqvTrCA3L3%2F0gMXNdI%2FRaSWfK3XoKhKYaR8QczGaYaIGu5QYZWKmLEDUeSiFxRXCxmmQfnENt3iSXm96WkyLp46Xr8RW2enjtEFXJYBnXemzUYGC1PQZ01YDVUQl6f2jSpov%2FhlHgcoFqdIoRhewBhqnGtZrRYjTTa9yT%2BWTYjdJqvVA2Xc5nPQMjthsmw%2BcOfTiYCKMcmFoB29qCkdX2%2Fn9WaZ7z1deRzJYecaqa6EyOtDv4q1bqsoHxwUlyllT%2Bc9VgLiibW4ok7%2Fe4wU%3D)
+![给我也整一个](https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F4ba891b7-e685-40fa-89ee-0b8dd206b8a9%2Fnse-1761695606568594205-852524620.jpg)
 
 ## 安装&&运行
 
@@ -36,7 +36,7 @@ yarn serve
 ```
 
 
-运行起来后，你可以看到已经有一篇文章，文章是从我notion的表格中获取的。你需要修改配置，改为自己的notion链接并做个性化的配置。
+运行起来后，你可以看到已经有一篇文章，文章是从我的notion表格中获取的。你需要改为自己的notion链接并做其它个性化的配置。
 
 下面是配置指南。
 
@@ -44,7 +44,7 @@ yarn serve
 
 ### 前置条件
 
-clone 下面这个page到自己的notion中,此页面包含了blog需要的2个表(文章表和友链)。后面你可以根据自己的喜好添加表格，做个性化的开发。
+clone 下面这个page到自己的notion中,此页面包含了blog需要的2个表(文章表和友链表)。后面你可以根据自己的喜好添加表格，做个性化的开发。
 
 [https://www.notion.so/gine/share-blog-table-60e00520137944a4a45a437c7d089488](https://www.notion.so/gine/share-blog-table-60e00520137944a4a45a437c7d089488)
 
@@ -54,9 +54,7 @@ clone 下面这个page到自己的notion中,此页面包含了blog需要的2个�
 
 
 ### 基础配置
-根据 `config.js` 中的说明，修改为自己的配置。
-
-默认配置是最小化的配置，只开启了blog相关的基本功能
+根据 `config.js` 中的说明，修改为自己的配置。默认配置是最小化的配置，只开启了blog相关的基本功能
 
 - 文章列表页
 - 文章详情页
@@ -76,6 +74,7 @@ clone 下面这个page到自己的notion中,此页面包含了blog需要的2个�
 ### blog 开启github缓存文章加速build 
 
 你需要新建一个仓库用来缓存blog文章内容。
++ 注意这里的仓库需要有文件，初始化添加Readme.md即可
 
 访问 https://github.com/settings/tokens 获取token 
 
