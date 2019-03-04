@@ -1,6 +1,6 @@
 # gine-blog
 
-gine-blog 是一个以notion为blog后端的,基于 React,Gatsby,Material-UI 的静态博客应用。
+gine-blog 是一个以notion为blog后端,基于 React,Gatsby,Material-UI 开发的静态博客应用。
 
 
 screenshot
@@ -21,6 +21,8 @@ lighthouse report
 ```
 git clone https://github.com/mayneyao/gine-blog.git
 
+# 如果你要部署到 netlify , 先fork到自己的仓库
+
 # 安装依赖
 yarn 
 
@@ -34,7 +36,6 @@ yarn build
 yarn serve
 
 ```
-
 
 运行起来后，你可以看到已经有一篇文章，文章是从我的notion表格中获取的。你需要改为自己的notion链接并做其它个性化的配置。
 
@@ -64,7 +65,7 @@ clone 下面这个page到自己的notion中,此页面包含了blog需要的2个�
 - 友链
 - about 页面实际上是一篇post，你需要在配置中写入相关post的slug。
 
-如果需要开启其它模块功能，按照下面的配置文档（参考config.js中的注释）操作即可。
+如果需要开启其它模块功能，按照下面的配置文档（参考config.js中的注释）操作即可。
 
 ### comment 开启评论
 
