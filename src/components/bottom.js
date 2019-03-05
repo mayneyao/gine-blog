@@ -66,9 +66,10 @@ export default () => (
                 text="material-ui" /> and <LoveIcon
                 color='primary'
                 style={{ fontSize: '0.9em' }} />
+
             <span style={{ display: 'block' }}>
                 Copyright 2019 <CopyrightIcon style={{ fontSize: '0.9em' }} /> <ULink
-                    href="https://github.com/mayneyao" text="Mayne" />
+                    href="https://github.com/mayneyao" text="Mayne" /> Powered by <ULink href="https://github.com/mayneyao/gine-blog" text="gine-blog" />
             </span>
 
         </Typography>
