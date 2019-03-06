@@ -19,6 +19,7 @@ const styles = {
     media: {
         // ⚠️ object-fit is not supported by IE 11.
         objectFit: 'cover',
+        height: '100%'
     },
 };
 
