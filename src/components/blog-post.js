@@ -45,9 +45,11 @@ class BlogPost extends React.Component {
             name,
             tags,
             html,
-            slug } = post
+            slug,
+            keywords
+        } = post
         const { disqusShortname, disqusConfig } = this.state
-
+        const seoKeywords = keywords ? keywords.join(" ") : ''
         return (
             <div>
                 <ScrollProgress />
@@ -58,7 +60,7 @@ class BlogPost extends React.Component {
                         objectFit: 'cover'
                     }} src={post.image || getImageByName(slug)} />
                     <Helmet defaultTitle={`${config.blogMeta.title} - ${name}`}>
-                        <meta name="description" content={`{config.blogMeta.title} 博客 python react gine ${name}`} />
+                        <meta name="description" content={`${seoKeywords} ${name} mayne gine 博客 python react`} />
                     </Helmet>
                     <main style={{
                         maxWidth: 900,
@@ -115,6 +117,7 @@ export const query = graphql`
         tags
         html
         slug
+        keywords
     }
   }
 `
