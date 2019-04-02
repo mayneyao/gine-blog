@@ -5,7 +5,7 @@ body, html {
 
 a {
     text-decoration: none;
-    color: #009688;
+    color: #009688!important;
     overflow-wrap: break-word;
 }
 
@@ -33,16 +33,16 @@ img {
         padding: 1em;
     }
 }
+
 @media screen and (max-width: 500px) {
-    #disqus_thread{
+    #disqus_thread {
         background: #f0f3f5;
         margin: -16px;
         margin-top: 1em;
         border-radius: 5px;
         padding: 1em;
     }
-  }
-
+}
 
 /* override markdown css*/
 
@@ -75,4 +75,8 @@ blockquote {
         transform: translateX(-100%);
         -webkit-transform: translateX(-100%);
     }
+}
+
+[data-block-id] {
+    max-width: calc(100vw - 0px)!important;
 }
