@@ -24,13 +24,13 @@ const hashColorMap = [
     '#ff5722',
 ]
 
-export const getHashColor = (tag) =>{
+export const getHashColor = (tag) => {
     return hashColorMap[Math.abs(Math.ceil(tag.hashCode())) % 7]
 }
 
 const ColorfulTag = (props) => {
     let color = getHashColor(props.tag)
-    return <Link to={`tags/${props.tag}`}>
+    return <Link to={props.to ? props.to : `tags/${props.tag}`}>
         <div style={{
             background: color,
             color: '#fff',

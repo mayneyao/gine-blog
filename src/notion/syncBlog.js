@@ -133,3 +133,25 @@ exports.syncNotionBlogData = async ({ createNode, createNodeId, createContentDig
 
     }
 }
+
+exports.syncNotionBookData = async ({ createNode, createNodeId, createContentDigest }) => {
+    let url = 'https://www.notion.so/98717bf8ad57434eafd9a65277403c33?v=fa4f00bb9b5b492fb23157f8d5df471f'
+    let res = await notion.queryCollection(url)
+
+    for (let data of res) {
+        const nodeContent = JSON.stringify(data)
+        const nodeMeta = {
+            id: createNodeId(data.slug),
+            parent: null,
+            children: [],
+            internal: {
+                type: `Book`,
+                mediaType: `text/html`,
+                content: nodeContent,
+                contentDigest: createContentDigest(data)
+            }
+        }
+        const node = Object.assign({}, data, nodeMeta)
+        createNode(node)
+    }
+}

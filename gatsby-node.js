@@ -119,6 +119,9 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest }) => 
 
     // 生成blog post数据
     await notion.syncNotionBlogData({ createNode, createNodeId, createContentDigest });
+
+    // 生成书单数据
+    await notion.syncNotionBookData({ createNode, createNodeId, createContentDigest });
 }
 
 

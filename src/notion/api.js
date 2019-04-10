@@ -28,7 +28,7 @@ getPageCollectionId = async (pageId) => {
     return collectionId
 }
 
-getBrowseableUrl = (blockID) =>{
+getBrowseableUrl = (blockID) => {
     return `https://notion.so/${blockID.split('-').join('')}`
 }
 queryCollection = async (url) => {
@@ -55,17 +55,20 @@ queryCollection = async (url) => {
         Object.entries(blockData.properties).map(item => {
             let [key, val] = item
             let r = schema[key]
-            if (r){
+            if (r) {
                 parsedBlockData.slug = blockId.split('-').join('')
                 parsedBlockData.browseableUrl = getBrowseableUrl(blockId)
                 parsedBlockData.created_time = dayjs(blockData.created_time).toISOString()
                 parsedBlockData.last_edited_time = dayjs(blockData.last_edited_time).toISOString()
+
                 let newKey = r.name
-                if (r.type === 'date'){
+                if (r.type === 'date') {
                     parsedBlockData[newKey] = val[0][1][0][1].start_date
-                }else if (r.type === 'multi_select'){
+                } else if (r.type === 'multi_select') {
                     parsedBlockData[newKey] = val[0][0].split(',')
-                }else{
+                } else if (r.type == 'file') {
+                    parsedBlockData[newKey] = val[0][1][0][1]
+                } else {
                     parsedBlockData[newKey] = val[0][0]
                 }
             }
@@ -77,6 +80,12 @@ queryCollection = async (url) => {
 }
 
 
-// console.log(queryCollection('https://www.notion.so/b8081728310b49fea0ff1d14e190b3fb?v=dbd9df2e8f784aa7bf8db977d82ee635'))
+// console.log(queryCollection('https://www.notion.so/98717bf8ad57434eafd9a65277403c33?v=fa4f00bb9b5b492fb23157f8d5df471f'))
 
+t = async () => {
+    let res = await queryCollection('https://www.notion.so/98717bf8ad57434eafd9a65277403c33?v=fa4f00bb9b5b492fb23157f8d5df471f')
+    console.log(res, res.length)
+}
+
+// t()
 module.exports = { queryCollection }
