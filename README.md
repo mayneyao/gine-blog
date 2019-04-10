@@ -99,3 +99,8 @@ export GitHubToken='yourtokenhere'
 
 ### 为什么安装依赖这么慢？
 初次安装依赖，会安装puppetter，所以比较慢
+
+可以先单独安装 puppetter
+```
+sudo npm install -g puppeteer --unsafe-perm=true --allow-root
+```
