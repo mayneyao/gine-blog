@@ -27,6 +27,7 @@
     "github-api": "^3.0.0",
     "image-downloader": "^3.4.2",
     "jss": "latest",
+    "loadsh": "^0.0.4",
     "lodash": "^4.17.11",
     "prismjs": "^1.15.0",
     "prop-types": "latest",

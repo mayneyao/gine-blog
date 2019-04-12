@@ -1,0 +1,118 @@
+import React from 'react';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import Divider from '@material-ui/core/Divider';
+import InboxIcon from '@material-ui/icons/Description';
+import { Link } from 'gatsby'
+
+const MyLink = props => <Link {...props} />
+
+
+const styles = theme => ({
+    root: {
+        width: '100%',
+        height: 500,
+        display: 'flex',
+        flexDirection: 'column',
+        width: 540,
+        minwWidth: 180,
+        maxWidth: '100%',
+        height: '60vh',
+        maxHeight: '70vh',
+        backgroundColor: theme.palette.background.paper,
+    },
+});
+
+function ListItemLink(props) {
+    return <ListItem button component="a" {...props} />;
+}
+
+
+function makeSearchResultTree(recordMap, results) {
+    let tree = {}
+    const getParentBlock = (blockID) => {
+        let thisBlock = recordMap.block[blockID].value
+        if (thisBlock.type === "page") {
+            return thisBlock.id
+        } else {
+            return getParentBlock(thisBlock.parent_id)
+        }
+    }
+    results.map(blockID => {
+        let thisBlock = recordMap.block[blockID].value
+        if (thisBlock.type === "page") {
+            tree[blockID] = {
+                title: thisBlock.properties.title[0][0],
+                children: []
+            }
+        } else if (thisBlock.type === "text") {
+            let parentBlockID = getParentBlock(thisBlock.id)
+            if (parentBlockID in tree) {
+                console.log('push')
+                tree[parentBlockID].children.push(thisBlock.properties.title[0])
+            } else {
+                let parentBlock = recordMap.block[parentBlockID].value
+                tree[parentBlockID] = {
+                    title: parentBlock.properties.title[0][0],
+                    children: [thisBlock.properties.title[0]]
+                }
+            }
+        }
+    })
+    return tree
+}
+
+function SimpleList(props) {
+    const { classes, data: {
+        recordMap, results
+    } } = props;
+
+    let tree = makeSearchResultTree(recordMap, results)
+
+    return (
+        <div className={classes.root}>
+            {
+                Boolean(results.length) ? <List component="nav">
+                    {
+                        Object.entries(tree).map(item => {
+                            let [key, block] = item
+                            let postSlug = key.split('-').join('')
+                            return (
+                                <div>
+                                    <MyLink to={`posts/${postSlug}`}>
+                                        <ListItem button>
+                                            <ListItemIcon>
+                                                <InboxIcon />
+                                            </ListItemIcon>
+                                            <ListItemText primary={block.title} />
+                                        </ListItem>
+                                    </MyLink>
+                                    {
+                                        block.children.map(item => (
+                                            <ListItem button>
+                                                <div style={{ minWidth: 40, height: 40 }}></div>
+                                                <ListItemText primary={item} />
+                                            </ListItem>
+                                        ))
+                                    }
+                                </div>
+                            )
+                        })
+                    }
+                </List> :
+                    <span style={{ color: 'gray' }}>搜不到啊😂</span>
+            }
+
+        </div>
+    );
+}
+
+SimpleList.propTypes = {
+    classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(styles)(SimpleList);

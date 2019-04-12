@@ -80,3 +80,12 @@ blockquote {
 [data-block-id] {
     max-width: calc(100vw - 0px)!important;
 }
+#mydlg > div > div{
+    position:fixed;
+    margin: 0 auto;
+    top:100px;
+}
+#mydlg {
+    width: 500px;
+    margin: 0 auto;
+}

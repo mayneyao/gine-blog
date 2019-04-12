@@ -31,6 +31,9 @@ getPageCollectionId = async (pageId) => {
 getBrowseableUrl = (blockID) => {
     return `https://notion.so/${blockID.split('-').join('')}`
 }
+
+
+
 queryCollection = async (url) => {
     let [base, params] = url.split('?')
     let p = new URLSearchParams(params)
