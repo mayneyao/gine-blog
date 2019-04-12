@@ -49,16 +49,21 @@ function makeSearchResultTree(recordMap, results) {
                 title: thisBlock.properties.title[0][0],
                 children: []
             }
-        } else if (thisBlock.type === "text") {
+        } else {
             let parentBlockID = getParentBlock(thisBlock.id)
             if (parentBlockID in tree) {
-                console.log('push')
-                tree[parentBlockID].children.push(thisBlock.properties.title[0])
+                tree[parentBlockID].children.push({
+                    title: thisBlock.properties.title[0],
+                    blockID: thisBlock.id
+                })
             } else {
                 let parentBlock = recordMap.block[parentBlockID].value
                 tree[parentBlockID] = {
                     title: parentBlock.properties.title[0][0],
-                    children: [thisBlock.properties.title[0]]
+                    children: [{
+                        title: thisBlock.properties.title[0],
+                        blockID: thisBlock.id
+                    }]
                 }
             }
         }
@@ -93,10 +98,12 @@ function SimpleList(props) {
                                     </MyLink>
                                     {
                                         block.children.map(item => (
-                                            <ListItem button>
-                                                <div style={{ minWidth: 40, height: 40 }}></div>
-                                                <ListItemText primary={item} />
-                                            </ListItem>
+                                            <MyLink to={`posts/${postSlug}#${item.blockID}`}>
+                                                <ListItem button>
+                                                    <div style={{ minWidth: 40, height: 40 }}></div>
+                                                    <ListItemText primary={item.title} />
+                                                </ListItem>
+                                            </MyLink>
                                         ))
                                     }
                                 </div>

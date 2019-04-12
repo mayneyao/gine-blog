@@ -35,6 +35,19 @@ class BlogPost extends React.Component {
             disqusShortname,
             disqusConfig
         })
+
+        // 检查hash，如果存在hash 则跳转到指定位置并高亮
+        let hash = window.location.hash
+        if (hash) {
+            let blockID = hash.split('#')[1]
+            let block = document.querySelector(`div[data-block-id="${blockID}"]`)
+            if (block) {
+                window.setTimeout(() => {
+                    block.style.background = 'rgba(45, 170, 219, 0.3)'
+                    block.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" })
+                }, 1000);
+            }
+        }
     }
 
     render() {
