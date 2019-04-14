@@ -18,7 +18,6 @@ const getFullBlockId = (blockId) => {
 }
 
 getPageCollectionId = async (pageId) => {
-    // console.log(pageId)
     let res = await axios.post('https://www.notion.so/api/v3/loadPageChunk',
         { "pageId": getFullBlockId(pageId), "limit": 50, "cursor": { "stack": [] }, "chunkNumber": 0, "verticalColumns": false },
         {

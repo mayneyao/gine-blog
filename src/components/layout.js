@@ -133,7 +133,7 @@ class Layout extends React.Component {
                     {this.props.children}
                 </div>
                 <SearchButton />
-                {/* <Bottom /> */}
+                <Bottom />
             </div>
         )
     }

@@ -1,10 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
-import withRoot from '../withRoot'
-import Layout from '../components/layout'
-import PostListItem from '../components/post-list-item'
-import ColorfulTag from './hash-colorful-tag'
+import withRoot from '../../withRoot'
+import Layout from '../layout'
+import PostListItem from '../post/post-list-item'
+import ColorfulTag from '../utils/hash-colorful-tag'
 import { graphql } from 'gatsby'
 
 const styles = theme => ({

@@ -10,7 +10,7 @@ import Typography from '@material-ui/core/Typography'
 import { Link } from 'gatsby'
 import getImageByName from '../utils/notion-hash-image'
 
-import ColorfulTag from './hash-colorful-tag'
+import ColorfulTag from '../utils/hash-colorful-tag'
 
 const styles = {
     card: {

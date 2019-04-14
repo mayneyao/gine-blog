@@ -6,7 +6,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import ColorfulTag from '../hash-colorful-tag'
+import ColorfulTag from '../utils/hash-colorful-tag'
 
 import StateTag from '../bangumi/StateTag';
 

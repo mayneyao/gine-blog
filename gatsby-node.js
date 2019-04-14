@@ -168,7 +168,7 @@ exports.createPages = ({ graphql, actions }) => {
         for (let i = 1; i <= pageCount; i++) {
             createPage({
                 path: `page/${i}`,
-                component: path.resolve(`./src/components/post-page.js`),
+                component: path.resolve(`./src/components/post/post-page.js`),
                 context: {
                     skip: (i - 1) * pageSize,
                     limit: pageSize,
@@ -181,7 +181,7 @@ exports.createPages = ({ graphql, actions }) => {
         edges.forEach(({ node }) => {
             createPage({
                 path: node.slug,
-                component: path.resolve(`./src/components/blog-post.js`),
+                component: path.resolve(`./src/components/post/blog-post.js`),
                 context: {
                     // Data passed to context is available
                     // in page queries as GraphQL variables.
@@ -198,7 +198,7 @@ exports.createPages = ({ graphql, actions }) => {
         Array.from(allTags).map(tag => {
             createPage({
                 path: `tags/${tag}`,
-                component: path.resolve(`./src/components/tag-page.js`),
+                component: path.resolve(`./src/components/postTag/tag-page.js`),
                 context: {
                     tag: tag,
                 },
