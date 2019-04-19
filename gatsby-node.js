@@ -5,6 +5,7 @@ const axios = require('axios')
 const download = require('image-downloader')
 const notion = require('./src/notion/syncBlog')
 const notionApi = require('./src/notion/api')
+const { syncAphorisms } = require('./src/notion/aphorisms')
 const config = require('./config')
 
 function genApiData(data, type, key, createNode, createNodeId, createContentDigest) {
@@ -122,6 +123,9 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest }) => 
 
     // 生成书单数据
     await notion.syncNotionBookData({ createNode, createNodeId, createContentDigest });
+
+    // 保存格言数据
+    await syncAphorisms();
 }
 
 

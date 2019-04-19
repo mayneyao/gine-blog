@@ -5,7 +5,7 @@ import ULink from './utils/link-without-underline'
 import axios from 'axios'
 import Typography from '@material-ui/core/Typography';
 import config from '../../config'
-
+import _ from 'loadsh'
 
 function isChineseChar(str) {
     var reg = /[\u4E00-\u9FA5\uF900-\uFA2D]/;
@@ -28,15 +28,16 @@ class Aphorisms extends React.Component {
     }
 
     componentDidMount() {
-        const { url } = config.aphorisms
+        const url = '/static/aphorisms.json'
         axios.get(url).then(res => {
             this.setState({
-                ...res.data
+                data: res.data
             })
         })
     }
     render() {
-        const { person, content, source } = this.state
+        const { data } = this.state
+        const { person, content, source } = data ? data[_.random(data.length - 1)] : {}
 
         const getRender = (person, content, source) => {
             if (person && content && source) {

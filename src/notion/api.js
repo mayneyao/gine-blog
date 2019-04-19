@@ -82,12 +82,10 @@ queryCollection = async (url) => {
 }
 
 
-// console.log(queryCollection('https://www.notion.so/98717bf8ad57434eafd9a65277403c33?v=fa4f00bb9b5b492fb23157f8d5df471f'))
-
-t = async () => {
-    let res = await queryCollection('https://www.notion.so/98717bf8ad57434eafd9a65277403c33?v=fa4f00bb9b5b492fb23157f8d5df471f')
-    console.log(res, res.length)
-}
+// t = async () => {
+//     let res = await queryCollection('https://www.notion.so/98717bf8ad57434eafd9a65277403c33?v=fa4f00bb9b5b492fb23157f8d5df471f')
+//     console.log(res, res.length)
+// }
 
 // t()
 module.exports = { queryCollection }

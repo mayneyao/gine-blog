@@ -53,9 +53,9 @@ module.exports = {
 
     // 格言
     aphorisms: {
-        open: false, // 默认关闭 需要api
-        sourceType: 'api',
-        url: 'https://api.gine.me/notion/b23848d867974c36a2902ec4cb833453/29915c889d4c415cbfb9e9bf7dd49afd?random_one=1',
+        open: true, // 默认关闭 需要api
+        sourceType: 'notion',
+        url: 'https://www.notion.so/gine/b23848d867974c36a2902ec4cb833453?v=29915c889d4c415cbfb9e9bf7dd49afd',
         // 返回格式参见上面链接的内容
     },
 
