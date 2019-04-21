@@ -20,7 +20,6 @@ class Index extends React.Component {
     render() {
         const { classes, data: { allBook } } = this.props
         const { currentPage } = this.props.pageContext
-        console.log(allBook)
         return (
             <Layout>
                 <div style={{ display: 'flex', flexWrap: 'wrap', maxWidth: '1760px', margin: '0 auto' }}>
