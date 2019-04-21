@@ -13,6 +13,13 @@ img {
     width: 100%;
 }
 
+#mydlg > div > div{
+    position:fixed;
+    margin: 0 auto;
+    top:100px;
+}
+
+
 @media screen and (min-width: 600px) {
     #disqus_thread {
         background: #f0f3f5;
@@ -21,6 +28,10 @@ img {
         margin-bottom: -16px;
         border-radius: 5px;
         padding: 1em;
+    }
+    #mydlg {
+        width: 500px;
+        margin: 0 auto;
     }
 }
 
@@ -31,6 +42,10 @@ img {
         margin-top: 1em;
         border-radius: 5px;
         padding: 1em;
+    }
+    #mydlg {
+        width: 360px;
+        margin: 0 auto;
     }
 }
 
@@ -79,13 +94,4 @@ blockquote {
 
 [data-block-id] {
     max-width: calc(100vw - 0px)!important;
-}
-#mydlg > div > div{
-    position:fixed;
-    margin: 0 auto;
-    top:100px;
-}
-#mydlg {
-    width: 500px;
-    margin: 0 auto;
 }

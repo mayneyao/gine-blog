@@ -11,14 +11,18 @@ import SearchIcon from '@material-ui/icons/Search';
 import CloseIcon from '@material-ui/icons/Cancel';
 import IconButton from '@material-ui/core/IconButton';
 import { withStyles } from '@material-ui/core/styles';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 
-const styles = {
+const styles = theme => ({
     mydlg: {
         position: 'fixed',
-        top: 0
-    }
-}
+        top: 0,
+    },
+    progress: {
+        margin: theme.spacing.unit * 0,
+    },
+})
 
 class FormDialog extends React.Component {
     constructor(props) {
@@ -30,7 +34,8 @@ class FormDialog extends React.Component {
                 recordMap: {},
                 results: []
             },
-            isSearchStarted: false
+            isSearchStarted: false,
+            loading: false
         };
         this.searchBlog = _.debounce(this.searchBlog, 800)
     }
@@ -38,7 +43,8 @@ class FormDialog extends React.Component {
 
     onSearchChange = (e) => {
         this.setState({
-            query: e.target.value
+            query: e.target.value,
+            loading: true
         }, () => {
             const { query } = this.state
             if (query.trim().length) {
@@ -51,7 +57,8 @@ class FormDialog extends React.Component {
         let res = await Axios.get(url)
         this.setState({
             blockData: res.data,
-            isSearchStarted: true
+            isSearchStarted: true,
+            loading: false
         })
     }
 
@@ -67,7 +74,8 @@ class FormDialog extends React.Component {
                 recordMap: {},
                 results: []
             },
-            isSearchStarted: false
+            isSearchStarted: false,
+            loading: false
         });
     };
     cancelSearch = () => {
@@ -76,7 +84,8 @@ class FormDialog extends React.Component {
             blockData: {
                 recordMap: {},
                 results: []
-            }
+            },
+            loading: false
         });
     }
     componentDidMount() {
@@ -89,13 +98,14 @@ class FormDialog extends React.Component {
     }
 
     render() {
-        const { blockData, isSearchStarted, query } = this.state;
+        const { blockData, isSearchStarted, query, loading } = this.state;
+        const { classes } = this.props;
         return (
             <div>
-                <IconButton variant="outlined" color="primary" onClick={this.handleClickOpen} style={{
+                <IconButton variant="outlined" onClick={this.handleClickOpen} style={{
                     position: 'fixed',
-                    top: 10,
-                    right: 10
+                    top: 0,
+                    right: 0
                 }}>
                     <SearchIcon />
                 </IconButton>
@@ -118,7 +128,7 @@ class FormDialog extends React.Component {
                             InputProps={{
                                 startAdornment: (
                                     <InputAdornment position="start">
-                                        <SearchIcon />
+                                        {loading ? <CircularProgress className={classes.progress} size={20} color="" /> : <SearchIcon />}
                                     </InputAdornment>
                                 ),
                                 endAdornment: (
