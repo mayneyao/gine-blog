@@ -16,7 +16,7 @@ syncBlogData = async (url) => {
         document.querySelectorAll('div.notion-page-content  img').forEach(item => {
             if (item.src.startsWith("https://s3.us-west")) {
                 let [parsedOriginUrl] = item.src.split("?")
-                item.src = encodeURIComponent(parsedOriginUrl).replace("s3.us-west-2", "s3-us-west-2")
+                item.src = `https://notion.so/image/${encodeURIComponent(parsedOriginUrl).replace("s3.us-west-2", "s3-us-west-2")}`
             } else {
                 item.src = item.src
             }
@@ -40,7 +40,8 @@ syncBlogData = async (url) => {
                     return blockId
                 }
             }
-            item.href = `/posts/${item.pathname.slice(1).split("-")}#${getFullBlockId(item.hash.slice(1))}`
+            let path = item.pathname.slice(1).split("-")
+            item.href = `/posts/${path.pop()}#${getFullBlockId(item.hash.slice(1))}`
         })
         let content = document.querySelector('#notion-app > div > div.notion-cursor-listener > div > div > div.notion-page-content')
 
