@@ -83,7 +83,7 @@ queryCollection = async (url) => {
 
 
 // t = async () => {
-//     let res = await queryCollection('https://www.notion.so/98717bf8ad57434eafd9a65277403c33?v=fa4f00bb9b5b492fb23157f8d5df471f')
+//     let res = await queryCollection('https://www.notion.so/gine/b8081728310b49fea0ff1d14e190b3fb?v=dbd9df2e8f784aa7bf8db977d82ee635')
 //     console.log(res, res.length)
 // }
 

@@ -93,6 +93,9 @@ exports.syncNotionBlogData = async ({ createNode, createNodeId, createContentDig
             let allBlogInfo = await GitHub.getAllBlogInfo()
 
             for (let item of res) {
+                if (item.status !== '已发布') {
+                    continue
+                }
                 let blogData
                 let blogKey = `${item.slug}.json`
                 let blogSha = allBlogInfo[blogKey]
