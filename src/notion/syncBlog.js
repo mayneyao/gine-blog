@@ -43,7 +43,7 @@ syncBlogData = async (url) => {
             let hashBlockID = getFullBlockId(item.hash.slice(1))
             item.href = `#${hashBlockID}`
 
-            let block = document.querySelector(`div[data-block-id="${blockID}"]`)
+            let block = document.querySelector(`div[data-block-id="${hashBlockID}"]`)
             block.id = hashBlockID
         });
 
