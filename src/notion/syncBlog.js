@@ -42,21 +42,23 @@ syncBlogData = async (url) => {
             }
             let hashBlockID = getFullBlockId(item.hash.slice(1))
             item.href = `#${hashBlockID}`
-            item.addEventListener('click', () => {
-                document.querySelector(`div[data-block-id=${hashBlockID}]`).scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" })
-            })
-            let content = document.querySelector('#notion-app > div > div.notion-cursor-listener > div > div > div.notion-page-content')
 
-            if (content) {
-                return {
-                    html: content.innerHTML,
-                    brief: content.innerText.slice(0, 100)
-                }
-            }
-            else {
-                return false
-            }
+            let block = document.querySelector(`div[data-block-id="${blockID}"]`)
+            block.id = hashBlockID
         });
+
+        // 文章内容
+        let content = document.querySelector('#notion-app > div > div.notion-cursor-listener > div > div > div.notion-page-content')
+
+        if (content) {
+            return {
+                html: content.innerHTML,
+                brief: content.innerText.slice(0, 100)
+            }
+        }
+        else {
+            return false
+        }
     })
 
     await browser.close();
