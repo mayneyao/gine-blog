@@ -11,7 +11,7 @@ syncBlogData = async (url) => {
     await page.goto(url);
     await page.waitForSelector('#notion-app');
     await page.waitFor(8000);
-    const data = await page.evaluate((notion) => {
+    const data = await page.evaluate(() => {
         // 图片链接转换
         document.querySelectorAll('div.notion-page-content  img').forEach(item => {
             if (item.src.startsWith("https://s3.us-west")) {
@@ -40,26 +40,28 @@ syncBlogData = async (url) => {
                     return blockId
                 }
             }
-            let path = item.pathname.slice(1).split("-")
-            item.href = `/posts/${path.pop()}#${getFullBlockId(item.hash.slice(1))}`
-        })
-        let content = document.querySelector('#notion-app > div > div.notion-cursor-listener > div > div > div.notion-page-content')
+            let hashBlockID = getFullBlockId(item.hash.slice(1))
+            item.href = `#${hashBlockID}`
+            item.addEventListener('click', () => {
+                document.querySelector(`div[data-block-id=${hashBlockID}]`).scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" })
+            })
+            let content = document.querySelector('#notion-app > div > div.notion-cursor-listener > div > div > div.notion-page-content')
 
-        if (content) {
-            return {
-                html: content.innerHTML,
-                brief: content.innerText.slice(0, 100)
+            if (content) {
+                return {
+                    html: content.innerHTML,
+                    brief: content.innerText.slice(0, 100)
+                }
             }
-        }
-        else {
-            return false
-        }
-    }, notion);
+            else {
+                return false
+            }
+        });
+    })
 
     await browser.close();
     return data
 }
-
 
 uploadBlogData2Github = async (item, blogData) => {
     let blogKey = `${item.slug}.json`
