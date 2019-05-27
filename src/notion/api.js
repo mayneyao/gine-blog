@@ -31,7 +31,23 @@ getBrowseableUrl = (blockID) => {
     return `https://notion.so/${blockID.split('-').join('')}`
 }
 
+parseImageUrl = (url, width) => {
+    let rUrl
+    if (url.startsWith("https://s3.us-west")) {
+        let [parsedOriginUrl] = item.src.split("?")
+        rUrl = `https://notion.so/image/${encodeURIComponent(parsedOriginUrl).replace("s3.us-west", "s3-us-west")}`
+    } else if (url.startsWith("/image")) {
+        rUrl = `https://notion.so${url}`
+    } else {
+        rUrl = url
+    }
 
+    if (width) {
+        return `${rUrl}?width=${width}`
+    } else {
+        return rUrl
+    }
+}
 
 queryCollection = async (url) => {
     let [base, params] = url.split('?')
@@ -63,6 +79,11 @@ queryCollection = async (url) => {
                 parsedBlockData.created_time = dayjs(blockData.created_time).toISOString()
                 parsedBlockData.last_edited_time = dayjs(blockData.last_edited_time).toISOString()
 
+                // page_cover
+                if (blockData.format) {
+                    parsedBlockData.format = blockData.format
+                }
+
                 let newKey = r.name
                 if (r.type === 'date') {
                     parsedBlockData[newKey] = val[0][1][0][1].start_date
@@ -88,4 +109,4 @@ queryCollection = async (url) => {
 // }
 
 // t()
-module.exports = { queryCollection, getFullBlockId }
+module.exports = { queryCollection, getFullBlockId, parseImageUrl }

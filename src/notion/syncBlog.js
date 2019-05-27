@@ -16,7 +16,7 @@ syncBlogData = async (url) => {
         document.querySelectorAll('div.notion-page-content  img').forEach(item => {
             if (item.src.startsWith("https://s3.us-west")) {
                 let [parsedOriginUrl] = item.src.split("?")
-                item.src = `https://notion.so/image/${encodeURIComponent(parsedOriginUrl).replace("s3.us-west-2", "s3-us-west-2")}`
+                item.src = `https://notion.so/image/${encodeURIComponent(parsedOriginUrl).replace("s3.us-west", "s3-us-west")}`
             } else {
                 item.src = item.src
             }

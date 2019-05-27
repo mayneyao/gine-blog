@@ -11,6 +11,7 @@ import getImageByName from '../utils/notion-hash-image'
 import Disqus from 'disqus-react';
 import { Helmet } from "react-helmet"
 import config from '../../../config'
+import notion from '../../notion/api'
 
 
 class BlogPost extends React.Component {
@@ -59,10 +60,19 @@ class BlogPost extends React.Component {
             tags,
             html,
             slug,
-            keywords
+            keywords,
+            format,
         } = post
         const { disqusShortname, disqusConfig } = this.state
         const seoKeywords = keywords ? keywords.join(" ") : ''
+        let coverImageUrl
+
+        if (format && format.page_cover) {
+            let cover = format.page_cover
+            coverImageUrl = notion.parseImageUrl(cover)
+        } else {
+            coverImageUrl = getImageByName(slug)
+        }
         return (
             <div>
                 <ScrollProgress />
@@ -71,7 +81,7 @@ class BlogPost extends React.Component {
                         width: '100%',
                         height: '400px',
                         objectFit: 'cover'
-                    }} src={post.image || getImageByName(slug)} />
+                    }} src={coverImageUrl} />
                     <Helmet defaultTitle={`${config.blogMeta.title} - ${name}`}>
                         <meta name="description" content={`${seoKeywords} ${name} mayne gine 博客 python react`} />
                     </Helmet>
