@@ -33,8 +33,8 @@ getBrowseableUrl = (blockID) => {
 
 parseImageUrl = (url, width) => {
     let rUrl
-    if (url.startsWith("https://s3.us-west")) {
-        let [parsedOriginUrl] = item.src.split("?")
+    if (url.startsWith("https://s3")) {
+        let [parsedOriginUrl] = url.split("?")
         rUrl = `https://notion.so/image/${encodeURIComponent(parsedOriginUrl).replace("s3.us-west", "s3-us-west")}`
     } else if (url.startsWith("/image")) {
         rUrl = `https://notion.so${url}`
@@ -81,7 +81,9 @@ queryCollection = async (url) => {
 
                 // page_cover
                 if (blockData.format) {
-                    parsedBlockData.format = blockData.format
+                    parsedBlockData.pformat = blockData.format
+                } else {
+                    parsedBlockData.pformat = {}
                 }
 
                 let newKey = r.name

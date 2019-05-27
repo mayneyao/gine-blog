@@ -9,8 +9,8 @@ import CardMedia from '@material-ui/core/CardMedia'
 import Typography from '@material-ui/core/Typography'
 import { Link } from 'gatsby'
 import getImageByName from '../utils/notion-hash-image'
-
 import ColorfulTag from '../utils/hash-colorful-tag'
+import notion from '../../notion/api'
 
 const styles = {
     card: {

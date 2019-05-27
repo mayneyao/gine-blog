@@ -61,14 +61,14 @@ class BlogPost extends React.Component {
             html,
             slug,
             keywords,
-            format,
+            pformat,
         } = post
         const { disqusShortname, disqusConfig } = this.state
         const seoKeywords = keywords ? keywords.join(" ") : ''
         let coverImageUrl
 
-        if (format && format.page_cover) {
-            let cover = format.page_cover
+        if (pformat && pformat.page_cover) {
+            let cover = pformat.page_cover
             coverImageUrl = notion.parseImageUrl(cover)
         } else {
             coverImageUrl = getImageByName(slug)
@@ -141,6 +141,9 @@ export const query = graphql`
         html
         slug
         keywords
+        pformat{
+            page_cover
+        }
     }
   }
 `

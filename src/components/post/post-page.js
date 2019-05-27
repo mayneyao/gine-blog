@@ -30,7 +30,7 @@ class Index extends React.Component {
                             key={node.id}
                             content={node.brief}
                             slug={node.slug}
-                            image={node.image}
+                            format={node.pformat}
                             tags={node.tags}
                             date={node.public_date}
                         />
@@ -68,6 +68,9 @@ export const query = graphql`
         public_date
         slug
         brief
+        pformat{
+            page_cover
+        }
       }
     }
     totalCount
