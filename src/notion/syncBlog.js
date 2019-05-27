@@ -11,9 +11,39 @@ syncBlogData = async (url) => {
     await page.goto(url);
     await page.waitForSelector('#notion-app');
     await page.waitFor(8000);
-    const data = await page.evaluate(() => {
-        document.querySelectorAll('div.notion-page-content  img').forEach(item => item.src = item.src)
+    const data = await page.evaluate((notion) => {
+        // 图片链接转换
+        document.querySelectorAll('div.notion-page-content  img').forEach(item => {
+            if (item.src.startsWith("https://s3.us-west")) {
+                let [parsedOriginUrl] = item.src.split("?")
+                item.src = encodeURIComponent(parsedOriginUrl).replace("s3.us-west-2", "s3-us-west-2")
+            } else {
+                item.src = item.src
+            }
+        })
+
+        // TOC 链接转化
+        let qs = "#notion-app > div > div.notion-cursor-listener > div > div.notion-scroller.vertical.horizontal > div.notion-page-content > div > div:nth-child(1) > div > a"
+        document.querySelectorAll(qs).forEach(item => {
+            // 真是服了，puppeteer传个函数这么麻烦。🤯
+            const getFullBlockId = (blockId) => {
+                if (typeof blockId !== 'string') {
+                    throw Error(`blockId: ${typeof blockId} must be string`)
+                }
+                if (blockId.match("^[a-zA-Z0-9]+$")) {
+                    return blockId.substr(0, 8) + "-"
+                        + blockId.substr(8, 4) + "-"
+                        + blockId.substr(12, 4) + "-"
+                        + blockId.substr(16, 4) + "-"
+                        + blockId.substr(20, 32)
+                } else {
+                    return blockId
+                }
+            }
+            item.href = `/posts/${item.pathname.slice(1).split("-")}#${getFullBlockId(item.hash.slice(1))}`
+        })
         let content = document.querySelector('#notion-app > div > div.notion-cursor-listener > div > div > div.notion-page-content')
+
         if (content) {
             return {
                 html: content.innerHTML,
@@ -23,7 +53,7 @@ syncBlogData = async (url) => {
         else {
             return false
         }
-    });
+    }, notion);
 
     await browser.close();
     return data

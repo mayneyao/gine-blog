@@ -88,4 +88,4 @@ queryCollection = async (url) => {
 // }
 
 // t()
-module.exports = { queryCollection }
+module.exports = { queryCollection, getFullBlockId }
