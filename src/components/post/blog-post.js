@@ -80,7 +80,8 @@ class BlogPost extends React.Component {
                     <img style={{
                         width: '100%',
                         height: '400px',
-                        objectFit: 'cover'
+                        objectFit: 'cover',
+                        zIndex: 1
                     }} src={coverImageUrl} />
                     <Helmet defaultTitle={`${config.blogMeta.title} - ${name}`}>
                         <meta name="description" content={`${seoKeywords} ${name} mayne gine 博客 python react`} />
@@ -91,6 +92,7 @@ class BlogPost extends React.Component {
                         marginTop: -100,
                         marginBottom: 100,
                         position: 'sticky',
+                        zIndex: 10
                     }}>
                         <div role='meta' style={{ display: 'flex' }}>
                             <div style={{
