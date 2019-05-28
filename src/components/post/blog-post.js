@@ -91,9 +91,8 @@ class BlogPost extends React.Component {
                         margin: '0 auto',
                         marginTop: -100,
                         marginBottom: 100,
-                        position: 'sticky',
                         zIndex: 10
-                    }}>
+                    }} className="sticky">
                         <div role='meta' style={{ display: 'flex' }}>
                             <div style={{
                                 background: '#eee',

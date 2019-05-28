@@ -19,6 +19,10 @@ img {
     top:100px;
 }
 
+.sticky {
+    position: sticky;
+    position: -webkit-sticky;
+}
 
 @media screen and (min-width: 600px) {
     #disqus_thread {
