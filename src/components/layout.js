@@ -132,7 +132,7 @@ class Layout extends React.Component {
                 <div style={{ margin: `0 auto` }}>
                     {this.props.children}
                 </div>
-                <SearchButton />
+                {config.blog.search.open && <SearchButton />}
                 <Bottom />
             </div>
         )
