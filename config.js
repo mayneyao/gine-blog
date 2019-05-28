@@ -26,7 +26,7 @@ module.exports = {
             branch: 'master' // 作为blog缓存数据仓库的分支
         },
         search: {
-            open: false, // 是否开启文章搜索功能
+            open: true, // 是否开启文章搜索功能
             api: "https://api.gine.me/notion/search/" // 搜索接口
         }
     },
