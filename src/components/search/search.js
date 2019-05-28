@@ -12,6 +12,7 @@ import CloseIcon from '@material-ui/icons/Cancel';
 import IconButton from '@material-ui/core/IconButton';
 import { withStyles } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import config from '../../../config'
 
 
 const styles = theme => ({
@@ -53,7 +54,8 @@ class FormDialog extends React.Component {
         })
     }
     searchBlog = async (query) => {
-        let url = `https://api.gine.me/notion/search/${query}`
+        // 需要搭配后端 api 使用。构造自己的 url 格式
+        let url = `${config.blog.search.api}${query}`
         let res = await Axios.get(url)
         this.setState({
             blockData: res.data,
