@@ -83,7 +83,7 @@ queryCollection = async (url) => {
                 if (blockData.format) {
                     parsedBlockData.pformat = blockData.format
                 } else {
-                    parsedBlockData.pformat = {}
+                    parsedBlockData.pformat = { page_cover: "" }
                 }
 
                 let newKey = r.name
