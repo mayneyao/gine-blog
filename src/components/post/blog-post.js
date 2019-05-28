@@ -1,16 +1,17 @@
 import React from 'react'
 import { graphql } from 'gatsby'
-import Layout from './layout'
-import withRoot from '../withRoot'
-import Paper from './paper'
+import Layout from '../layout'
+import withRoot from '../../withRoot'
+import Paper from '../utils/paper'
 import 'prismjs/themes/prism-tomorrow.css'
 import 'prismjs/plugins/line-numbers/prism-line-numbers.css'
-import ScrollProgress from './scroll-progress'
-import ColorfulTag from './hash-colorful-tag'
+import ScrollProgress from '../utils/scroll-progress'
+import ColorfulTag from '../utils/hash-colorful-tag'
 import getImageByName from '../utils/notion-hash-image'
 import Disqus from 'disqus-react';
 import { Helmet } from "react-helmet"
-import config from '../../config'
+import config from '../../../config'
+import notion from '../../notion/api'
 
 
 class BlogPost extends React.Component {
@@ -35,6 +36,19 @@ class BlogPost extends React.Component {
             disqusShortname,
             disqusConfig
         })
+
+        // 检查hash，如果存在hash 则跳转到指定位置并高亮
+        let hash = window.location.hash
+        if (hash) {
+            let blockID = hash.split('#')[1]
+            let block = document.querySelector(`div[data-block-id="${blockID}"]`)
+            if (block) {
+                window.setTimeout(() => {
+                    block.style.background = 'rgba(45, 170, 219, 0.3)'
+                    block.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" })
+                }, 1000);
+            }
+        }
     }
 
     render() {
@@ -45,9 +59,20 @@ class BlogPost extends React.Component {
             name,
             tags,
             html,
-            slug } = post
+            slug,
+            keywords,
+            pformat,
+        } = post
         const { disqusShortname, disqusConfig } = this.state
+        const seoKeywords = keywords ? keywords.join(" ") : ''
+        let coverImageUrl
 
+        if (pformat && pformat.page_cover) {
+            let cover = pformat.page_cover
+            coverImageUrl = notion.parseImageUrl(cover)
+        } else {
+            coverImageUrl = getImageByName(slug)
+        }
         return (
             <div>
                 <ScrollProgress />
@@ -56,9 +81,9 @@ class BlogPost extends React.Component {
                         width: '100%',
                         height: '400px',
                         objectFit: 'cover'
-                    }} src={post.image || getImageByName(slug)} />
+                    }} src={coverImageUrl} />
                     <Helmet defaultTitle={`${config.blogMeta.title} - ${name}`}>
-                        <meta name="description" content={`{config.blogMeta.title} 博客 python react gine ${name}`} />
+                        <meta name="description" content={`${seoKeywords} ${name} mayne gine 博客 python react`} />
                     </Helmet>
                     <main style={{
                         maxWidth: 900,
@@ -115,6 +140,10 @@ export const query = graphql`
         tags
         html
         slug
+        keywords
+        pformat{
+            page_cover
+        }
     }
   }
 `

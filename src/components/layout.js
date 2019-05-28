@@ -8,14 +8,14 @@ import NavList from './nav-list'
 import { Helmet } from "react-helmet"
 import PlayingMusic from './music/CurrentPlayingMusic'
 import PlayingGame from './game/CurrentPlayingGame'
-import Divider from '@material-ui/core/Divider';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
+import Divider from '@material-ui/core/Divider'
+import IconButton from '@material-ui/core/IconButton'
+import MenuIcon from '@material-ui/icons/Menu'
 
 import throttle from 'lodash/throttle'
 import Axios from "axios"
 import config from '../../config'
-
+import SearchButton from './search/search'
 
 const styles = {
     root: {
@@ -59,7 +59,6 @@ class Layout extends React.Component {
 
     _fetchData = () => {
         Axios.get('https://api.gine.me/currently_playing').then(res => {
-            console.log(res)
             this.setState({
                 data: res.data
             })
@@ -90,6 +89,7 @@ class Layout extends React.Component {
         const { open, iOS, height, data: { music, game } } = this.state
         const { classes } = this.props
         return (
+
             <div style={{ background: '#f3f5f7' }}>
                 <Helmet defaultTitle={config.blogMeta.title}>
                     <html lang="zh-cmn-Hans" />
@@ -132,6 +132,7 @@ class Layout extends React.Component {
                 <div style={{ margin: `0 auto` }}>
                     {this.props.children}
                 </div>
+                <SearchButton />
                 <Bottom />
             </div>
         )

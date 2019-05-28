@@ -41,7 +41,6 @@ export default class extends React.Component {
         let maxWidth = document.getElementById('MyTopMusic').offsetWidth
 
         Axios.get(config.music.url).then(res => {
-            console.log(res)
             let maxTrackPopularity = max(res.data.items.map(item => item.popularity))
             this.setState({
                 data: res.data,

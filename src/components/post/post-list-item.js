@@ -9,8 +9,8 @@ import CardMedia from '@material-ui/core/CardMedia'
 import Typography from '@material-ui/core/Typography'
 import { Link } from 'gatsby'
 import getImageByName from '../utils/notion-hash-image'
-
-import ColorfulTag from './hash-colorful-tag'
+import ColorfulTag from '../utils/hash-colorful-tag'
+import notion from '../../notion/api'
 
 const styles = {
     card: {
@@ -29,8 +29,15 @@ function notionImageResize(url, width) {
 }
 
 function ImgMediaCard(props) {
-    const { classes, title, content, slug, image, tags, date } = props
+    const { classes, title, content, slug, format, tags, date } = props
     const MyLink = props => <Link to={slug} {...props} />
+    let coverImageUrl
+    if (format && format.page_cover) {
+        let cover = format.page_cover
+        coverImageUrl = notion.parseImageUrl(cover, 520)
+    } else {
+        coverImageUrl = notionImageResize(getImageByName(slug), 520)
+    }
     return (
         <Card className={classes.card}>
             <CardActionArea component={MyLink}>
@@ -39,7 +46,7 @@ function ImgMediaCard(props) {
                     alt="Contemplative Reptile"
                     className={classes.media}
                     height="140"
-                    image={image || notionImageResize(getImageByName(slug), 520)}
+                    image={coverImageUrl}
                     title="Contemplative Reptile"
                 />
                 <CardContent>

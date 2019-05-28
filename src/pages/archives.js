@@ -6,7 +6,7 @@ import Layout from '../components/layout'
 import { Link } from 'gatsby'
 import { graphql } from 'gatsby'
 import Typography from '@material-ui/core/Typography'
-import Paper from '../components/paper'
+import Paper from '../components/utils/paper'
 
 
 const styles = theme => ({

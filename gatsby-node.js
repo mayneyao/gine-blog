@@ -1,11 +1,10 @@
-const { createFilePath } = require(`gatsby-source-filesystem`)
 const path = require(`path`)
 const fs = require("fs")
-const axios = require('axios')
-const download = require('image-downloader')
 const notion = require('./src/notion/syncBlog')
 const notionApi = require('./src/notion/api')
+const { syncAphorisms } = require('./src/notion/aphorisms')
 const config = require('./config')
+const { genBangumiData } = require('./src/components/bangumi/api')
 
 function genApiData(data, type, key, createNode, createNodeId, createContentDigest) {
     data.map(itemData => {
@@ -26,73 +25,6 @@ function genApiData(data, type, key, createNode, createNodeId, createContentDige
     })
 }
 
-async function genBangumiData(createNode, createNodeId, createContentDigest) {
-    let res
-    console.log('>>>获取bangumi数据')
-
-    if (config.bangumi.open) {
-        res = await axios.get(config.bangumi.url)
-    } else {
-        // 站位数据，没有实际意义，为了保证build通过
-        res = {
-            data: {
-                data: {
-                    result: [
-                        {
-                            brief: "史莱姆生活，开始了。↵上班族的三上悟在道路上被歹徒给刺杀身亡后，回过神来发现自己转生到了异世界。↵不...",
-                            cover: "http://i0.hdslb.com/bfs/bangumi/a4c0e0ccc44fe3949a734f546cf5bb07da925bad.png",
-                            evaluate: "",
-                            favorites: 4396396,
-                            is_finish: 0,
-                            last_ep_index: 0,
-                            newest_ep_index: 21,
-                            season_id: "25739",
-                            share_url: "http://bangumi.bilibili.com/anime/25739/",
-                            title: "关于我转生变成史莱姆这档事",
-                            total_count: 0,
-                        }
-                    ]
-                }
-            }
-        }
-    }
-
-    res.data.data.result.map(myData => {
-        // Data can come from anywhere, but for now create it manually
-        let coverUrl = myData.cover
-        let coverPath = `public/static/${coverUrl.split('/').pop()}`
-        let options = {
-            url: coverUrl,
-            dest: coverPath
-        }
-        if (!fs.existsSync(coverPath)) {
-            download.image(options)
-                .then(({ filename, image }) => {
-                    console.log('File saved to', filename)
-                })
-                .catch((err) => {
-                    console.error(err)
-                })
-        }
-
-        const nodeContent = JSON.stringify(myData)
-
-        const nodeMeta = {
-            id: createNodeId(myData.season_id),
-            parent: null,
-            children: [],
-            internal: {
-                type: `Bangumi`,
-                mediaType: `text/html`,
-                content: nodeContent,
-                contentDigest: createContentDigest(myData)
-            }
-        }
-
-        const node = Object.assign({}, myData, nodeMeta)
-        createNode(node)
-    })
-}
 
 exports.sourceNodes = async ({ actions, createNodeId, createContentDigest }) => {
     const { createNode } = actions;
@@ -119,6 +51,12 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest }) => 
 
     // 生成blog post数据
     await notion.syncNotionBlogData({ createNode, createNodeId, createContentDigest });
+
+    // 生成书单数据
+    await notion.syncNotionBookData({ createNode, createNodeId, createContentDigest });
+
+    // 保存格言数据
+    await syncAphorisms();
 }
 
 
@@ -165,7 +103,7 @@ exports.createPages = ({ graphql, actions }) => {
         for (let i = 1; i <= pageCount; i++) {
             createPage({
                 path: `page/${i}`,
-                component: path.resolve(`./src/components/post-page.js`),
+                component: path.resolve(`./src/components/post/post-page.js`),
                 context: {
                     skip: (i - 1) * pageSize,
                     limit: pageSize,
@@ -178,7 +116,7 @@ exports.createPages = ({ graphql, actions }) => {
         edges.forEach(({ node }) => {
             createPage({
                 path: node.slug,
-                component: path.resolve(`./src/components/blog-post.js`),
+                component: path.resolve(`./src/components/post/blog-post.js`),
                 context: {
                     // Data passed to context is available
                     // in page queries as GraphQL variables.
@@ -195,7 +133,7 @@ exports.createPages = ({ graphql, actions }) => {
         Array.from(allTags).map(tag => {
             createPage({
                 path: `tags/${tag}`,
-                component: path.resolve(`./src/components/tag-page.js`),
+                component: path.resolve(`./src/components/postTag/tag-page.js`),
                 context: {
                     tag: tag,
                 },

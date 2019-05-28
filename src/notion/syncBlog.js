@@ -12,8 +12,44 @@ syncBlogData = async (url) => {
     await page.waitForSelector('#notion-app');
     await page.waitFor(8000);
     const data = await page.evaluate(() => {
-        document.querySelectorAll('div.notion-page-content  img').forEach(item => item.src = item.src)
+        // 图片链接转换
+        document.querySelectorAll('div.notion-page-content  img').forEach(item => {
+            if (item.src.startsWith("https://s3.us-west")) {
+                let [parsedOriginUrl] = item.src.split("?")
+                item.src = `https://notion.so/image/${encodeURIComponent(parsedOriginUrl).replace("s3.us-west", "s3-us-west")}`
+            } else {
+                item.src = item.src
+            }
+        })
+
+        // TOC 链接转化
+        let qs = "#notion-app > div > div.notion-cursor-listener > div > div.notion-scroller.vertical.horizontal > div.notion-page-content > div > div:nth-child(1) > div > a"
+        document.querySelectorAll(qs).forEach(item => {
+            // 真是服了，puppeteer传个函数这么麻烦。🤯
+            const getFullBlockId = (blockId) => {
+                if (typeof blockId !== 'string') {
+                    throw Error(`blockId: ${typeof blockId} must be string`)
+                }
+                if (blockId.match("^[a-zA-Z0-9]+$")) {
+                    return blockId.substr(0, 8) + "-"
+                        + blockId.substr(8, 4) + "-"
+                        + blockId.substr(12, 4) + "-"
+                        + blockId.substr(16, 4) + "-"
+                        + blockId.substr(20, 32)
+                } else {
+                    return blockId
+                }
+            }
+            let hashBlockID = getFullBlockId(item.hash.slice(1))
+            item.href = `#${hashBlockID}`
+
+            let block = document.querySelector(`div[data-block-id="${hashBlockID}"]`)
+            block.id = hashBlockID
+        });
+
+        // 文章内容
         let content = document.querySelector('#notion-app > div > div.notion-cursor-listener > div > div > div.notion-page-content')
+
         if (content) {
             return {
                 html: content.innerHTML,
@@ -23,12 +59,11 @@ syncBlogData = async (url) => {
         else {
             return false
         }
-    });
+    })
 
     await browser.close();
     return data
 }
-
 
 uploadBlogData2Github = async (item, blogData) => {
     let blogKey = `${item.slug}.json`
@@ -58,6 +93,9 @@ exports.syncNotionBlogData = async ({ createNode, createNodeId, createContentDig
             let allBlogInfo = await GitHub.getAllBlogInfo()
 
             for (let item of res) {
+                if (item.status !== '已发布') {
+                    continue
+                }
                 let blogData
                 let blogKey = `${item.slug}.json`
                 let blogSha = allBlogInfo[blogKey]
@@ -131,5 +169,27 @@ exports.syncNotionBlogData = async ({ createNode, createNodeId, createContentDig
 
         }
 
+    }
+}
+
+exports.syncNotionBookData = async ({ createNode, createNodeId, createContentDigest }) => {
+    let url = 'https://www.notion.so/98717bf8ad57434eafd9a65277403c33?v=fa4f00bb9b5b492fb23157f8d5df471f'
+    let res = await notion.queryCollection(url)
+
+    for (let data of res) {
+        const nodeContent = JSON.stringify(data)
+        const nodeMeta = {
+            id: createNodeId(data.slug),
+            parent: null,
+            children: [],
+            internal: {
+                type: `Book`,
+                mediaType: `text/html`,
+                content: nodeContent,
+                contentDigest: createContentDigest(data)
+            }
+        }
+        const node = Object.assign({}, data, nodeMeta)
+        createNode(node)
     }
 }

@@ -18,7 +18,6 @@ const getFullBlockId = (blockId) => {
 }
 
 getPageCollectionId = async (pageId) => {
-    // console.log(pageId)
     let res = await axios.post('https://www.notion.so/api/v3/loadPageChunk',
         { "pageId": getFullBlockId(pageId), "limit": 50, "cursor": { "stack": [] }, "chunkNumber": 0, "verticalColumns": false },
         {
@@ -28,9 +27,28 @@ getPageCollectionId = async (pageId) => {
     return collectionId
 }
 
-getBrowseableUrl = (blockID) =>{
+getBrowseableUrl = (blockID) => {
     return `https://notion.so/${blockID.split('-').join('')}`
 }
+
+parseImageUrl = (url, width) => {
+    let rUrl
+    if (url.startsWith("https://s3")) {
+        let [parsedOriginUrl] = url.split("?")
+        rUrl = `https://notion.so/image/${encodeURIComponent(parsedOriginUrl).replace("s3.us-west", "s3-us-west")}`
+    } else if (url.startsWith("/image")) {
+        rUrl = `https://notion.so${url}`
+    } else {
+        rUrl = url
+    }
+
+    if (width) {
+        return `${rUrl}?width=${width}`
+    } else {
+        return rUrl
+    }
+}
+
 queryCollection = async (url) => {
     let [base, params] = url.split('?')
     let p = new URLSearchParams(params)
@@ -55,17 +73,27 @@ queryCollection = async (url) => {
         Object.entries(blockData.properties).map(item => {
             let [key, val] = item
             let r = schema[key]
-            if (r){
+            if (r) {
                 parsedBlockData.slug = blockId.split('-').join('')
                 parsedBlockData.browseableUrl = getBrowseableUrl(blockId)
                 parsedBlockData.created_time = dayjs(blockData.created_time).toISOString()
                 parsedBlockData.last_edited_time = dayjs(blockData.last_edited_time).toISOString()
+
+                // page_cover
+                if (blockData.format) {
+                    parsedBlockData.pformat = blockData.format
+                } else {
+                    parsedBlockData.pformat = {}
+                }
+
                 let newKey = r.name
-                if (r.type === 'date'){
+                if (r.type === 'date') {
                     parsedBlockData[newKey] = val[0][1][0][1].start_date
-                }else if (r.type === 'multi_select'){
+                } else if (r.type === 'multi_select') {
                     parsedBlockData[newKey] = val[0][0].split(',')
-                }else{
+                } else if (r.type == 'file') {
+                    parsedBlockData[newKey] = val[0][1][0][1]
+                } else {
                     parsedBlockData[newKey] = val[0][0]
                 }
             }
@@ -77,6 +105,10 @@ queryCollection = async (url) => {
 }
 
 
-// console.log(queryCollection('https://www.notion.so/b8081728310b49fea0ff1d14e190b3fb?v=dbd9df2e8f784aa7bf8db977d82ee635'))
+// t = async () => {
+//     let res = await queryCollection('https://www.notion.so/gine/b8081728310b49fea0ff1d14e190b3fb?v=dbd9df2e8f784aa7bf8db977d82ee635')
+//     console.log(res, res.length)
+// }
 
-module.exports = { queryCollection }
+// t()
+module.exports = { queryCollection, getFullBlockId, parseImageUrl }

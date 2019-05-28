@@ -8,7 +8,6 @@ class AllLink extends React.Component {
     render() {
 
         const { data, classes } = this.props
-        console.log(this.props)
         return <Layout>
             <div style={{ display: 'flex', flexWrap: 'wrap', maxWidth: 450, margin: '1em auto' }}>
                 {

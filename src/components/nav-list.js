@@ -89,14 +89,15 @@ function SimpleList(props) {
                 </MyLink>
 
                 {
-                    config.book.open && <ListItemLink href={config.book.url} target="_blank">
-                        <ListItemIcon>
-                            <BookListIcon style={{ color: '#607d8b' }} />
-                        </ListItemIcon>
-                        <ListItemText primary="书单" />
-                    </ListItemLink>
+                    config.book.open && <MyLink to={'books'}>
+                        <ListItem button>
+                            <ListItemIcon>
+                                <BookListIcon style={{ color: '#607d8b' }} />
+                            </ListItemIcon>
+                            <ListItemText primary="书单" />
+                        </ListItem>
+                    </MyLink>
                 }
-
 
                 {
                     config.music.open && <MyLink to={'music'}>

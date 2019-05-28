@@ -10,7 +10,7 @@ class AllBangumi extends React.Component {
     render() {
 
         const { data, classes } = this.props
-        console.log(this.props)
+        
         return <Layout>
             <div style={{ display: 'flex', flexWrap: 'wrap', maxWidth: 1100, margin: '0 auto' }}>
                 {

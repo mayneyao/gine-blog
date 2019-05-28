@@ -4,10 +4,10 @@ import { withStyles } from '@material-ui/core/styles'
 import withRoot from '../withRoot'
 import Layout from '../components/layout'
 import countBy from 'lodash/countBy'
-import ColorfulTag, { getHashColor } from '../components/hash-colorful-tag'
+import ColorfulTag, { getHashColor } from '../components/utils/hash-colorful-tag'
 import { graphql } from 'gatsby'
-import Paper from '../components/paper'
-import PieChart from '../components/PieChart'
+import Paper from '../components/utils/paper'
+import PieChart from '../components/postTag/PieChart'
 
 const styles = theme => ({
     index: {

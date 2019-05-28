@@ -4,7 +4,7 @@ const allImages = [
     // 'https://www.notion.so/images/page-cover/solid_blue.png',
     // 'https://www.notion.so/images/page-cover/solid_beige.png',
     'https://www.notion.so/images/page-cover/gradients_8.png',
-    'https://www.notion.so/images/page-cover/gradients_4.png',
+    'https://www.notion.so/images/page-cover/gradients_1.png',
     'https://www.notion.so/images/page-cover/gradients_2.png',
     'https://www.notion.so/images/page-cover/gradients_11.jpg',
     'https://www.notion.so/images/page-cover/gradients_10.jpg',
