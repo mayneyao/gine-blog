@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/styles';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import { parseImageUrl } from '../../notion/api'
+import dayjs from 'dayjs'
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -10,11 +11,9 @@ const useStyles = makeStyles(theme => ({
         flexWrap: 'wrap',
         justifyContent: 'space-around',
         overflow: 'hidden',
-        backgroundColor: theme.palette.background.paper,
-    },
-    gridList: {
-        width: 500,
-        height: 450,
+        // backgroundColor: '#fff',
+        width: 400,
+        margin: '0 auto'
     },
 }));
 
@@ -38,16 +37,21 @@ const useStyles = makeStyles(theme => ({
  */
 function ImageGridList(props) {
     const classes = useStyles();
-    const data = props.data
+    const data = props.data.sort((a, b) => dayjs(b.date) - dayjs(a.date))
+    console.log(data)
+
     return (
         <div className={classes.root}>
-            <GridList cellHeight={160} className={classes.gridList} cols={3}>
-                {data.map(tile => (
-                    <GridListTile key={tile.img} cols={tile.cols || 1}>
-                        <img src={parseImageUrl(tile.image)} alt={tile.name} />
-                    </GridListTile>
-                ))}
-            </GridList>
+
+            {
+                data.map(pic => (
+                    <div>
+                        <h3>{pic.date}</h3>
+                        <img src={parseImageUrl(pic.image, 400)} alt={pic.name} loading="lazy" />
+                        <div>{pic.comment}</div>
+                    </div>
+                ))
+            }
         </div>
     );
 }
