@@ -87,17 +87,18 @@ class Layout extends React.Component {
 
     render() {
         const { open, iOS, height, data: { music, game } } = this.state
-        const { classes } = this.props
+        const { classes, title } = this.props
         return (
 
             <div style={{ background: '#f3f5f7' }}>
-                <Helmet defaultTitle={config.blogMeta.title}>
+                <Helmet defaultTitle={`${config.blogMeta.title}${title ? ` - ${title}` : ""}`}>
                     <html lang="zh-cmn-Hans" />
                     <meta name="description" content={`${config.blogMeta.title} 博客 python react gine`} />
                     <noscript>
                         为了更好的浏览体验，请不要在本页面禁用 Javascript 🙂
                     </noscript>
                 </Helmet>
+
                 <SwipeableDrawer
                     disableBackdropTransition={!iOS}
                     disableDiscovery={iOS}

@@ -5,19 +5,19 @@ import Layout from '../components/layout'
 import withRoot from '../withRoot'
 
 class AllLink extends React.Component {
-    render() {
+  render() {
 
-        const { data, classes } = this.props
-        return <Layout>
-            <div style={{ display: 'flex', flexWrap: 'wrap', maxWidth: 450, margin: '1em auto' }}>
-                {
-                    data.allLink.edges.map(item => {
-                        return <LinkCard data={item.node} key={item.node.id}></LinkCard>
-                    })
-                }
-            </div>
-        </Layout>
-    }
+    const { data, classes } = this.props
+    return <Layout title="友链">
+      <div style={{ display: 'flex', flexWrap: 'wrap', maxWidth: 450, margin: '1em auto' }}>
+        {
+          data.allLink.edges.map(item => {
+            return <LinkCard data={item.node} key={item.node.id}></LinkCard>
+          })
+        }
+      </div>
+    </Layout>
+  }
 }
 export default withRoot(AllLink)
 

@@ -17,7 +17,7 @@ function NotFound(props) {
     const { classes } = props
 
     return (
-        <Layout>
+        <Layout title="404">
             <div className={classes.root}>
                 <Typography variant="display1" gutterBottom>
                     404 Not Found!

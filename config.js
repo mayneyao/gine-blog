@@ -63,6 +63,10 @@ module.exports = {
         // 返回格式参见上面链接的内容
     },
 
+    draw: {
+        open: true,
+        url: 'https://www.notion.so/gine/306f676a9b93470f8f99baefbdbeea1c?v=674d6449a8354f7aba4e4c174d8608e6'
+    },
     // 正在播放的音乐
     // 正在玩的游戏
     now: {

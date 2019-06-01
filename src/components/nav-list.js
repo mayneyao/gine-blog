@@ -13,6 +13,7 @@ import SubscriptionsIcon from '@material-ui/icons/Subscriptions'
 import ArchiveIcon from '@material-ui/icons/Archive'
 import MusicIcon from '@material-ui/icons/Headset'
 import FriendIcon from '@material-ui/icons/People'
+import PaletteIcon from '@material-ui/icons/Palette'
 
 
 import CardMedia from '@material-ui/core/CardMedia'
@@ -117,6 +118,16 @@ function SimpleList(props) {
                                 <SubscriptionsIcon style={{ color: '#af52bf' }} />
                             </ListItemIcon>
                             <ListItemText primary="番剧" />
+                        </ListItem>
+                    </MyLink>
+                }
+                {
+                    config.draw.open && <MyLink to={'v2draw'}>
+                        <ListItem button>
+                            <ListItemIcon>
+                                <PaletteIcon style={{ color: '#00bcd4' }} />
+                            </ListItemIcon>
+                            <ListItemText primary="绘画" />
                         </ListItem>
                     </MyLink>
                 }

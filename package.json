@@ -7,6 +7,7 @@
     "@material-ui/core": "latest",
     "@material-ui/icons": "^3.0.2",
     "@material-ui/lab": "^3.0.0-alpha.28",
+    "@material-ui/styles": "^4.0.1",
     "axios": "^0.18.1",
     "dayjs": "^1.8.8",
     "disqus-react": "^1.0.5",
@@ -42,6 +43,13 @@
   "scripts": {
     "develop": "gatsby develop",
     "build": "gatsby build",
-    "serve": "gatsby serve"
+    "serve": "gatsby serve",
+    "start:lambda": "netlify-lambda serve src/lambda",
+    "build:lambda": "netlify-lambda build src/lambda"
+  },
+  "devDependencies": {
+    "add": "^2.0.6",
+    "netlify-lambda": "^1.4.13",
+    "yarn": "^1.16.0"
   }
 }
