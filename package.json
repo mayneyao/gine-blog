@@ -42,6 +42,13 @@
   "scripts": {
     "develop": "gatsby develop",
     "build": "gatsby build",
-    "serve": "gatsby serve"
+    "serve": "gatsby serve",
+    "start:lambda": "netlify-lambda serve src/functions",
+    "build:lambda": "netlify-lambda build src/functions"
+  },
+  "devDependencies": {
+    "add": "^2.0.6",
+    "netlify-lambda": "^1.4.13",
+    "yarn": "^1.16.0"
   }
 }
