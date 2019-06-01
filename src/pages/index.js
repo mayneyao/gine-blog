@@ -8,7 +8,7 @@ import LinearProgress from '@material-ui/core/LinearProgress'
 const styles = theme => ({
     root: {
         textAlign: 'center',
-        paddingTop: theme.spacing.unit * 20,
+        paddingTop: theme.spacing.unit(20),
     },
     index: {
         margin: '0 auto',
@@ -18,17 +18,17 @@ const styles = theme => ({
 })
 
 class Index extends React.Component {
-    componentDidMount () {
+    componentDidMount() {
         window.location.href = '/page/1'
     }
 
-    render () {
-        const {classes} = this.props
+    render() {
+        const { classes } = this.props
 
         return (
             <Layout>
                 <div className={classes.index}>
-                    <LinearProgress/>
+                    <LinearProgress />
                 </div>
             </Layout>
         )

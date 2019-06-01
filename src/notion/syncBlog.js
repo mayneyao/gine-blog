@@ -41,10 +41,13 @@ syncBlogData = async (url) => {
                 }
             }
             let hashBlockID = getFullBlockId(item.hash.slice(1))
+            console.log(hashBlockID)
             item.href = `#${hashBlockID}`
 
             let block = document.querySelector(`div[data-block-id="${hashBlockID}"]`)
-            block.id = hashBlockID
+            if (block){
+                block.id = hashBlockID
+            }
         });
 
         // 文章内容

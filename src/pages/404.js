@@ -9,7 +9,7 @@ import Layout from '../components/layout'
 const styles = theme => ({
     root: {
         textAlign: 'center',
-        paddingTop: theme.spacing.unit * 20,
+        paddingTop: theme.spacing.unit(20),
     },
 })
 

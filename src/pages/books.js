@@ -9,7 +9,7 @@ import { graphql } from 'gatsby'
 const styles = theme => ({
     root: {
         textAlign: 'center',
-        paddingTop: theme.spacing.unit * 20,
+        paddingTop: theme.spacing.unit(20),
     },
     index: {
         margin: '0 auto',

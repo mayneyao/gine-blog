@@ -6,13 +6,13 @@ import Paper from '@material-ui/core/Paper'
 const styles = theme => ({
     root: {
         ...theme.mixins.gutters(),
-        paddingTop: theme.spacing.unit * 2,
-        paddingBottom: theme.spacing.unit * 2,
+        paddingTop: theme.spacing.unit(2),
+        paddingBottom: theme.spacing.unit(2),
     },
 })
 
-function PaperSheet (props) {
-    const {classes} = props
+function PaperSheet(props) {
+    const { classes } = props
 
     return (
         <div>
