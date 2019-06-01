@@ -97,5 +97,5 @@ blockquote {
 }
 
 [data-block-id] {
-    max-width: calc(100vw - 0px)!important;
+    max-width: 100%!important;
 }
