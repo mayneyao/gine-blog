@@ -88,14 +88,12 @@ exports.syncNotionBlogData = async ({ createNode, createNodeId, createContentDig
         let url = config.blog.url
         let res = await notion.queryCollection(url)
 
+        res = res.filter(item => item.status == '已发布')
         if (config.blog.openGithubCache) {
             // 开启github 文章缓存
             let allBlogInfo = await GitHub.getAllBlogInfo()
 
             for (let item of res) {
-                if (item.status !== '已发布') {
-                    continue
-                }
                 let blogData
                 let blogKey = `${item.slug}.json`
                 let blogSha = allBlogInfo[blogKey]
