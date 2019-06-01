@@ -46,7 +46,7 @@ module.exports = {
     bangumi: {
         open: false, // 默认关闭
         sourceType: 'bilibili',
-        url: 'http://space.bilibili.com/ajax/Bangumi/getList?mid=22539301&page=1', // 替换自己为自己的mid （这里只获取了第一页的数据，有需要的自行修改。）
+        url: 'http://space.bilibili.com/ajax/Bangumi/getList?mid=22539301&page=1', // 替换自己为自己的mid 
     },
 
     // 格言
