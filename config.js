@@ -27,7 +27,9 @@ module.exports = {
         },
         search: {
             open: true, // 是否开启文章搜索功能
-            api: "https://api.gine.me/notion/search/" // 搜索接口
+            api: "/.netlify/functions/search" // 搜索接口
+            // api: "http://127.0.0.1:9000/search" // 搜索接口
+
         }
     },
 

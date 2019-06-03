@@ -1,6 +1,15 @@
 const axios = require('axios')
 const dayjs = require('dayjs')
 const { URLSearchParams } = require('url')
+const parse = require('url').parse
+
+
+const getUrlBloackId = (url) => {
+    let pUrl = parse(url)
+    let pathList = pUrl.pathname.split('/')
+    let blockID = pathList[pathList.length - 1]
+    return blockID
+}
 
 const getFullBlockId = (blockId) => {
     if (typeof blockId !== 'string') {
@@ -104,6 +113,33 @@ queryCollection = async (url) => {
     return data
 }
 
+const search = async (fullTableID, query) => {
+    let apiUrl = 'https://www.notion.so/api/v3/searchBlocks'
+    let ret = await axios.post(apiUrl,
+        {
+            "query": query,
+            "table": "block",
+            "id": fullTableID,
+            "limit": 20
+        },
+        {
+            header: {
+                'content-type': 'application/json;charset=UTF-8',
+                'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.103 Safari/537.36'
+            }
+        }
+    )
+    return ret.data
+}
+
+// t = async () => {
+//     const { getUrlBloackId, getFullBlockId } = notion
+//     let fullTableID = getFullBlockId(getUrlBloackId(config.blog.url))
+//     let res = await searchBlogs(fullTableID, 'react')
+//     console.log(res)
+// }
+
+// t()
 
 // t = async () => {
 //     let res = await queryCollection('https://www.notion.so/gine/b8081728310b49fea0ff1d14e190b3fb?v=dbd9df2e8f784aa7bf8db977d82ee635')
@@ -111,4 +147,4 @@ queryCollection = async (url) => {
 // }
 
 // t()
-module.exports = { queryCollection, getFullBlockId, parseImageUrl }
+module.exports = { queryCollection, getFullBlockId, parseImageUrl, getUrlBloackId, search }
