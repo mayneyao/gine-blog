@@ -29,7 +29,7 @@ class ImageGallery extends React.Component {
     componentDidMount() {
         if (config.draw.open) {
             axios.get(`/.netlify/functions/notion?url=${config.draw.url}`).then(res => {
-            // axios.get(`http://127.0.0.1:9000/notion?url=${config.draw.url}`).then(res => {
+                // axios.get(`http://127.0.0.1:9000/notion?url=${config.draw.url}`).then(res => {
                 this.setState({
                     data: res.data,
                     loading: false
@@ -45,7 +45,9 @@ class ImageGallery extends React.Component {
                 <div style={{ width: '100%' }}>
                     {loading && <LinearProgress />}
                 </div>
-                <ImageList data={data} />
+                <div style={{ width: '100%' }}>
+                    <ImageList data={data} />
+                </div>
             </Layout >
         )
     }
