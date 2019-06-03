@@ -19,6 +19,16 @@ https://gine.me/posts/a788c3e6713e4166a4a8c72a7977b457
 
 ## 更新日志
 
+### 2019-06-03 (dev-mayne > matser)
++ 使用 netlify lambda function 实现了 notion table to json 接口。
+    + 将任意公开的 notion 表格 转换成 Json 数据。
++ 使用 netlify lambda function 实现了 notion table search 接口。
+    + 指定 notion 表格和关键字，检索记录。
++ 基于上述接口实现了文章搜索功能。
+    + 部署在 netlify 上既可以使用 文章搜索功能。
++ 基于上述接口实现了绘画模块（beta）。
+[ ] 计划将所有的动态接口全部用 netlify lambda function 重写。 届时不再需要部署后端，即可使用所有功能。
+
 ### 2019-05-28 (dev-mayne > matser)
 
 + 兼容了 notion TOC 目录。
