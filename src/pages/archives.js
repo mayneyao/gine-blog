@@ -33,7 +33,7 @@ class Tags extends React.Component {
                 allPosts[year].push(node)
             })
         return (
-            <Layout>
+            <Layout title="归档">
                 <div className={classes.index}>
                     <Paper>
                         {

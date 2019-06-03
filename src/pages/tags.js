@@ -29,7 +29,7 @@ class Tags extends React.Component {
             return { item: tag, count: count, color: getHashColor(tag), percent: count / Object.entries(countTags).length }
         })
         return (
-            <Layout>
+            <Layout title="标签">
                 <div className={classes.index}>
                     <Paper>
                         <PieChart sourceData={sourceData} />

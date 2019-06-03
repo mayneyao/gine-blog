@@ -44,7 +44,7 @@
     "develop": "gatsby develop",
     "build": "gatsby build",
     "serve": "gatsby serve",
-    "start:lambda": "netlify-lambda serve src/lambda",
+    "start:lambda": "LAMBDA_DEV=yes netlify-lambda serve src/lambda",
     "build:lambda": "netlify-lambda build src/lambda"
   },
   "devDependencies": {

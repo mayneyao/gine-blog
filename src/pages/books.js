@@ -21,7 +21,7 @@ class Index extends React.Component {
         const { classes, data: { allBook } } = this.props
         const { currentPage } = this.props.pageContext
         return (
-            <Layout>
+            <Layout title="书单">
                 <div style={{ display: 'flex', flexWrap: 'wrap', maxWidth: '1760px', margin: '0 auto' }}>
                     {
                         allBook.edges.map(item => {

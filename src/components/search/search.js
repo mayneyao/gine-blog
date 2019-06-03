@@ -13,6 +13,7 @@ import IconButton from '@material-ui/core/IconButton';
 import { withStyles } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import config from '../../../config'
+import notion from '../../notion/api'
 
 
 const styles = theme => ({
@@ -55,7 +56,9 @@ class FormDialog extends React.Component {
     }
     searchBlog = async (query) => {
         // 需要搭配后端 api 使用。构造自己的 url 格式
-        let url = `${config.blog.search.api}${query}`
+        const { getUrlBloackId, getFullBlockId } = notion
+        const tableID = getFullBlockId(getUrlBloackId(config.blog.url))
+        let url = `${config.blog.search.api}?table=${tableID}&query=${query}`
         let res = await Axios.get(url)
         this.setState({
             blockData: res.data,

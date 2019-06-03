@@ -1,7 +1,5 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/styles';
-import GridList from '@material-ui/core/GridList';
-import GridListTile from '@material-ui/core/GridListTile';
 import { parseImageUrl } from '../../notion/api'
 import dayjs from 'dayjs'
 
@@ -38,8 +36,6 @@ const useStyles = makeStyles(theme => ({
 function ImageGridList(props) {
     const classes = useStyles();
     const data = props.data.sort((a, b) => dayjs(b.date) - dayjs(a.date))
-    console.log(data)
-
     return (
         <div className={classes.root}>
 

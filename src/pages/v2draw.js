@@ -5,6 +5,8 @@ import ImageList from '../components/draw/list'
 import { withStyles } from '@material-ui/core/styles'
 import withRoot from '../withRoot'
 import Layout from '../components/layout'
+import LinearProgress from '@material-ui/core/LinearProgress'
+import { width } from 'window-size';
 
 const styles = theme => ({
     index: {
@@ -19,7 +21,8 @@ class ImageGallery extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            data: []
+            data: [],
+            loading: true
         }
     }
 
@@ -28,18 +31,24 @@ class ImageGallery extends React.Component {
             axios.get(`/.netlify/functions/notion?url=${config.draw.url}`).then(res => {
                 // axios.get(`http://127.0.0.1:9000/notion?url=${config.draw.url}`).then(res => {
                 this.setState({
-                    data: res.data
+                    data: res.data,
+                    loading: false
                 })
             })
         }
 
     }
     render() {
-        const { data } = this.state
+        const { data, loading } = this.state
         return (
-            <Layout>
-                <ImageList data={data} />
-            </Layout>
+            <Layout title="Mayne 的绘画之路">
+                <div style={{ width: '100%' }}>
+                    {loading && <LinearProgress />}
+                </div>
+                <div style={{ width: '100%' }}>
+                    <ImageList data={data} />
+                </div>
+            </Layout >
         )
     }
 }

@@ -6,9 +6,7 @@ exports.handler = async (event, context) => {
     let response = await notion.queryCollection(notionUrl)
     return {
         headers: {
-            "Content-Type": "application/json;charset=UTF-8",
-            "Access-Control-Allow-Origin": "*",
-            "max-age": 30
+            "Content-Type": "application/json;charset=UTF-8"
         },
         statusCode: 200,
         body: JSON.stringify(response)
