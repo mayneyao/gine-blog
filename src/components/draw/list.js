@@ -43,7 +43,7 @@ function ImageGridList(props) {
                 data.map(pic => (
                     <div>
                         <h3>{pic.date}</h3>
-                        <img src={parseImageUrl(pic.image, 400)} alt={pic.name} loading="lazy" />
+                        <img src={parseImageUrl(pic.image[0], 400)} alt={pic.name} loading="lazy" />
                         <div>{pic.comment}</div>
                     </div>
                 ))

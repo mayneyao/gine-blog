@@ -101,7 +101,12 @@ queryCollection = async (url) => {
                 } else if (r.type === 'multi_select') {
                     parsedBlockData[newKey] = val[0][0].split(',')
                 } else if (r.type == 'file') {
-                    parsedBlockData[newKey] = val[0][1][0][1]
+                    parsedBlockData[newKey] = val.filter(item => {
+                        let content = item[1]
+                        return Boolean(content)
+                    }).map(item => {
+                        return item[1][0][1]
+                    })
                 } else {
                     parsedBlockData[newKey] = val[0][0]
                 }
@@ -142,7 +147,7 @@ const search = async (fullTableID, query) => {
 // t()
 
 // t = async () => {
-//     let res = await queryCollection('https://www.notion.so/gine/b8081728310b49fea0ff1d14e190b3fb?v=dbd9df2e8f784aa7bf8db977d82ee635')
+//     let res = await queryCollection('https://www.notion.so/gine/3f7ccea5c2054477aba91f8e6e79dceb?v=e0094e2a6bfb4180a386a2de5237e609')
 //     console.log(res, res.length)
 // }
 

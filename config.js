@@ -65,10 +65,18 @@ module.exports = {
         // 返回格式参见上面链接的内容
     },
 
+    // 绘画
     draw: {
         open: true,
         url: 'https://www.notion.so/gine/306f676a9b93470f8f99baefbdbeea1c?v=674d6449a8354f7aba4e4c174d8608e6'
     },
+
+    // 个人动态
+    moments: {
+        open: true,
+        url: 'https://www.notion.so/gine/3f7ccea5c2054477aba91f8e6e79dceb?v=e0094e2a6bfb4180a386a2de5237e609'
+    },
+
     // 正在播放的音乐
     // 正在玩的游戏
     now: {

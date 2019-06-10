@@ -99,3 +99,21 @@ blockquote {
 [data-block-id] {
     max-width: 100%!important;
 }
+
+
+/* moments */
+
+.pswp-thumbnails{
+    display: flex;
+    max-width: 400px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+}
+.pswp-thumbnail{
+    padding: 2px;
+    max-width: 200px;
+    min-width: 100px;
+    height: 100px;
+    overflow: hidden;
+    /* background: #000000 */
+}

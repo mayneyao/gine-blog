@@ -10,8 +10,8 @@ class AllBangumi extends React.Component {
     render() {
 
         const { data, classes } = this.props
-        
-        return <Layout>
+
+        return <Layout title="番剧">
             <div style={{ display: 'flex', flexWrap: 'wrap', maxWidth: 1100, margin: '0 auto' }}>
                 {
                     data.allBangumi.edges.sort((a, b) => parseInt(a.node.season_id) < parseInt(b.node.season_id) ? 1 : -1).map(item => {
