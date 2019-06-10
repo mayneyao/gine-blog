@@ -29,7 +29,7 @@ class ImageGallery extends React.Component {
 
     componentDidMount() {
         if (config.moments.open) {
-            axios.get(`/.netlify/functions/notion?url=${config.draw.url}`).then(res => {
+            axios.get(`/.netlify/functions/notion?url=${config.moments.url}`).then(res => {
                 // axios.get(`http://127.0.0.1:9000/notion?url=${config.moments.url}`).then(res => {
                 this.setState({
                     data: res.data,
