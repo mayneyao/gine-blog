@@ -45,7 +45,7 @@ function SimpleList(props) {
 
     return (
         <div className={classes.root}>
-            <MyLink to={'/page/1'}>
+            <MyLink to={'/'}>
                 <CardMedia
                     className={classes.media}
                     image={avatar}
@@ -53,7 +53,7 @@ function SimpleList(props) {
                 />
             </MyLink>
             <List component="nav">
-                <MyLink to={'/page/1'}>
+                <MyLink to={'/'}>
                     <ListItem button>
                         <ListItemIcon>
                             <HomeIcon color={'primary'} />
