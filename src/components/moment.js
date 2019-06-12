@@ -32,8 +32,17 @@ class Moment extends React.Component {
   }
   render() {
     const { modalIsOpen, currentIndex } = this.state;
+    const { images, content, time, classes, link } = this.props
+    let plink = undefined
 
-    const { images, content, time, classes } = this.props
+    if (link) {
+      try {
+        let l = new URL(link)
+        plink = l.origin
+      } catch (error) {
+        console.log("错误的链接")
+      }
+    }
     return (
       <div style={{ margin: '0 auto', maxWidth: 400, marginTop: '10px' }}>
         <Card className={classes.card}>
@@ -44,6 +53,7 @@ class Moment extends React.Component {
           </div>
           <div>
             {content}
+            {plink && <a src={link}>{plink}</a>}
           </div>
           <div style={{
             display: 'flex',
