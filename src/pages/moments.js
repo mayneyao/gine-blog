@@ -59,7 +59,7 @@ class ImageGallery extends React.Component {
                 <div style={{ width: '100%' }}>
                     {
                         data.sort((a, b) => dayjs(a.created_time) < dayjs(b.created_time) ? 1 : -1)
-                            .map(item => <Moment content={item.content} images={this.formatItems(item.images || [])} time={item.created_time} />)
+                            .map(item => <Moment link={item.link} content={item.content} images={this.formatItems(item.images || [])} time={item.created_time} />)
                     }
                 </div>
             </Layout >
