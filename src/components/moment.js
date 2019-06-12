@@ -53,7 +53,9 @@ class Moment extends React.Component {
           </div>
           <div>
             {content}
-            {plink && <a src={link}>{plink}</a>}
+          </div>
+          <div>
+            {plink && <a href={link} target="_blank">{plink}</a>}
           </div>
           <div style={{
             display: 'flex',
