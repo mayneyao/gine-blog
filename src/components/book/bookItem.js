@@ -21,7 +21,7 @@ const styles = theme => ({
         display: 'flex',
         height: 217,
         width: 420,
-        margin: '10px',
+        margin: '10px auto',
         position: 'relative'
     },
     details: {
