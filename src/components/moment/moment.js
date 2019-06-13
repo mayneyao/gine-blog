@@ -88,7 +88,7 @@ class Moment extends React.Component {
           {modalIsOpen ? (
             <Modal onClose={this.toggleModal}>
               <Carousel
-                views={images}
+                views={parseImages}
                 currentIndex={currentIndex}
                 frameProps={{ autoSize: 'height' }}
                 styles={{
