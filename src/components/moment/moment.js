@@ -1,26 +1,25 @@
 import React from 'react';
 import Carousel, { Modal, ModalGateway } from 'react-images';
-import { parseImageUrl } from '../notion/api'
+import { parseImageUrl } from '../../notion/api'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import Card from '@material-ui/core/Card';
-import { withStyles } from '@material-ui/core/styles';
+import Music from './music'
 
 dayjs.extend(relativeTime)
-
-
-const styles = {
-  card: {
-    minWidth: 400,
-    padding: '1em'
-  },
-};
 
 
 class Moment extends React.Component {
   state = {
     modalIsOpen: false,
     currentIndex: 0
+  }
+  formatItems = (images) => {
+    return images.map(item => {
+      if (item) {
+        return { src: parseImageUrl(item) }
+      }
+    })
   }
   toggleModal = () => {
     this.setState(state => ({ modalIsOpen: !state.modalIsOpen }));
@@ -32,8 +31,9 @@ class Moment extends React.Component {
   }
   render() {
     const { modalIsOpen, currentIndex } = this.state;
-    const { images, content, time, classes, link } = this.props
+    const { data: { images, content, created_time, link, type } } = this.props
     let plink = undefined
+    let parseImages = this.formatItems(images || [])
 
     if (link) {
       try {
@@ -45,10 +45,13 @@ class Moment extends React.Component {
     }
     return (
       <div style={{ margin: '0 auto', maxWidth: 400, marginTop: '10px' }}>
-        <Card className={classes.card}>
+        <Card style={{
+          minWidth: 400,
+          padding: '1em'
+        }}>
           <div>
             {
-              dayjs(time).fromNow()
+              dayjs(created_time).fromNow()
             }
           </div>
           <div>
@@ -57,13 +60,16 @@ class Moment extends React.Component {
           <div>
             {plink && <a href={link} target="_blank">{plink}</a>}
           </div>
+          <div>
+            <Music type={type} link={link} />
+          </div>
           <div style={{
             display: 'flex',
             flexWrap: 'wrap',
             justifyContent: 'start'
           }}>
             {
-              images.map((item, index) => <div style={{ width: 120, overflow: 'hidden', maxHeight: 100, padding: 5 }}>
+              parseImages.map((item, index) => <div style={{ width: 120, overflow: 'hidden', maxHeight: 100, padding: 5 }}>
                 <img
                   src={parseImageUrl(item.src, 120)}
                   onClick={() => this.handleImageClick(index)}
@@ -105,4 +111,4 @@ class Moment extends React.Component {
   }
 }
 
-export default withStyles(styles)(Moment);
+export default Moment;

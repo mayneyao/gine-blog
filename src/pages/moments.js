@@ -4,8 +4,7 @@ import axios from 'axios'
 import withRoot from '../withRoot'
 import Layout from '../components/layout'
 import LinearProgress from '@material-ui/core/LinearProgress'
-import Moment from '../components/moment'
-import { parseImageUrl } from '../notion/api'
+import Moment from '../components/moment/moment'
 import config from '../../config'
 import dayjs from 'dayjs'
 
@@ -40,14 +39,6 @@ class ImageGallery extends React.Component {
 
     }
 
-    formatItems = (images) => {
-        return images.map(item => {
-            return {
-                src: parseImageUrl(item),
-            }
-        })
-
-    }
     render() {
         const { data, loading } = this.state
 
@@ -59,7 +50,7 @@ class ImageGallery extends React.Component {
                 <div style={{ width: '100%' }}>
                     {
                         data.sort((a, b) => dayjs(a.created_time) < dayjs(b.created_time) ? 1 : -1)
-                            .map(item => <Moment link={item.link} content={item.content} images={this.formatItems(item.images || [])} time={item.created_time} />)
+                            .map(item => <Moment data={item} />)
                     }
                 </div>
             </Layout >
