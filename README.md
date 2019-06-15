@@ -20,23 +20,28 @@ https://gine.me/posts/a788c3e6713e4166a4a8c72a7977b457
 ## 更新日志
 
 ### 2019-06-03 (dev-mayne > matser)
-+ 使用 netlify lambda function 实现了 notion table to json 接口。
+
+近日研究了一下 netlify 的 lambda function， 体验不错。对部分功能做了一些调整。
+
++ [ ] 计划将所有的动态接口全部用 netlify lambda function 重写。 届时不再需要部署后端，即可使用所有功能。
+
++ 使用 netlify lambda function 实现了 notion table to json 接口。
     + 将任意公开的 notion 表格 转换成 Json 数据。
-+ 使用 netlify lambda function 实现了 notion table search 接口。
++ 使用 netlify lambda function 实现了 notion table search 接口。
     + 指定 notion 表格和关键字，检索记录。
 + 基于上述接口实现了文章搜索功能。
-    + 部署在 netlify 上既可以使用 文章搜索功能。
+    + 无需搭配后端 API，部署在 netlify 上既可以使用文章搜索功能。
 + 基于上述接口实现了绘画模块（beta）。
-[ ] 计划将所有的动态接口全部用 netlify lambda function 重写。 届时不再需要部署后端，即可使用所有功能。
+
 
 ### 2019-05-28 (dev-mayne > matser)
 
 + 兼容了 notion TOC 目录。
-    + 你可以在文章中使用  /table-content 生成的目录了。
-    + 目录会本页正常跳转，而不是跳转到notion页面。
+    + 你可以在文章中使用  /table-of-content 生成的目录了。
+    + 目录会在本页正常跳转，而不是跳转到 notion 页面。
 + 文章搜索功能
     + 需要搭配后端API使用，模拟 notion 的搜索交互。
-    + 搜索结果分为文章和文章内的block，点击结果跳转到对应的文章/block。
+    + 搜索结果分为文章和文章内的 block，点击结果跳转到对应的文章/block。
 + SEO 优化
     + post 添加 keyworld 字段。
 + 优化工作流
