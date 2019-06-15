@@ -9,7 +9,7 @@ class AllLink extends React.Component {
 
     const { data, classes } = this.props
     return <Layout title="友链">
-      <div style={{ display: 'flex', flexWrap: 'wrap', maxWidth: 450, margin: '1em auto' }}>
+      <div style={{ display: 'flex', flexWrap: 'wrap', maxWidth: 450, margin: '1em auto', marginTop: 42 }}>
         {
           data.allLink.edges.map(item => {
             return <LinkCard data={item.node} key={item.node.id}></LinkCard>

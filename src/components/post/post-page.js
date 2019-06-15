@@ -13,7 +13,7 @@ const styles = theme => ({
         paddingTop: theme.spacing.unit * 20,
     },
     index: {
-        margin: '0 auto',
+        margin: '2px auto',
         maxWidth: 700,
     },
 })

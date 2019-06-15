@@ -1,61 +1,26 @@
 import React from 'react'
-import { withStyles } from '@material-ui/core/styles'
-import axios from 'axios'
 import withRoot from '../withRoot'
-import Layout from '../components/layout'
-import LinearProgress from '@material-ui/core/LinearProgress'
-import Moment from '../components/moment/moment'
+import DynamicPage from '../components/dynamicPage'
+import moment from '../components/moment/moment'
 import config from '../../config'
 import dayjs from 'dayjs'
 
-const styles = theme => ({
-    index: {
+function Moments(props) {
+    const style = {
         margin: '0 auto',
         maxWidth: 800,
-        marginTop: '1em',
-    },
-})
-
-
-class ImageGallery extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            data: [],
-            loading: true
-        }
+        paddingTop: '10px'
     }
-
-    componentDidMount() {
-        if (config.moments.open) {
-            axios.get(`/.netlify/functions/notion?url=${config.moments.url}`).then(res => {
-                // axios.get(`http://127.0.0.1:9000/notion?url=${config.moments.url}`).then(res => {
-                this.setState({
-                    data: res.data,
-                    loading: false
-                })
-            })
-        }
-
-    }
-
-    render() {
-        const { data, loading } = this.state
-
-        return (
-            <Layout title="动态">
-                <div style={{ width: '100%' }}>
-                    {loading && <LinearProgress />}
-                </div>
-                <div style={{ width: '100%' }}>
-                    {
-                        data.sort((a, b) => dayjs(a.created_time) < dayjs(b.created_time) ? 1 : -1)
-                            .map(item => <Moment data={item} />)
-                    }
-                </div>
-            </Layout >
-        )
-    }
+    let url = `notion?url=${config.moments.url}`
+    return (
+        <DynamicPage
+            style={style}
+            url={url}
+            itemComponent={moment}
+            sortFunc={(a, b) => dayjs(b.created_time) - dayjs(a.created_time)}
+            title="动态"
+        />
+    )
 }
 
-export default withRoot(withStyles(styles)(ImageGallery))
+export default withRoot(Moments)

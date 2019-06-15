@@ -1,56 +1,29 @@
 import React from 'react'
-import config from '../../config'
-import axios from 'axios'
-import ImageList from '../components/draw/list'
-import { withStyles } from '@material-ui/core/styles'
 import withRoot from '../withRoot'
-import Layout from '../components/layout'
-import LinearProgress from '@material-ui/core/LinearProgress'
-import { width } from 'window-size';
+import DynamicPage from '../components/dynamicPage'
+import draw from '../components/draw/item'
+import config from '../../config'
+import dayjs from 'dayjs'
 
-const styles = theme => ({
-    index: {
-        margin: '0 auto',
-        maxWidth: 800,
-        marginTop: '1em',
-    },
-})
-
-
-class ImageGallery extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            data: [],
-            loading: true
-        }
+function Draw(props) {
+    const style = {
+        display: 'flex',
+        flexWrap: 'wrap',
+        justifyContent: 'space-around',
+        overflow: 'hidden',
+        width: 400,
+        margin: '0 auto'
     }
-
-    componentDidMount() {
-        if (config.draw.open) {
-            axios.get(`/.netlify/functions/notion?url=${config.draw.url}`).then(res => {
-                // axios.get(`http://127.0.0.1:9000/notion?url=${config.draw.url}`).then(res => {
-                this.setState({
-                    data: res.data,
-                    loading: false
-                })
-            })
-        }
-
-    }
-    render() {
-        const { data, loading } = this.state
-        return (
-            <Layout title="Mayne 的绘画之路">
-                <div style={{ width: '100%' }}>
-                    {loading && <LinearProgress />}
-                </div>
-                <div style={{ width: '100%' }}>
-                    <ImageList data={data} />
-                </div>
-            </Layout >
-        )
-    }
+    let url = `notion?url=${config.draw.url}`
+    return (
+        <DynamicPage
+            style={style}
+            url={url}
+            itemComponent={draw}
+            sortFunc={(a, b) => dayjs(b.date) - dayjs(a.date)}
+            title="动态"
+        />
+    )
 }
 
-export default withRoot(withStyles(styles)(ImageGallery))
+export default withRoot(Draw)

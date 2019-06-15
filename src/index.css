@@ -117,3 +117,9 @@ blockquote {
     overflow: hidden;
     /* background: #000000 */
 }
+
+
+/* react-images z-index fix */
+.fullscreen > div{
+    z-index: 1200!important;
+}

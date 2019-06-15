@@ -66,6 +66,7 @@ class Layout extends React.Component {
     }
 
     back2Top = () => {
+        console.log("11111")
         let top = document.getElementById("top")
         top.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" })
     }
@@ -132,21 +133,26 @@ class Layout extends React.Component {
                     <Toolbar style={{ minHeight: 48 }}> */}
                 <div style={{
                     height: 40,
-                    position: fixed,
+                    position: "fixed",
                     background: "#fff",
                     width: '100%',
                     top: 0,
                     zIndex: 999,
-                }} onClick={this.back2Top} id="Top">
+                }}>
                     <IconButton className={classes.menuButton} color="inherit" aria-label="Menu" onClick={this.toggleDrawer(true)}>
                         <MenuIcon />
                     </IconButton>
+
+                    <div style={{ wdith: '100%', height: '100%' }} onClick={this.back2Top}>
+
+                    </div>
                     {config.blog.search.open && <SearchButton />}
                 </div>
 
                 {/* </Toolbar>
                 </AppBar> */}
-                <div style={{ margin: `0 auto` }}>
+                <div id="top"></div>
+                <div style={{ margin: `0 auto`, marginTop: '40px' }}>
                     {this.props.children}
                 </div>
 
