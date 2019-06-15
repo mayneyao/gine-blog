@@ -93,7 +93,7 @@ class Layout extends React.Component {
 
     render() {
         const { open, iOS, height, data: { music, game } } = this.state
-        const { classes, title } = this.props
+        const { classes, title, navStyle = {}, wrapStyle = {} } = this.props
         return (
 
             <div style={{ background: '#f3f5f7' }}>
@@ -138,6 +138,7 @@ class Layout extends React.Component {
                     width: '100%',
                     top: 0,
                     zIndex: 999,
+                    ...navStyle
                 }}>
                     <IconButton className={classes.menuButton} color="inherit" aria-label="Menu" onClick={this.toggleDrawer(true)}>
                         <MenuIcon />
@@ -152,7 +153,7 @@ class Layout extends React.Component {
                 {/* </Toolbar>
                 </AppBar> */}
                 <div id="top"></div>
-                <div style={{ margin: `0 auto`, marginTop: '40px' }}>
+                <div style={{ margin: `0 auto`, marginTop: '40px', ...wrapStyle }}>
                     {this.props.children}
                 </div>
 
