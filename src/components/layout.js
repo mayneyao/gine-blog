@@ -26,7 +26,7 @@ const styles = {
         top: 0,
         marginLeft: 0,
         marginRight: 20,
-        position: 'fixed',
+        position: 'absolute',
         zIndex: 100
     },
     drawer: {
@@ -63,6 +63,11 @@ class Layout extends React.Component {
                 data: res.data
             })
         })
+    }
+
+    back2Top = () => {
+        let top = document.getElementById("top")
+        top.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" })
     }
 
     componentDidMount() {
@@ -125,15 +130,26 @@ class Layout extends React.Component {
                 </SwipeableDrawer>
                 {/* <AppBar position="sticky">
                     <Toolbar style={{ minHeight: 48 }}> */}
-                <IconButton className={classes.menuButton} color="inherit" aria-label="Menu" onClick={this.toggleDrawer(true)}>
-                    <MenuIcon />
-                </IconButton>
+                <div style={{
+                    height: 40,
+                    position: fixed,
+                    background: "#fff",
+                    width: '100%',
+                    top: 0,
+                    zIndex: 999,
+                }} onClick={this.back2Top} id="Top">
+                    <IconButton className={classes.menuButton} color="inherit" aria-label="Menu" onClick={this.toggleDrawer(true)}>
+                        <MenuIcon />
+                    </IconButton>
+                    {config.blog.search.open && <SearchButton />}
+                </div>
+
                 {/* </Toolbar>
                 </AppBar> */}
                 <div style={{ margin: `0 auto` }}>
                     {this.props.children}
                 </div>
-                {config.blog.search.open && <SearchButton />}
+
                 <Bottom />
             </div>
         )

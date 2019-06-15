@@ -18,7 +18,7 @@ import notion from '../../notion/api'
 
 const styles = theme => ({
     mydlg: {
-        position: 'fixed',
+        position: 'absolute',
         top: 0,
     },
     progress: {
