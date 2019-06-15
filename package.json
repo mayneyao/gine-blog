@@ -36,6 +36,7 @@
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-helmet": "^5.2.0",
+    "react-images": "^1.0.0",
     "react-jss": "^8.1.0",
     "scrollprogress": "^3.0.2",
     "typeface-roboto": "^0.0.54"

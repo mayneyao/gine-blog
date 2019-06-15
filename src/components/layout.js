@@ -26,7 +26,7 @@ const styles = {
         top: 0,
         marginLeft: 0,
         marginRight: 20,
-        position: 'fixed',
+        position: 'absolute',
         zIndex: 100
     },
     drawer: {
@@ -65,6 +65,12 @@ class Layout extends React.Component {
         })
     }
 
+    back2Top = () => {
+        console.log("11111")
+        let top = document.getElementById("top")
+        top.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" })
+    }
+
     componentDidMount() {
         const iOS = process.browser &&
             /iPad|iPhone|iPod/.test(navigator.userAgent)
@@ -87,7 +93,7 @@ class Layout extends React.Component {
 
     render() {
         const { open, iOS, height, data: { music, game } } = this.state
-        const { classes, title } = this.props
+        const { classes, title, navStyle = {}, wrapStyle = {} } = this.props
         return (
 
             <div style={{ background: '#f3f5f7' }}>
@@ -125,15 +131,32 @@ class Layout extends React.Component {
                 </SwipeableDrawer>
                 {/* <AppBar position="sticky">
                     <Toolbar style={{ minHeight: 48 }}> */}
-                <IconButton className={classes.menuButton} color="inherit" aria-label="Menu" onClick={this.toggleDrawer(true)}>
-                    <MenuIcon />
-                </IconButton>
+                <div style={{
+                    height: 40,
+                    position: "fixed",
+                    background: "#fff",
+                    width: '100%',
+                    top: 0,
+                    zIndex: 999,
+                    ...navStyle
+                }}>
+                    <IconButton className={classes.menuButton} color="inherit" aria-label="Menu" onClick={this.toggleDrawer(true)}>
+                        <MenuIcon />
+                    </IconButton>
+
+                    <div style={{ wdith: '100%', height: '100%' }} onClick={this.back2Top}>
+
+                    </div>
+                    {config.blog.search.open && <SearchButton />}
+                </div>
+
                 {/* </Toolbar>
                 </AppBar> */}
-                <div style={{ margin: `0 auto` }}>
+                <div id="top"></div>
+                <div style={{ margin: `0 auto`, marginTop: '40px', ...wrapStyle }}>
                     {this.props.children}
                 </div>
-                {config.blog.search.open && <SearchButton />}
+
                 <Bottom />
             </div>
         )

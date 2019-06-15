@@ -24,6 +24,10 @@ module.exports = {
             repo: 'blog', // 作为blog缓存数据仓库的名称
             branch: 'master' // 作为blog缓存数据仓库的分支
         },
+        search: {
+            open: false,
+            url: '/.netlify/functions/search'
+        }
     },
 
     // 友链
@@ -52,9 +56,18 @@ module.exports = {
     // 格言
     aphorisms: {
         open: false, // 默认关闭 需要api
-        sourceType: 'api',
-        url: 'https://api.gine.me/notion/b23848d867974c36a2902ec4cb833453/29915c889d4c415cbfb9e9bf7dd49afd?random_one=1',
+        sourceType: 'notion',
+        url: '', // notion 表格地址
         // 返回格式参见上面链接的内容
+    },
+
+    draw: {
+        open: false,
+        url: ""
+    },
+    moments: {
+        open: false,
+        url: ""
     },
 
     // 正在播放的音乐
@@ -65,7 +78,7 @@ module.exports = {
 
     book: {
         open: false, // 默认关闭
-        url: 'https://www.notion.so/98717bf8ad57434eafd9a65277403c33?v=fa4f00bb9b5b492fb23157f8d5df471f', // 目前仅仅是外链
+        url: 'https://www.notion.so/98717bf8ad57434eafd9a65277403c33?v=fa4f00bb9b5b492fb23157f8d5df471f', // 书单表格地址
     },
 
     // music 

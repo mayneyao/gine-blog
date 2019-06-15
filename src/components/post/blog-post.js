@@ -76,7 +76,7 @@ class BlogPost extends React.Component {
         return (
             <div>
                 <ScrollProgress />
-                <Layout>
+                <Layout navStyle={{ background: 'rgba(0,0,0,.05)' }} wrapStyle={{ marginTop: 0 }}>
                     <img style={{
                         width: '100%',
                         height: '400px',

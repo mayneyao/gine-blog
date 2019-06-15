@@ -14,7 +14,7 @@ import ArchiveIcon from '@material-ui/icons/Archive'
 import MusicIcon from '@material-ui/icons/Headset'
 import FriendIcon from '@material-ui/icons/People'
 import PaletteIcon from '@material-ui/icons/Palette'
-
+import MomentIcon from '@material-ui/icons/Camera'
 
 import CardMedia from '@material-ui/core/CardMedia'
 import { Link } from 'gatsby'
@@ -45,7 +45,7 @@ function SimpleList(props) {
 
     return (
         <div className={classes.root}>
-            <MyLink to={'/page/1'}>
+            <MyLink to={'/'}>
                 <CardMedia
                     className={classes.media}
                     image={avatar}
@@ -53,7 +53,7 @@ function SimpleList(props) {
                 />
             </MyLink>
             <List component="nav">
-                <MyLink to={'/page/1'}>
+                <MyLink to={'/'}>
                     <ListItem button>
                         <ListItemIcon>
                             <HomeIcon color={'primary'} />
@@ -128,6 +128,16 @@ function SimpleList(props) {
                                 <PaletteIcon style={{ color: '#00bcd4' }} />
                             </ListItemIcon>
                             <ListItemText primary="绘画" />
+                        </ListItem>
+                    </MyLink>
+                }
+                {
+                    config.moments.open && <MyLink to={'moments'}>
+                        <ListItem button>
+                            <ListItemIcon>
+                                <MomentIcon style={{ color: '#4a148c' }} />
+                            </ListItemIcon>
+                            <ListItemText primary="动态" />
                         </ListItem>
                     </MyLink>
                 }

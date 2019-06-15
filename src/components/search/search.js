@@ -18,7 +18,7 @@ import notion from '../../notion/api'
 
 const styles = theme => ({
     mydlg: {
-        position: 'fixed',
+        position: 'absolute',
         top: 0,
     },
     progress: {
@@ -106,7 +106,7 @@ class FormDialog extends React.Component {
         const { blockData, isSearchStarted, query, loading } = this.state;
         const { classes } = this.props;
         return (
-            <div>
+            <>
                 <IconButton variant="outlined" onClick={this.handleClickOpen} style={{
                     position: 'fixed',
                     top: 0,
@@ -149,7 +149,7 @@ class FormDialog extends React.Component {
                         {blockData && isSearchStarted && <SearchResults data={blockData} />}
                     </DialogContent>
                 </Dialog>
-            </div>
+            </>
         );
     }
 }

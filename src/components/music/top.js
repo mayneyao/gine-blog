@@ -58,7 +58,7 @@ export default class extends React.Component {
             <Helmet defaultTitle={`近期Top20Music&状态分析 - ${config.blogMeta.title}`}>
                 <meta name="description" content={`${config.blogMeta.title} 博客 python react gine music 音乐`} />
             </Helmet>
-            <Paper style={{ display: 'flex', flexWrap: 'wrap', maxWidth: 850, margin: '0 auto', marginTop: 10 }} id='MyTopMusic'>
+            <Paper style={{ display: 'flex', flexWrap: 'wrap', maxWidth: 850, margin: '0 auto', marginTop: 42 }} id='MyTopMusic'>
                 <div>
                     {
                         data && data.items && data.items.sort((a, b) => a.popularity < b.popularity ? 1 : -1).map(item => {

@@ -96,9 +96,22 @@ exports.createPages = ({ graphql, actions }) => {
             })
         }
 
+
+        const { pageSize } = result.data.site.siteMetadata
+
+        // 创建主页
+        createPage({
+            path: `/`,
+            component: path.resolve(`./src/components/post/post-page.js`),
+            context: {
+                skip: 0,
+                limit: pageSize,
+                currentPage: 1,
+            },
+        })
+
         // 创建分页
         const { totalCount, edges } = result.data.allPost
-        const { pageSize } = result.data.site.siteMetadata
         const pageCount = Math.ceil(totalCount / pageSize)
         for (let i = 1; i <= pageCount; i++) {
             createPage({
