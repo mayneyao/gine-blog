@@ -21,7 +21,7 @@ function Draw(props) {
             url={url}
             itemComponent={draw}
             sortFunc={(a, b) => dayjs(b.date) - dayjs(a.date)}
-            title="动态"
+            title="绘画之路"
         />
     )
 }
