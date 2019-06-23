@@ -8,3 +8,14 @@
 // export const wrapRootElement = ({ element }) => {
 //   return <WithRoot key={Math.random()}>{element}</WithRoot>;
 // };
+
+export const onServiceWorkerUpdateFound = () => {
+    const answer = window.confirm(
+        `好久不见，站点已经更新了。` +
+        `重新加载，展示新页面？`
+    )
+
+    if (answer === true) {
+        window.location.reload()
+    }
+}

@@ -18,6 +18,22 @@ if (config.ga.open) {
             head: true,
         },
     })
+
+    if (config.ga.viewId) {
+        conf.plugins.push({
+            resolve: "gatsby-plugin-guess-js",
+            options: {
+                // Find the view id in the GA admin in a section labeled "views"
+                GAViewID: `${config.ga.viewId}`,
+                minimumThreshold: 0.03,
+                // The "period" for fetching analytic data.
+                period: {
+                    startDate: new Date("2019-1-1"),
+                    endDate: new Date(),
+                },
+            },
+        })
+    }
 }
 
 if (config.sitemap.open) {
