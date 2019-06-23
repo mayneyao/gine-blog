@@ -95,6 +95,11 @@ module.exports = {
         open: false, // 默认关闭
         trackingId: 'UA-xxxxxxxx-x', // ga 分配的追踪代码
     },
+    // google_ad_client
+    google_ad_client: {
+        open: true,
+        clientId: 'pub-6897108038029263',
+    },
     // PWA 优化 
     pwa: {
         open: false, //默认关闭
