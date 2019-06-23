@@ -94,8 +94,6 @@ class Layout extends React.Component {
     render() {
         const { open, iOS, height, data: { music, game } } = this.state
         const { classes, title, navStyle = {}, wrapStyle = {} } = this.props
-
-        
         return (
 
             <div style={{ background: '#f3f5f7' }}>
