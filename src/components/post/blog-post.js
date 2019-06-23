@@ -10,6 +10,8 @@ import Disqus from 'disqus-react';
 import { Helmet } from "react-helmet"
 import config from '../../../config'
 import notion from '../../notion/api'
+import 'prismjs/themes/prism-tomorrow.css'
+import 'prismjs/plugins/line-numbers/prism-line-numbers.css'
 
 
 class BlogPost extends React.Component {

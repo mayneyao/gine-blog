@@ -23,6 +23,7 @@
     "image-downloader": "^3.4.2",
     "jss": "latest",
     "lodash": "^4.17.11",
+    "prismjs": "^1.16.0",
     "prop-types": "latest",
     "puppeteer": "^1.17.0",
     "react": "^16.8.6",
