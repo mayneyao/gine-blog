@@ -103,20 +103,20 @@ class Layout extends React.Component {
                     <noscript>
                         为了更好的浏览体验，请不要在本页面禁用 Javascript 🙂
                     </noscript>
-                    {
-                        config.google_ad_client.open && <>
-                            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                            <script>
-                                {
-                                    `(adsbygoogle = window.adsbygoogle || []).push({
+                </Helmet>
+                {
+                    config.google_ad_client.open && <Helmet>
+                        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                        <script>
+                            {
+                                `(adsbygoogle = window.adsbygoogle || []).push({
                                         google_ad_client: "${config.google_ad_client.clientId}",
                                         enable_page_level_ads: true
                                     })`
-                                }
-                            </script>
-                        </>
-                    }
-                </Helmet>
+                            }
+                        </script>
+                    </Helmet>
+                }
 
                 <SwipeableDrawer
                     disableBackdropTransition={!iOS}
