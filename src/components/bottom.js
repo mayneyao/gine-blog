@@ -5,7 +5,7 @@ import ULink from './utils/link-without-underline'
 import axios from 'axios'
 import Typography from '@material-ui/core/Typography';
 import config from '../../config'
-import _ from 'loadsh'
+import _ from 'lodash'
 
 function isChineseChar(str) {
     var reg = /[\u4E00-\u9FA5\uF900-\uFA2D]/;
