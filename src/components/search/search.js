@@ -107,11 +107,16 @@ class FormDialog extends React.Component {
         const { classes } = this.props;
         return (
             <>
-                <IconButton variant="outlined" onClick={this.handleClickOpen} style={{
-                    position: 'fixed',
-                    top: 0,
-                    right: 0
-                }}>
+                <IconButton
+                    color="inherit"
+                    aria-label="Search"
+                    variant="outlined"
+                    onClick={this.handleClickOpen}
+                    style={{
+                        position: 'fixed',
+                        top: 0,
+                        right: 0
+                    }}>
                     <SearchIcon />
                 </IconButton>
                 <Dialog
