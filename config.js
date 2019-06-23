@@ -114,7 +114,7 @@ module.exports = {
     ga: {
         open: true, // 默认关闭
         trackingId: 'UA-89592481-3', // ga 分配的追踪代码
-        viewId: '187855292', // ga 分配的数据视图ID，用于 guess.js 优化访问体验。
+        // viewId: '187855292', // ga 分配的数据视图ID，用于 guess.js 优化访问体验。
     },
 
     // google_ad_client
