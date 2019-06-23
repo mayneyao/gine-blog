@@ -22,6 +22,7 @@
     "github-api": "^3.0.0",
     "image-downloader": "^3.4.2",
     "jss": "latest",
+    "katex": "^0.10.2",
     "lodash": "^4.17.11",
     "prismjs": "^1.16.0",
     "prop-types": "latest",

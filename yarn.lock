@@ -6749,6 +6749,13 @@ jwt-decode@^2.2.0:
   resolved "https://registry.npm.taobao.org/jwt-decode/download/jwt-decode-2.2.0.tgz#7d86bd56679f58ce6a84704a657dd392bba81a79"
   integrity sha1-fYa9VmefWM5qhHBKZX3TkruoGnk=
 
+katex@^0.10.2:
+  version "0.10.2"
+  resolved "https://registry.npm.taobao.org/katex/download/katex-0.10.2.tgz#39973edbb65eda5b6f9e7f41648781e557dd4932"
+  integrity sha1-OZc+27Ze2ltvnn9BZIeB5VfdSTI=
+  dependencies:
+    commander "^2.19.0"
+
 keycode@^2.1.9:
   version "2.2.0"
   resolved "https://registry.npmjs.org/keycode/-/keycode-2.2.0.tgz#3d0af56dc7b8b8e5cba8d0a97f107204eec22b04"
