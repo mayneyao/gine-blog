@@ -65,9 +65,31 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
 }
 
 exports.createPages = ({ graphql, actions }) => {
+
+    // google adsense 校验
+    if (config.google_ad_client.open) {
+        const ad_txt = `google.com, ${config.google_ad_client.clientId}, DIRECT, f08c47fec0942fa0`
+        fs.writeFile('public/ads.txt', ad_txt, function (err) {
+            if (err) {
+                console.error(err)
+            }
+        })
+    }
+    // netlify 域名重定向
+    if (config.seo.open) {
+        // 如果站点是部署在 netlify上，开启此选项可以优化seo结果
+        const _redirects = `${config.seo.netlifyUrl}/* ${config.seo.siteUrl}/:splat 301!`
+        fs.writeFile('public/_redirects', _redirects, function (err) {
+            if (err) {
+                console.error(err)
+            }
+        })
+    }
+
     // **Note:** The graphql function call returns a Promise
     // see: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise for more info
     const { createPage } = actions
+
     return graphql(`
     {
       site{
@@ -85,17 +107,6 @@ exports.createPages = ({ graphql, actions }) => {
         }
       }
     }`).then(result => {
-        // netlify 域名重定向
-        if (config.seo.open) {
-            // 如果站点是部署在 netlify上，开启此选项可以优化seo结果
-            const _redirects = `${config.seo.netlifyUrl}/* ${config.seo.siteUrl}/:splat 301!`
-            fs.writeFile('public/_redirects', _redirects, function (err) {
-                if (err) {
-                    console.error(err)
-                }
-            })
-        }
-
 
         const { pageSize } = result.data.site.siteMetadata
 
