@@ -19,3 +19,7 @@ export const onServiceWorkerUpdateFound = () => {
         window.location.reload()
     }
 }
+
+// 注册自定义 sw 
+// 参见：https://www.gatsbyjs.org/docs/add-offline-support-with-a-service-worker/#using-a-custom-service-worker-in-gatsby
+// export const registerServiceWorker = () => true
