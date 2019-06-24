@@ -138,18 +138,6 @@ module.exports = {
         },
         // 配置参见 gatsby-plugin-offline 插件文档
         swConf: {
-            importWorkboxFrom: `local`,
-            globDirectory: rootDir,
-            globPatterns,
-            modifyUrlPrefix: {
-                // If `pathPrefix` is configured by user, we should replace
-                // the default prefix with `pathPrefix`.
-                "/": `${pathPrefix}/`,
-            },
-            cacheId: `gatsby-plugin-offline`,
-            // Don't cache-bust JS or CSS files, and anything in the static directory,
-            // since these files have unique URLs and their contents will never change
-            dontCacheBustUrlsMatching: /(\.js$|\.css$|static\/)/,
             runtimeCaching: [
                 {
                     // Use cacheFirst since these don't need to be revalidated (same RegExp
@@ -168,8 +156,6 @@ module.exports = {
                     handler: `staleWhileRevalidate`,
                 },
             ],
-            skipWaiting: true,
-            clientsClaim: true,
         }
     },
     rss: {
