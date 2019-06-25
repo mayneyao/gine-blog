@@ -10,6 +10,15 @@ conf = {
 }
 
 
+if (config.blog.cache.source === 'local') {
+    conf.plugins.push({
+        resolve: "gatsby-plugin-netlify-cache",
+        options: {
+            cachePublic: true
+        }
+    })
+}
+
 if (config.ga.open) {
     conf.plugins.push({
         resolve: `gatsby-plugin-google-analytics`,

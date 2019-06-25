@@ -19,6 +19,9 @@ module.exports = {
         // 建议开启，可以大大提高build速度
         // 访问 https://github.com/settings/tokens 获取token 
         // export GitHubToken='yourtokenhere'
+        cache: {
+            source: `local` // or github
+        },
         openGithubCache: true, // 开启此配置后，notion页面的数据会缓存到github仓库。需要在环境变量中配置 GitHubToken
         github: {
             username: 'mayneyao', // github 用户名

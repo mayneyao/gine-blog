@@ -19,11 +19,9 @@ getBangumiData = async () => {
 
 
 async function genBangumiData(createNode, createNodeId, createContentDigest) {
-
-    console.log('>>>获取bangumi数据')
-    let bangumiData = await getBangumiData()
     if (config.bangumi.open) {
-        res = bangumiData
+        console.log('>>>获取bangumi数据')
+        res = await getBangumiData()
     } else {
         // 站位数据，没有实际意义，为了保证build通过
         res = [
