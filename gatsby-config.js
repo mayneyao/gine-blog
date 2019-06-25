@@ -6,9 +6,14 @@ conf = {
     siteMetadata: config.blogMeta,
     plugins: [
         `gatsby-plugin-react-helmet`,
+        {
+            resolve: "gatsby-plugin-netlify-cache",
+            options: {
+                cachePublic: true
+            }
+        },
     ],
 }
-
 
 if (config.ga.open) {
     conf.plugins.push({

@@ -1,9 +1,15 @@
 const puppeteer = require('puppeteer');
-const Axios = require('axios');
 const GitHub = require('../github/api');
 const dayjs = require('dayjs');
 const config = require('../../config');
 const notion = require('./api');
+const fs = require("fs")
+const path = require("path")
+
+function generateBrief(text, length) {
+    return text.replace(/<[^>]*>|/g, "").substr(0, length)
+}
+
 
 syncBlogData = async (url) => {
     const browser = await puppeteer.launch();
@@ -84,91 +90,103 @@ uploadBlogData2Github = async (item, blogData) => {
 }
 
 
+createBlogPostNode = (blogData, item, createNode, createNodeId, createContentDigest) => {
+    let data = { ...item, update_time: item.last_edited_time, slug: `posts/${item.slug}`, html: blogData.html, brief: blogData.brief }
+    const nodeContent = JSON.stringify(data)
+    const nodeMeta = {
+        id: createNodeId(data.slug),
+        parent: null,
+        children: [],
+        internal: {
+            type: `Post`,
+            mediaType: `text/html`,
+            content: nodeContent,
+            contentDigest: createContentDigest(data)
+        }
+    }
+    const node = Object.assign({}, data, nodeMeta)
+    createNode(node)
+}
+
+
+getBlogInfoData = async (item, allBlogInfoFromGithub) => {
+    // 文章内容获取策略： 优先从本地缓存获取文章 > [从 github 获取文章]> pupetteer 抓取 > [同步文章到 github]
+    let rootPath = path.dirname(path.dirname(__dirname))
+    let localPostDataPath = `${rootPath}/public/page-data/posts/${item.slug}/page-data.json`
+    console.log(`从本地获取文章缓存: ${item.name}`)
+    if (fs.existsSync(localPostDataPath)) {
+        let allData = fs.readFileSync(localPostDataPath)
+        let postData = JSON.parse(allData)
+        const { update_time, html } = postData.result.data.post
+        return {
+            blogData: {
+                brief: generateBrief(html, 100),
+                html
+            },
+            update_time,
+            source: 'local'
+        }
+    } else if (config.blog.openGithubCache && allBlogInfoFromGithub) {
+        // 从 github 获取博客内容
+        let blogKey = `${item.slug}.json`
+        let blogSha = allBlogInfoFromGithub[blogKey]
+        if (blogSha) {
+            // 存在旧blog数据
+            let githubBlogData = await GitHub.getBlogData(blogSha)
+            return {
+                blogData: githubBlogData.content,
+                update_time: githubBlogData.update_time,
+                source: 'github'
+            }
+        } else {
+            return {
+                source: 'github'
+            }
+        }
+    }
+}
+
 exports.syncNotionBlogData = async ({ createNode, createNodeId, createContentDigest }) => {
 
     if (config.blog.sourceType === 'notion') {
         let url = config.blog.url
         let res = await notion.queryCollection(url)
-
+        let allBlogInfoFromGithub
         res = res.filter(item => item && item.public_date && item.status == '已发布')
         if (config.blog.openGithubCache) {
             // 开启github 文章缓存
-            let allBlogInfo = await GitHub.getAllBlogInfo()
-
-            for (let item of res) {
-                let blogData
-                let blogKey = `${item.slug}.json`
-                let blogSha = allBlogInfo[blogKey]
-                let isFromGithubCache = true
-                if (blogSha) {
-                    // 存在旧blog数据
-                    let githubBlogData = await GitHub.getBlogData(blogSha)
-                    if (dayjs(item.last_edited_time) > dayjs(githubBlogData.update_time)) {
-                        // 文章需要更新
-                        console.log(`>>>开始同步文章:${item.name} from notion \n`)
-                        blogData = await syncBlogData(item.browseableUrl);
-                        isFromGithubCache = false
-                        await uploadBlogData2Github(item, blogData)
-
-                    } else {
-                        // 文章不需要更新，获取来自github的缓存数据
-                        blogData = githubBlogData.content
-                    }
-
-                } else {
-                    // 不存在blog 数据
+            allBlogInfoFromGithub = await GitHub.getAllBlogInfo()
+        }
+        for (let item of res) {
+            let blogData
+            let blogInfoData = await getBlogInfoData(item, allBlogInfoFromGithub)
+            if (blogInfoData.blogData && blogInfoData.update_time) {
+                // 文章需要更新 & 启用github缓存，需要同步到github
+                if (dayjs(item.last_edited_time) > dayjs(blogInfoData.update_time)) {
+                    console.log(`>>>${blogInfoData.source} 文章已经过期：${item.name} \n`)
                     console.log(`>>>开始同步文章:${item.name} from notion \n`)
                     blogData = await syncBlogData(item.browseableUrl);
-                    isFromGithubCache = false
+                    if (config.blog.openGithubCache) {
+                        console.log(`>>>同步文章:${item.name} 到 github \n`)
+                        await uploadBlogData2Github(item, blogData)
+                    }
+                } else {
+                    blogData = blogInfoData.blogData
+                }
+            } else {
+                // 找不到文章, puppetter 抓取
+                console.log(`>>>开始同步文章:${item.name} from notion \n`)
+                blogData = await syncBlogData(item.browseableUrl);
+
+                if (config.blog.openGithubCache) {
+                    console.log(`>>>同步文章:${item.name} 到 github \n`)
                     await uploadBlogData2Github(item, blogData)
                 }
-                if (blogData) {
-                    if (isFromGithubCache) {
-                        console.log(`>>>从github获取缓存Blog数据: ${item.name}`)
-                    }
-                    let data = { ...item, update_time: item.last_edited_time, slug: `posts/${item.slug}`, html: blogData.html, brief: blogData.brief }
-                    const nodeContent = JSON.stringify(data)
-                    const nodeMeta = {
-                        id: createNodeId(data.slug),
-                        parent: null,
-                        children: [],
-                        internal: {
-                            type: `Post`,
-                            mediaType: `text/html`,
-                            content: nodeContent,
-                            contentDigest: createContentDigest(data)
-                        }
-                    }
-                    const node = Object.assign({}, data, nodeMeta)
-                    createNode(node)
-                }
             }
-        } else {
-            // 未开启github文章缓存，每次都从notion拉取文章
-            for (let item of res) {
-                console.log(`>>>开始同步文章:${item.name} from notion \n`)
-                const blogData = await syncBlogData(item.browseableUrl);
-                if (blogData) {
-                    let data = { ...item, update_time: item.last_edited_time, slug: `posts/${item.slug}`, html: blogData.html, brief: blogData.brief }
-                    const nodeContent = JSON.stringify(data)
-                    const nodeMeta = {
-                        id: createNodeId(data.slug),
-                        parent: null,
-                        children: [],
-                        internal: {
-                            type: `Post`,
-                            mediaType: `text/html`,
-                            content: nodeContent,
-                            contentDigest: createContentDigest(data)
-                        }
-                    }
-                    const node = Object.assign({}, data, nodeMeta)
-                    createNode(node)
-                }
+            if (blogData) {
+                createBlogPostNode(blogData, item, createNode, createNodeId, createContentDigest)
             }
-
         }
-
     }
 }
 
