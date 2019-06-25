@@ -110,29 +110,22 @@ createBlogPostNode = (blogData, item, createNode, createNodeId, createContentDig
 
 
 getBlogInfoData = async (item, allBlogInfoFromGithub) => {
-    if (config.blog.cache.source === 'local') {
-        // 从本地获取博客内容
-        let rootPath = path.dirname(path.dirname(__dirname))
-        let localPostDataPath = `${rootPath}/public/page-data/posts/${item.slug}/page-data.json`
-        console.log(`从本地获取文章缓存: ${item.name}`)
-        if (fs.existsSync(localPostDataPath)) {
-            let allData = fs.readFileSync(localPostDataPath)
-            let postData = JSON.parse(allData)
-            const { update_time, html } = postData.result.data.post
-            return {
-                blogData: {
-                    brief: generateBrief(html, 100),
-                    html
-                },
-                update_time,
-                source: 'local'
-            }
-        } else {
-            return {
-                source: 'local'
-            }
+    // 文章内容获取策略： 优先从本地缓存获取文章 > [从 github 获取文章]> pupetteer 抓取 > [同步文章到 github]
+    let rootPath = path.dirname(path.dirname(__dirname))
+    let localPostDataPath = `${rootPath}/public/page-data/posts/${item.slug}/page-data.json`
+    console.log(`从本地获取文章缓存: ${item.name}`)
+    if (fs.existsSync(localPostDataPath)) {
+        let allData = fs.readFileSync(localPostDataPath)
+        let postData = JSON.parse(allData)
+        const { update_time, html } = postData.result.data.post
+        return {
+            blogData: {
+                brief: generateBrief(html, 100),
+                html
+            },
+            update_time,
+            source: 'local'
         }
-
     } else if (config.blog.openGithubCache && allBlogInfo) {
         // 从 github 获取博客内容
         let blogKey = `${item.slug}.json`
@@ -150,7 +143,6 @@ getBlogInfoData = async (item, allBlogInfoFromGithub) => {
                 source: 'github'
             }
         }
-
     }
 }
 
@@ -171,23 +163,25 @@ exports.syncNotionBlogData = async ({ createNode, createNodeId, createContentDig
             if (blogInfoData.blogData && blogInfoData.update_time) {
                 // 文章需要更新 & 启用github缓存，需要同步到github
                 if (dayjs(item.last_edited_time) > dayjs(blogInfoData.update_time)) {
-                    if (blogInfoData.source === 'local') {
-                        console.log(`>>>本地文章已经过期：${item.name}`)
-                    }
+                    console.log(`>>>${blogInfoData.source} 文章已经过期：${item.name} \n`)
                     console.log(`>>>开始同步文章:${item.name} from notion \n`)
                     blogData = await syncBlogData(item.browseableUrl);
-                    if (blogInfoData.source === 'github') {
+                    if (config.blog.openGithubCache) {
                         console.log(`>>>同步文章:${item.name} 到 github \n`)
                         await uploadBlogData2Github(item, blogData)
                     }
                 } else {
                     blogData = blogInfoData.blogData
                 }
-            } else if (blogInfoData.source === 'github') {
-                // 找不到文章 & 启用github缓存，需要同步到github
+            } else {
+                // 找不到文章, puppetter 抓取
                 console.log(`>>>开始同步文章:${item.name} from notion \n`)
                 blogData = await syncBlogData(item.browseableUrl);
-                await uploadBlogData2Github(item, blogData)
+
+                if (config.blog.openGithubCache) {
+                    console.log(`>>>同步文章:${item.name} 到 github \n`)
+                    await uploadBlogData2Github(item, blogData)
+                }
             }
             if (blogData) {
                 createBlogPostNode(blogData, item, createNode, createNodeId, createContentDigest)
