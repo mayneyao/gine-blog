@@ -126,7 +126,7 @@ getBlogInfoData = async (item, allBlogInfoFromGithub) => {
             update_time,
             source: 'local'
         }
-    } else if (config.blog.openGithubCache && allBlogInfo) {
+    } else if (config.blog.openGithubCache && allBlogInfoFromGithub) {
         // 从 github 获取博客内容
         let blogKey = `${item.slug}.json`
         let blogSha = allBlogInfoFromGithub[blogKey]
