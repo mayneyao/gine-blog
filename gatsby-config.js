@@ -6,17 +6,13 @@ conf = {
     siteMetadata: config.blogMeta,
     plugins: [
         `gatsby-plugin-react-helmet`,
+        {
+            resolve: "gatsby-plugin-netlify-cache",
+            options: {
+                cachePublic: true
+            }
+        },
     ],
-}
-
-
-if (config.blog.cache.source === 'local') {
-    conf.plugins.push({
-        resolve: "gatsby-plugin-netlify-cache",
-        options: {
-            cachePublic: true
-        }
-    })
 }
 
 if (config.ga.open) {
@@ -103,7 +99,7 @@ if (config.rss.open) {
 }
 
 
-if (config.blog.cache.source === 'github' && config.blog.openGithubCache && !process.env.GitHubToken) {
+if (config.blog.openGithubCache && !process.env.GitHubToken) {
     throw Error('因为您开启了github仓库缓存notion文章，请配置环境变量 GitHubToken')
 }
 
