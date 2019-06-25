@@ -113,8 +113,9 @@ getBlogInfoData = async (item, allBlogInfoFromGithub) => {
     // 文章内容获取策略： 优先从本地缓存获取文章 > [从 github 获取文章]> pupetteer 抓取 > [同步文章到 github]
     let rootPath = path.dirname(path.dirname(__dirname))
     let localPostDataPath = `${rootPath}/public/page-data/posts/${item.slug}/page-data.json`
-    console.log(`从本地获取文章缓存: ${item.name}`)
+
     if (fs.existsSync(localPostDataPath)) {
+        console.log(`从本地获取文章缓存: ${item.name}`)
         let allData = fs.readFileSync(localPostDataPath)
         let postData = JSON.parse(allData)
         const { update_time, html } = postData.result.data.post
@@ -128,6 +129,7 @@ getBlogInfoData = async (item, allBlogInfoFromGithub) => {
         }
     } else if (config.blog.openGithubCache && allBlogInfoFromGithub) {
         // 从 github 获取博客内容
+        console.log(`从 github 获取文章缓存: ${item.name}`)
         let blogKey = `${item.slug}.json`
         let blogSha = allBlogInfoFromGithub[blogKey]
         if (blogSha) {
