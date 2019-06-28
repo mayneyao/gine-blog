@@ -14,7 +14,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-
+import { Link } from 'gatsby'
 
 const styles = theme => ({
     card: {
@@ -64,7 +64,8 @@ function MediaControlCard(props) {
         setOpen(false);
     }
 
-    const { classes, theme, data: { node: {
+
+    const { classes, theme, data: { postsInfo, node: {
         name, comment, cover_image, slug, stars, start, status, tags
     } } } = props;
 
@@ -113,8 +114,14 @@ function MediaControlCard(props) {
                     <DialogTitle id={`book-${slug}`}>{`关于《${name}》的评论`}</DialogTitle>
                     <DialogContent>
                         <DialogContentText id="alert-dialog-description">
-                            {comment}
+                            {`${comment}`}
                         </DialogContentText>
+                        {
+                            Boolean(postsInfo.length) && <h3>相关文章</h3>
+                        }
+                        {
+                            postsInfo.map(item => <Link to={item.node.slug}><div>{item.node.name}</div></Link>)
+                        }
                     </DialogContent>
                 </Dialog>
             </div>

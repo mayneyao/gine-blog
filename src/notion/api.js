@@ -11,6 +11,9 @@ const getUrlBloackId = (url) => {
     return blockID
 }
 
+const getBlockHashId = (blockId) => {
+    return blockId.split('-').join('')
+}
 const getFullBlockId = (blockId) => {
     if (typeof blockId !== 'string') {
         throw Error(`blockId: ${typeof blockId} must be string`)
@@ -96,20 +99,29 @@ queryCollection = async (url) => {
                 }
 
                 let newKey = r.name
-                if (r.type === 'date') {
-                    parsedBlockData[newKey] = val[0][1][0][1].start_date
-                } else if (r.type === 'multi_select') {
-                    parsedBlockData[newKey] = val[0][0].split(',')
-                } else if (r.type == 'file') {
-                    parsedBlockData[newKey] = val.filter(item => {
-                        let content = item[1]
-                        return Boolean(content)
-                    }).map(item => {
-                        return item[1][0][1]
-                    })
-                } else {
-                    parsedBlockData[newKey] = val[0][0]
+                switch (r.type) {
+                    case 'date':
+                        parsedBlockData[newKey] = val[0][1][0][1].start_date
+                        break
+                    case 'multi_select':
+                        parsedBlockData[newKey] = val[0][0].split(',')
+                        break
+                    case 'file':
+                        parsedBlockData[newKey] = val.filter(item => {
+                            let content = item[1]
+                            return Boolean(content)
+                        }).map(item => {
+                            return item[1][0][1]
+                        })
+                        break
+                    case 'relation':
+                        parsedBlockData[newKey] = val.filter(item => item.length > 1).map(item => item[1][0])
+                        break
+                    default:
+                        parsedBlockData[newKey] = val[0][0]
+                        break
                 }
+
             }
         })
         data.push(parsedBlockData)
@@ -147,9 +159,9 @@ const search = async (fullTableID, query) => {
 // t()
 
 // t = async () => {
-//     let res = await queryCollection('https://www.notion.so/gine/3f7ccea5c2054477aba91f8e6e79dceb?v=e0094e2a6bfb4180a386a2de5237e609')
+//     let res = await queryCollection('https://www.notion.so/gine/98717bf8ad57434eafd9a65277403c33?v=e338aeb23c854f51bf52b37bfc3fb75a')
 //     console.log(res, res.length)
 // }
 
 // t()
-module.exports = { queryCollection, getFullBlockId, parseImageUrl, getUrlBloackId, search }
+module.exports = { queryCollection, getFullBlockId, parseImageUrl, getUrlBloackId, search, getBlockHashId }
