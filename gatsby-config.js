@@ -1,14 +1,19 @@
 
 const config = require('./config.js')
 
+
 conf = {
     siteMetadata: config.blogMeta,
     plugins: [
-        `gatsby-plugin-offline`,
         `gatsby-plugin-react-helmet`,
+        {
+            resolve: "gatsby-plugin-netlify-cache",
+            options: {
+                cachePublic: true
+            }
+        },
     ],
 }
-
 
 if (config.ga.open) {
     conf.plugins.push({
@@ -63,9 +68,26 @@ if (config.sitemap.open) {
 }
 
 if (config.pwa.open) {
+
+    // 安装应用
     conf.plugins.push({
         resolve: `gatsby-plugin-manifest`,
         options: config.pwa.conf,
+    })
+
+    // sw 重载
+    let swConf = config.pwa.swConf
+
+    // 对基于 nelify functions 动态页面，缓存其请求
+    swConf.runtimeCaching.push({
+        // Add runtime caching of various other page resources
+        urlPattern: /^https?:.*\/.netlify\/functions\/notion/,
+        handler: `staleWhileRevalidate`,
+    })
+
+    conf.plugins.push({
+        resolve: `gatsby-plugin-offline`,
+        options: swConf,
     })
 }
 
