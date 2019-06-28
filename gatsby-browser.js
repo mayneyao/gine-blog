@@ -21,9 +21,11 @@ export const onServiceWorkerUpdateFound = () => {
             let buildInfo = response.json()
             return buildInfo.build
         }).then(build => {
-            fetch(`/.netlify/functions/autoBuild?build=${build}`)
+            fetch(`/.netlify/functions/autoBuild?build=${build}`).then(res => {
+                console.log(res.data)
+                window.location.reload()
+            })
         })
-        window.location.reload()
     }
 }
 
