@@ -160,7 +160,7 @@ exports.syncNotionBlogData = async ({ createNode, createNodeId, createContentDig
         let build = res.reduce((a, b) => new Date(a.last_edited_time).getTime() + new Date(b.last_edited_time).getTime())
         let rootPath = path.dirname(path.dirname(__dirname))
         let dataPath = `${rootPath}/public/buildInfo.json`
-        console.log(`>>>写入 build info`)
+        console.log(`>>>写入 build info：${build}`)
         fs.writeFile(dataPath, JSON.stringify({ build }), function (err) {
             if (err) {
                 console.error(err)
