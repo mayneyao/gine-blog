@@ -15,7 +15,7 @@ module.exports = {
     blog: {
         sourceType: 'notion',
         url: 'https://www.notion.so/gine/b8081728310b49fea0ff1d14e190b3fb?v=dbd9df2e8f784aa7bf8db977d82ee635',
-        
+
         // 建议开启，可以大大提高build速度
         // 访问 https://github.com/settings/tokens 获取token 
         // export GitHubToken='yourtokenhere'
@@ -54,7 +54,7 @@ module.exports = {
     bangumi: {
         open: true, // 默认关闭
         sourceType: 'bilibili',
-        url: 'http://space.bilibili.com/ajax/Bangumi/getList?mid=22539301', // 替换自己为自己的mid （这里只获取了第一页的数据，有需要的自行修改。）
+        url: 'https://api.bilibili.com/x/space/bangumi/follow/list?type=1&follow_status=0&pn=1&ps=100&vmid=22539301', // 适配新版的API接口，获取前100项
     },
 
     // 格言

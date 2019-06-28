@@ -31,9 +31,8 @@ export const query = graphql`
         node{
           season_id
           cover
-          share_url
           title
-          brief
+          evaluate
           is_finish
         }
       }

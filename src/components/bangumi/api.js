@@ -6,14 +6,17 @@ const download = require('image-downloader')
 getBangumiData = async () => {
     let allBangumiData = []
     let res = await axios.get(config.bangumi.url)
-    let count = 1
-    allBangumiData = allBangumiData.concat(res.data.data.result)
-    while (count <= res.data.data.pages) {
-        count += 1
-        res = await axios.get(`${config.bangumi.url}&page=${count}`)
-        data = res.data
-        allBangumiData = allBangumiData.concat(res.data.data.result)
-    }
+    // let count = 1
+    allBangumiData = allBangumiData.concat(res.data.data.list)
+
+    // 新版的接口不再需要拼接数据
+    // console.log(count, res.data.data.pages)
+    // while (count <= res.data.data.pages) {
+    //     count += 1
+    //     res = await axios.get(`${config.bangumi.url}&page=${count}`)
+    //     data = res.data
+    //     allBangumiData = allBangumiData.concat(res.data.data.result)
+    // }
     return allBangumiData
 }
 
@@ -34,7 +37,6 @@ async function genBangumiData(createNode, createNodeId, createContentDigest) {
                 last_ep_index: 0,
                 newest_ep_index: 21,
                 season_id: "25739",
-                share_url: "http://bangumi.bilibili.com/anime/25739/",
                 title: "关于我转生变成史莱姆这档事",
                 total_count: 0,
             }

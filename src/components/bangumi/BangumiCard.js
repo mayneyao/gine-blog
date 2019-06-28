@@ -45,12 +45,12 @@ function ImgMediaCard(props) {
                         {data.title}
                     </Typography>
                     <Typography component="p">
-                        {data.brief}
+                        {data.evaluate}
                     </Typography>
                 </CardContent>
             </CardActionArea>
             <CardActions>
-                <Button size="small" color="primary" href={data.share_url} target="_blank">
+                <Button size="small" color="primary" href={`http://bangumi.bilibili.com/anime/${data.season_id}/`} target="_blank">
                     查看详情
                 </Button>
             </CardActions>
