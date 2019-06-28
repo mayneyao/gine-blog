@@ -2,7 +2,7 @@
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/c9191dcb-f9c1-4b8c-8ec7-fbca94456c84/deploy-status)](https://app.netlify.com/sites/gine/deploys)
 
-gine-blog 是一个以notion为blog后端,基于 React,Gatsby,Material-UI 开发的静态博客应用。
+gine-blog 是一个以 Notion 为 blog 后端,基于 React,Gatsby,Material-UI 开发的博客应用。如果部署在 netlify 上则可以享受免费的 netlify functions 额度，结合 Notion API 可以生成自定义的动态内容页。
 
 screenshot
 ![](https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F56495b11-eb1f-43b2-bef9-9a84c9822251%2Fs3.png?width=3840)
