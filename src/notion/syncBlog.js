@@ -162,7 +162,7 @@ exports.syncNotionBlogData = async ({ createNode, createNodeId, createContentDig
         for (let item of res) {
             let blogData
             let blogInfoData = await getBlogInfoData(item, allBlogInfoFromGithub)
-            if (blogInfoData.blogData && blogInfoData.update_time) {
+            if (blogInfoData && blogInfoData.blogData && blogInfoData.update_time) {
                 // 文章需要更新 & 启用github缓存，需要同步到github
                 if (dayjs(item.last_edited_time) > dayjs(blogInfoData.update_time)) {
                     console.log(`>>>${blogInfoData.source} 文章已经过期：${item.name} \n`)
