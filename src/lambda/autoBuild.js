@@ -18,7 +18,7 @@ exports.handler = async (event, context) => {
             headers: new Headers({
                 'Content-Type': 'application/json'
             })
-        }).then(res => res.json())
+        }).then(res => console.log(`new build`))
             .catch(error => console.error('Error:', error))
             .then(response => console.log('Success:', response));
     }
