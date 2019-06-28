@@ -157,7 +157,8 @@ exports.syncNotionBlogData = async ({ createNode, createNodeId, createContentDig
         res = res.filter(item => item && item.public_date && item.status == '已发布')
 
         // 获取已发布文章的最后更新时间戳总和, build 标记
-        let build = res.reduce((a, b) => new Date(a.last_edited_time).getTime() + new Date(b.last_edited_time).getTime())
+        let buildTimes = res.map(item => new Date(item.last_edited_time).getTime())
+        let build = buildTimes.reduce((a, b) => a + b)
         let rootPath = path.dirname(path.dirname(__dirname))
         let dataPath = `${rootPath}/public/buildInfo.json`
         console.log(`>>>写入 build info：${build}`)
