@@ -84,6 +84,21 @@ if (config.pwa.open) {
         urlPattern: /^https?:.*\/.netlify\/functions\/notion/,
         handler: `staleWhileRevalidate`,
     })
+    
+    // notion 表格搜索
+    // 这里缓存的意义其实不是很大，仅对同一客户端搜索相同字符串的体验有所提升
+    swConf.runtimeCaching.push({
+        urlPattern: /^https?:.*\/.netlify\/functions\/search/,
+        handler: `staleWhileRevalidate`,
+    })
+
+    // spotify 音乐分析
+    swConf.runtimeCaching.push({
+        // fixme 此接口比较特殊，无法通用，这里暂时写死
+        urlPattern: /^https:\/\/api.gine.me\/$/,
+        handler: `staleWhileRevalidate`,
+    })
+
 
     conf.plugins.push({
         resolve: `gatsby-plugin-offline`,
