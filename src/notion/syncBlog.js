@@ -155,6 +155,19 @@ exports.syncNotionBlogData = async ({ createNode, createNodeId, createContentDig
         let res = await notion.queryCollection(url)
         let allBlogInfoFromGithub
         res = res.filter(item => item && item.public_date && item.status == '已发布')
+
+        // 获取已发布文章的最后更新时间戳总和, build 标记
+        let build = res.reduce((a, b) => new Date(a.last_edited_time).getTime() + new Date(b.last_edited_time).getTime())
+        let rootPath = path.dirname(path.dirname(__dirname))
+        let dataPath = `${rootPath}/public/buildInfo.json`
+        console.log(`>>>写入 build info`)
+        fs.writeFile(dataPath, JSON.stringify({ build }), function (err) {
+            if (err) {
+                console.error(err)
+            }
+        })
+
+
         if (config.blog.openGithubCache) {
             // 开启github 文章缓存
             allBlogInfoFromGithub = await GitHub.getAllBlogInfo()

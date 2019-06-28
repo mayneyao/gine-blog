@@ -16,6 +16,13 @@ export const onServiceWorkerUpdateFound = () => {
     )
 
     if (answer === true) {
+        // 触发自动 build 流程
+        fetch('/buildInfo.json').then(res => {
+            let buildInfo = response.json()
+            return buildInfo.build
+        }).then(build => {
+            fetch(`/.netlify/functions/autoBuild?build=${build}`)
+        })
         window.location.reload()
     }
 }
