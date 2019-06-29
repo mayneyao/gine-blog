@@ -5,20 +5,24 @@ const axios = require('axios')
 
 exports.handler = async (event, context) => {
     // 获取 build 信息
-    let oldBuild = event.queryStringParameters.build
     let res = await notion.queryCollection(config.blog.url)
     res = res.filter(item => item && item.public_date && item.status == '已发布')
     // 获取已发布文章的最后更新时间戳总和, build 标记
     let buildTimes = res.map(item => new Date(item.last_edited_time).getTime())
     let newBuild = buildTimes.reduce((a, b) => a + b)
 
-    if (newBuild > parseInt(oldBuild)) {
-        // 触发 build 请求
-        axios.post(`https://api.netlify.com/build_hooks/${process.env.AutoBuildToken}`, {})
-            .then(res => console.log(`new build`))
-            .catch(error => console.error('Error:', error))
-            .then(response => console.log('Success:', response));
-    }
+    axios.get(`${config.blogMeta.siteUrl}/buildInfo.json`).then(res => {
+        let oldBuild = res.data.build
+        if (oldBuild === newBuild) {
+            console.log('客户端存在缓存，不需要 build ')
+        } else if (newBuild > oldBuild) {
+            // 触发 build 请求
+            axios.post(`https://api.netlify.com/build_hooks/${process.env.AutoBuildToken}`, {})
+                .then(res => console.log(`new build`))
+                .catch(error => console.error('Error:', error))
+                .then(response => console.log('Success:', response));
+        }
+    })
 
     let headers = {
         "Content-Type": "application/json;charset=UTF-8"

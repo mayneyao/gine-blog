@@ -9,7 +9,6 @@
 //   return <WithRoot key={Math.random()}>{element}</WithRoot>;
 // };
 
-import axios from 'axios'
 import config from './config'
 
 
@@ -24,14 +23,9 @@ export const onServiceWorkerUpdateFound = () => {
         // fetch 坑真多🤯 还是 axios 好 
 
         if (config.blog.autoBuild.open && Math.random() * 100 <= config.blog.autoBuild.proportion) {
-            axios.get('/buildInfo.json').then(res => {
-                let buildInfo = res.data
-                return buildInfo.build
-            }).then(build => {
-                fetch(`/.netlify/functions/autoBuild?build=${build}`).then(res => {
-                    console.log(res.data)
-                    window.location.reload()
-                })
+            fetch(`/.netlify/functions/autoBuild`).then(res => {
+                console.log(res.data)
+                window.location.reload()
             }).catch(error => {
                 console.error('Error:', error)
                 window.location.reload()
