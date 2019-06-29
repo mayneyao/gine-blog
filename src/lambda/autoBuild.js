@@ -8,7 +8,8 @@ exports.handler = async (event, context) => {
     let res = await notion.queryCollection(config.blog.url)
     res = res.filter(item => item && item.public_date && item.status == '已发布')
     // 获取已发布文章的最后更新时间戳总和, build 标记
-    let newBuild = res.reduce((a, b) => new Date(a.last_edited_time).getTime() + new Date(b.last_edited_time).getTime())
+    let buildTimes = res.map(item => new Date(item.last_edited_time).getTime())
+    let newBuild = buildTimes.reduce((a, b) => a + b)
 
     if (newBuild > parseInt(oldBuild)) {
         // 触发 build 请求
