@@ -1,6 +1,7 @@
 
 const notion = require('../notion/api')
 const config = require('../../config')
+const axios = require('axios')
 
 exports.handler = async (event, context) => {
     // 获取 build 信息
@@ -13,13 +14,8 @@ exports.handler = async (event, context) => {
 
     if (newBuild > parseInt(oldBuild)) {
         // 触发 build 请求
-        fetch(`https://api.netlify.com/build_hooks/${process.env.AutoBuildToken}`, {
-            method: 'POST',
-            body: `{}`,
-            headers: new Headers({
-                'Content-Type': 'application/json'
-            })
-        }).then(res => console.log(`new build`))
+        axios.post(`https://api.netlify.com/build_hooks/${process.env.AutoBuildToken}`, {})
+            .then(res => console.log(`new build`))
             .catch(error => console.error('Error:', error))
             .then(response => console.log('Success:', response));
     }
