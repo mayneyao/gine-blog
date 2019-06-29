@@ -29,13 +29,17 @@ class Index extends React.Component {
                             let postsInfo = []
                             if (item.node.fk_blog) {
                                 item.node.fk_blog.map(fkPost => {
-                                    postsInfo = allPost.edges.filter(post => {
+                                    let relatedPost = allPost.edges.find(post => {
                                         let postID = post.node.slug.split('/')[1]
                                         return postID === notion.getBlockHashId(fkPost[1])
                                     })
+                                    if (relatedPost) {
+                                        postsInfo.push(relatedPost)
+                                    }
                                 })
                             }
-                            return <BookItem data={{ postsInfo, ...item }} />
+
+                            return <BookItem data={{ postsInfo, ...item }} key={item.node.slug} />
                         })
                     }
                 </div>

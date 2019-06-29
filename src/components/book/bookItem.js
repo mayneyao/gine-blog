@@ -76,7 +76,6 @@ function MediaControlCard(props) {
         '待读': '#795548',
         '待购': '#ffc107'
     }
-
     return (
         <Card className={classes.card}>
             <StateTag state={status} color={CSMap[status]} />
@@ -120,7 +119,7 @@ function MediaControlCard(props) {
                             Boolean(postsInfo.length) && <h3>相关文章</h3>
                         }
                         {
-                            postsInfo.map(item => <Link to={item.node.slug}><div>{item.node.name}</div></Link>)
+                            postsInfo.map(item => <Link to={item.node.slug} key={item.node.slug}><div>{item.node.name}</div></Link>)
                         }
                     </DialogContent>
                 </Dialog>
