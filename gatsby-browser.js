@@ -9,6 +9,9 @@
 //   return <WithRoot key={Math.random()}>{element}</WithRoot>;
 // };
 
+import axios from 'axios'
+
+
 export const onServiceWorkerUpdateFound = () => {
     const answer = window.confirm(
         `好久不见，站点已经更新了。` +
@@ -17,8 +20,9 @@ export const onServiceWorkerUpdateFound = () => {
 
     if (answer === true) {
         // 触发自动 build 流程
-        fetch('/buildInfo.json').then(res => {
-            let buildInfo = res.json()
+        // fetch 坑真多🤯 还是 axios 好 
+        axios.get('/buildInfo.json').then(res => {
+            let buildInfo = res.data
             return buildInfo.build
         }).then(build => {
             fetch(`/.netlify/functions/autoBuild?build=${build}`).then(res => {
