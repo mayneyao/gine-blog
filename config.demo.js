@@ -24,6 +24,16 @@ module.exports = {
             repo: 'blog', // 作为blog缓存数据仓库的名称
             branch: 'master' // 作为blog缓存数据仓库的分支
         },
+        search: {
+            open: true, // 是否开启文章搜索功能
+            api: "/.netlify/functions/search" // 搜索接口
+            // api: "http://127.0.0.1:9000/search" // 搜索接口
+        },
+        // 自动 build
+        autoBuild: {
+            open: true,
+            proportion: 100, // 0-100 用户触发自动 build 检测的请求占比，当访问量很大时请减小其数值。
+        }
     },
 
     // 友链

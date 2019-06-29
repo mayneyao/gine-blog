@@ -10,6 +10,7 @@
 // };
 
 import axios from 'axios'
+import config from './config'
 
 
 export const onServiceWorkerUpdateFound = () => {
@@ -21,18 +22,23 @@ export const onServiceWorkerUpdateFound = () => {
     if (answer === true) {
         // 触发自动 build 流程
         // fetch 坑真多🤯 还是 axios 好 
-        axios.get('/buildInfo.json').then(res => {
-            let buildInfo = res.data
-            return buildInfo.build
-        }).then(build => {
-            fetch(`/.netlify/functions/autoBuild?build=${build}`).then(res => {
-                console.log(res.data)
+
+        if (config.blog.autoBuild.open && Math.random() * 100 <= config.blog.autoBuild.proportion) {
+            axios.get('/buildInfo.json').then(res => {
+                let buildInfo = res.data
+                return buildInfo.build
+            }).then(build => {
+                fetch(`/.netlify/functions/autoBuild?build=${build}`).then(res => {
+                    console.log(res.data)
+                    window.location.reload()
+                })
+            }).catch(error => {
+                console.error('Error:', error)
                 window.location.reload()
             })
-        }).catch(error => {
-            console.error('Error:', error)
+        } else {
             window.location.reload()
-        })
+        }
     }
 }
 
