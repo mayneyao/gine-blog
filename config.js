@@ -123,7 +123,7 @@ module.exports = {
 
     // google_ad_client
     google_ad_client: {
-        open: true,
+        open: false,
         clientId: 'pub-6897108038029263',
     },
     // PWA 优化 
