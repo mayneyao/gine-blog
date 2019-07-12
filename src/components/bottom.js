@@ -40,12 +40,12 @@ class Aphorisms extends React.Component {
         const { person, content, source } = data ? data[_.random(data.length - 1)] : {}
 
         const getRender = (person, content, source) => {
-            if (person && content && source) {
+            if (content && source) {
                 let personLang = isChineseChar(person) ? 'zh' : 'en'
                 let sourceLang = isChineseChar(source) ? 'zh' : 'en'
                 return <div>
-                    {content} —— <WIKI lang={personLang} title={person} /> 《<WIKI lang={sourceLang} title={source} />》
-                </div>
+                    {content} —— {!!person && <WIKI lang={personLang} title={person} />} 《<WIKI lang={sourceLang} title={source} />》
+                    </div>
             }
         }
         return <Typography variant="subtitle1">
