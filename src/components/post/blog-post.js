@@ -13,6 +13,7 @@ import notion from '../../notion/api'
 import 'prismjs/themes/prism-tomorrow.css'
 import 'prismjs/plugins/line-numbers/prism-line-numbers.css'
 import 'katex/dist/katex.min.css'
+import '../../static/css/gist.css'
 
 class BlogPost extends React.Component {
     constructor(props) {
