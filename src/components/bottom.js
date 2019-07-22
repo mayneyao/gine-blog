@@ -70,7 +70,7 @@ export default () => (
 
             <span style={{ display: 'block' }}>
                 Copyright 2019 <CopyrightIcon style={{ fontSize: '0.9em' }} /> <ULink
-                    href="https://github.com/mayneyao" text="Mayne" /> Powered by <ULink href="https://github.com/mayneyao/gine-blog" text="gine-blog" />
+                    href={`https://github.com/${config.blogMeta.me.github}`} text={config.blogMeta.name} /> Powered by <ULink href="https://github.com/mayneyao/gine-blog" text="gine-blog" />
             </span>
 
         </Typography>

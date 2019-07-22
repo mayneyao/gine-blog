@@ -4,11 +4,17 @@
 module.exports = {
     // blog mate
     blogMeta: {
+        name: 'Mayne', // copyright 显示
         title: `Mayne's Blog`, //网站标题
         pageSize: 3, // 每页多少篇文章
         description: `All things about Mayne`, // 网站描述 seo
         siteUrl: `https://gine.me`, // 站点URL
         aboutPostSlug: `10a70927d25a43d19acf14e0d36354e7`, //没有单独的about页面，about页面指向文章。
+
+        // 社交帐号配置，显示在页面最下方。
+        me: {
+            github: 'mayneyao' // github 用户名称
+        }
     },
 
     // 博客数据源 目前只适配notion
