@@ -19,7 +19,6 @@ import MomentIcon from '@material-ui/icons/Camera'
 import CardMedia from '@material-ui/core/CardMedia'
 import { Link } from 'gatsby'
 
-import avatar from '../static/41546411364_.pic.jpg' // 需要自定义头像修改此处
 import config from '../../config'
 
 
@@ -41,6 +40,7 @@ const styles = theme => ({
 const MyLink = props => <Link {...props} />
 
 function SimpleList(props) {
+    let avatar = require(`../static/${config.blogMeta.avatar}`)
     const { classes } = props
 
     return (
