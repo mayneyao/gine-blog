@@ -10,7 +10,7 @@ module.exports = {
         description: `All things about Mayne`, // 网站描述 seo
         siteUrl: `https://gine.me`, // 站点URL
         aboutPostSlug: `10a70927d25a43d19acf14e0d36354e7`, //没有单独的about页面，about页面指向文章。
-
+        avatar: '41546411364_.pic.jpg', // src/static 目录下
         // 社交帐号配置，显示在页面最下方。
         me: {
             github: 'mayneyao' // github 用户名称
