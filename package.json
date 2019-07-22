@@ -24,7 +24,7 @@
     "image-downloader": "^3.4.2",
     "jss": "latest",
     "katex": "^0.10.2",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.13",
     "prismjs": "^1.16.0",
     "prop-types": "latest",
     "puppeteer": "^1.17.0",
