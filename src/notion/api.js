@@ -82,49 +82,51 @@ queryCollection = async (url) => {
     blockIds.map(blockId => {
         let blockData = res.data.recordMap.block[blockId].value
         let parsedBlockData = {}
-        Object.entries(blockData.properties).map(item => {
-            let [key, val] = item
-            let r = schema[key]
-            if (r) {
-                parsedBlockData.slug = blockId.split('-').join('')
-                parsedBlockData.browseableUrl = getBrowseableUrl(blockId)
-                parsedBlockData.created_time = dayjs(blockData.created_time).toISOString()
-                parsedBlockData.last_edited_time = dayjs(blockData.last_edited_time).toISOString()
+        // 新建的空白行没有 properties 属性，将其过滤掉。
+        if (blockData.properties) {
+            Object.entries(blockData.properties).map(item => {
+                let [key, val] = item
+                let r = schema[key]
+                if (r) {
+                    parsedBlockData.slug = blockId.split('-').join('')
+                    parsedBlockData.browseableUrl = getBrowseableUrl(blockId)
+                    parsedBlockData.created_time = dayjs(blockData.created_time).toISOString()
+                    parsedBlockData.last_edited_time = dayjs(blockData.last_edited_time).toISOString()
 
-                // page_cover
-                if (blockData.format) {
-                    parsedBlockData.pformat = blockData.format
-                } else {
-                    parsedBlockData.pformat = { page_cover: "" }
+                    // page_cover
+                    if (blockData.format) {
+                        parsedBlockData.pformat = blockData.format
+                    } else {
+                        parsedBlockData.pformat = { page_cover: "" }
+                    }
+
+                    let newKey = r.name
+                    switch (r.type) {
+                        case 'date':
+                            parsedBlockData[newKey] = val[0][1][0][1].start_date
+                            break
+                        case 'multi_select':
+                            parsedBlockData[newKey] = val[0][0].split(',')
+                            break
+                        case 'file':
+                            parsedBlockData[newKey] = val.filter(item => {
+                                let content = item[1]
+                                return Boolean(content)
+                            }).map(item => {
+                                return item[1][0][1]
+                            })
+                            break
+                        case 'relation':
+                            parsedBlockData[newKey] = val.filter(item => item.length > 1).map(item => item[1][0])
+                            break
+                        default:
+                            parsedBlockData[newKey] = val[0][0]
+                            break
+                    }
                 }
-
-                let newKey = r.name
-                switch (r.type) {
-                    case 'date':
-                        parsedBlockData[newKey] = val[0][1][0][1].start_date
-                        break
-                    case 'multi_select':
-                        parsedBlockData[newKey] = val[0][0].split(',')
-                        break
-                    case 'file':
-                        parsedBlockData[newKey] = val.filter(item => {
-                            let content = item[1]
-                            return Boolean(content)
-                        }).map(item => {
-                            return item[1][0][1]
-                        })
-                        break
-                    case 'relation':
-                        parsedBlockData[newKey] = val.filter(item => item.length > 1).map(item => item[1][0])
-                        break
-                    default:
-                        parsedBlockData[newKey] = val[0][0]
-                        break
-                }
-
-            }
-        })
-        data.push(parsedBlockData)
+            })
+            data.push(parsedBlockData)
+        }
     })
     // console.log(data)
     return data
