@@ -13,10 +13,10 @@ img {
     width: 100%;
 }
 
-#mydlg > div > div{
-    position:fixed;
+#mydlg>div>div {
+    position: fixed;
     margin: 0 auto;
-    top:100px;
+    top: 100px;
 }
 
 .sticky {
@@ -96,20 +96,26 @@ blockquote {
     }
 }
 
+/* fix notion css*/
+
 [data-block-id] {
     max-width: 100%!important;
 }
 
+* {
+    box-sizing: border-box;
+}
 
 /* moments */
 
-.pswp-thumbnails{
+.pswp-thumbnails {
     display: flex;
     max-width: 400px;
     margin: 0 auto;
     flex-wrap: wrap;
 }
-.pswp-thumbnail{
+
+.pswp-thumbnail {
     padding: 2px;
     max-width: 200px;
     min-width: 100px;
@@ -118,8 +124,8 @@ blockquote {
     /* background: #000000 */
 }
 
-
 /* react-images z-index fix */
-.fullscreen > div{
+
+.fullscreen>div {
     z-index: 1200!important;
 }
