@@ -49,11 +49,11 @@ syncBlogData = async (url) => {
 
             let u
             try {
-                let u = new URL(item.href)
+                u = new URL(item.href)
             } catch (error) {
                 console.log(error)
             }
-
+            
             if (u && u.host === 'www.notion.so') {
                 let hashBlockID = getFullBlockId(item.hash.slice(1))
                 item.href = `#${hashBlockID}`
