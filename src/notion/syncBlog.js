@@ -53,7 +53,7 @@ syncBlogData = async (url) => {
             } catch (error) {
                 console.log(error)
             }
-            
+
             if (u && u.host === 'www.notion.so') {
                 let hashBlockID = getFullBlockId(item.hash.slice(1))
                 item.href = `#${hashBlockID}`
@@ -73,6 +73,12 @@ syncBlogData = async (url) => {
 
         // 文章内容
         let content = document.querySelector('#notion-app > div > div.notion-cursor-listener > div > div > div.notion-page-content')
+
+        // 可编辑内容修改为不可编辑？不清楚出现原因，真是神秘 fixme
+        let contenteditable = content.querySelectorAll("div[contenteditable=true]")
+        contenteditable.forEach(i => {
+            i.setAttribute("contenteditable", false)
+        })
 
         if (content) {
             return {
