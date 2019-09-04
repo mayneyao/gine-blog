@@ -13,6 +13,12 @@ screenshot
 <a href="https://app.netlify.com/start/deploy?repository=https://github.com/mayneyao/gine-blog" target="_blank"><img src="https://www.netlify.com/img/deploy/button.svg" alt="Deploy to Netlify"></a>
 
 
+## 关于新功能&分支&计划
+
++ 我会在 dev-mayne 分支(https://gine.me 部署的分支)上尝试新功能，待功能稳定后并入 master 分支。
++ 计划将 notion 相关的内容，用 notabase 封装，写成 gatsby 插件形式。减少博客仓库的代码。
++ 待上述特性稳定后，可能会考虑推出主题模块，主题代码与主仓库分离。
+
 ## 使用文档
 
 https://gine.me/posts/a788c3e6713e4166a4a8c72a7977b457
@@ -20,3 +26,10 @@ https://gine.me/posts/a788c3e6713e4166a4a8c72a7977b457
 ## 更新日志
 
 参见 [Releases](https://github.com/mayneyao/gine-blog/releases)
+
+## FAQ
+
++ 托管在 Netlify 上的站点访问很慢怎么办？
++ + Netlify 的 CDN 对国内用户并不友好，你可以将域名 DNS 设置为 Cloudflare，cf 的 cdn 勉强够用。（域名备案了的话，可以考虑国内的托管服务）
+
++ 我想要保持更新
