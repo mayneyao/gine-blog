@@ -193,7 +193,7 @@ exports.syncNotionBlogData = async ({ createNode, createNodeId, createContentDig
 }
 
 exports.syncNotionBookData = async ({ createNode, createNodeId, createContentDigest }) => {
-    let url = 'https://www.notion.so/98717bf8ad57434eafd9a65277403c33?v=fa4f00bb9b5b492fb23157f8d5df471f'
+    let url = config.book.url
     let res = await notion.queryCollection(url)
 
     for (let data of res) {
