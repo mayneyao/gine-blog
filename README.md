@@ -30,6 +30,6 @@ https://gine.me/posts/a788c3e6713e4166a4a8c72a7977b457
 ## FAQ
 
 + 托管在 Netlify 上的站点访问很慢怎么办？
-+ + Netlify 的 CDN 对国内用户并不友好，你可以将域名 DNS 设置为 Cloudflare，cf 的 cdn 勉强够用。（域名备案了的话，可以考虑国内的托管服务）
+  + Netlify 的 CDN 对国内用户并不友好，你可以将域名 DNS 设置为 Cloudflare，cf 的 cdn 勉强够用。（域名备案了的话，可以考虑国内的托管服务）
 
-+ 我想要保持更新
+
