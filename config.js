@@ -132,6 +132,27 @@ module.exports = {
             theme_color: `#ffffff`,
             display: `standalone`,
             icon: `src/static/41546411364_.pic.jpg`, // This path is relative to the root of the site.
+        },
+        // 配置参见 gatsby-plugin-offline 插件文档
+        swConf: {
+            runtimeCaching: [
+                {
+                    // Use cacheFirst since these don't need to be revalidated (same RegExp
+                    // and same reason as above)
+                    urlPattern: /(\.js$|\.css$|static\/)/,
+                    handler: `cacheFirst`,
+                },
+                {
+                    // Add runtime caching of various other page resources
+                    urlPattern: /^https?:.*\.(png|jpg|jpeg|webp|svg|gif|tiff|js|woff|woff2|json|css)$/,
+                    handler: `staleWhileRevalidate`,
+                },
+                {
+                    // Google Fonts CSS (doesn't end in .css so we need to specify it)
+                    urlPattern: /^https?:\/\/fonts\.googleapis\.com\/css/,
+                    handler: `staleWhileRevalidate`,
+                },
+            ],
         }
     },
     rss: {
