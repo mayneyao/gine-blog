@@ -29,7 +29,25 @@ copy [this page](https://www.notion.so/share-blog-table-60e00520137944a4a45a437c
 
 the only file you need care is `gatsby-config.js`
 
-change `dbMap` for your own table url
+change `configTable` for your own config table url
+```
+module.exports = {
+    plugins: [
+        {
+            resolve: `gatsby-theme-gine-blog`
+        },
+        {
+            resolve: `gatsby-source-notion-database`,
+            options: {
+                configTable: "https://www.notion.so/65b35da1762e4f259904bb4cc38e54fd?v=89e80623e52e4419a35f20e54056cfb8", // 
+            }
+        }
+    ],
+}
+```
+
+if you dont want to config source from notion table, write config file like this
+
 ```
 module.exports = {
     plugins: [
