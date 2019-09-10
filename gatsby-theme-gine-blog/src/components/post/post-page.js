@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import withRoot from '../../withRoot'
-import Layout from '../layout'
+import Layout from '../layout/index'
 import PostListItem from './post-list-item'
 import Pagination from '../utils/pagination'
 import { graphql } from 'gatsby'
@@ -36,7 +36,7 @@ class Index extends React.Component {
                         />
                     ))}
                     <Pagination totalCount={data.allPosts.totalCount}
-                        pageSize={data.site.siteMetadata.pageSize}
+                        pageSize={data.siteConfig.pageSize}
                         currentPage={currentPage}
                     />
                 </div>
@@ -54,10 +54,8 @@ export default withRoot(withStyles(styles)(Index))
 export const query = graphql`
    query ($skip: Int!, $limit: Int!)
   {
-    site {
-      siteMetadata {
-        pageSize
-    }
+    siteConfig {  
+      pageSize
   }
   allPosts(skip: $skip, limit: $limit,sort: { fields: [public_date], order: DESC }) {
     edges{

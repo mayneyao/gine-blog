@@ -1,22 +1,24 @@
 module.exports = {
     plugins: [
         {
-            resolve: `gatsby-theme-gine-blog`
+            resolve: `gatsby-theme-gine-blog`,
+            options: {
+                configTable: "https://www.notion.so/b4af861710064848aaf9f859c79bb127?v=0de244d6f8414ade9b7b147adcb2f78e"
+            }
         },
         {
             resolve: `gatsby-source-notion-database`,
             options: {
-                dbMap: {
-                    // "posts": "https://www.notion.so/99623ef9630940cdb8524ba355831677?v=8366741ca7dd4b339c19484712e13563",
-                    "links": "https://www.notion.so/0e59694e75ee4357963695d6195ceeb3?v=52e8f7f022f240d8899ae26b83458ee6",
-                    // "books": "https://www.notion.so/e355d54c576c41ea826c4704fde3a7c0?v=3f7d51a5dba040ff9ba02c4b99b07823",
-                    // "aphorisms": "https://www.notion.so/a841201f775e40f7ba931e09520e9da1?v=0ff0a013989e4ce1a475bacd46867726",
-                    // "moments": "https://www.notion.so/735993abd6614abb8b37079f8e08d720?v=dcf03ba9b5694ffda0e5d8ded199b5ea"
-                },
-                settings: {
-                    "posts": "html" // posts 中的 title 对应页面的 html 会被缓存
-                }
+                configTable: "https://www.notion.so/65b35da1762e4f259904bb4cc38e54fd?v=89e80623e52e4419a35f20e54056cfb8"
             }
-        }
+        },
+        // {
+        //     resolve: `gatsby-source-notion-database`,
+        //     options: {
+        //         dbMap: {
+        //             'config': "https://www.notion.so/b4af861710064848aaf9f859c79bb127?v=0de244d6f8414ade9b7b147adcb2f78e"
+        //         }
+        //     }
+        // },
     ],
 }

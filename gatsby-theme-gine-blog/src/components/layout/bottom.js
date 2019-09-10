@@ -1,10 +1,9 @@
 import React from 'react'
 import LoveIcon from '@material-ui/icons/Favorite'
 import CopyrightIcon from '@material-ui/icons/Copyright'
-import ULink from './utils/link-without-underline'
+import ULink from '../utils/link-without-underline'
 import axios from 'axios'
 import Typography from '@material-ui/core/Typography';
-import config from '../../config'
 import _ from 'lodash'
 
 function isChineseChar(str) {
@@ -57,7 +56,7 @@ class Aphorisms extends React.Component {
 }
 
 
-export default () => (
+export default (props) => (
     <div style={{ margin: `1em 0 auto auto`, textAlign: 'center', paddingBottom: '1em' }}>
         <Typography variant="subtitle1">
             Build with <ULink href="https://www.gatsbyjs.org" text="gatsby" />,
@@ -69,9 +68,8 @@ export default () => (
 
             <span style={{ display: 'block' }}>
                 Copyright 2019 <CopyrightIcon style={{ fontSize: '0.9em' }} /> <ULink
-                    href={`https://github.com/${config.blogMeta.me.github}`} text={config.blogMeta.name} /> Powered by <ULink href="https://github.com/mayneyao/gine-blog" text="gine-blog" />
-            </span>
-
+                    href={props.siteConfig.copyrightUrl} text={props.siteConfig.copyrightName} /> Powered by <ULink href="https://github.com/mayneyao/gine-blog" text="gine-blog" />
+            </span>                  
         </Typography>
 
     </div>

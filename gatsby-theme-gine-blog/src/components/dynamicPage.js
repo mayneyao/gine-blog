@@ -2,7 +2,7 @@ import React from 'react'
 import { withStyles } from '@material-ui/core/styles'
 import axios from 'axios'
 import withRoot from '../withRoot'
-import Layout from '../components/layout'
+import Layout from './layout/index'
 import LinearProgress from '@material-ui/core/LinearProgress'
 
 const styles = theme => ({

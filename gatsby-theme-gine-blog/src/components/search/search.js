@@ -11,7 +11,6 @@ import CloseIcon from '@material-ui/icons/Cancel';
 import IconButton from '@material-ui/core/IconButton';
 import { withStyles } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import config from '../../../config'
 import notion from '../../notion/api'
 
 

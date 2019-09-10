@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import withRoot from '../withRoot'
-import Layout from '../components/layout'
+import Layout from '../components/layout/index'
 import { Link } from 'gatsby'
 import { graphql } from 'gatsby'
 import Typography from '@material-ui/core/Typography'
@@ -49,7 +49,7 @@ class Tags extends React.Component {
                                                     borderLeft: '2px solid #999',
                                                     padding: '5px 0 5px 1em'
                                                 }}>
-                                                    <Typography variant="h6">{`${month}-${day} `}<Link to={post.slug}>{post.name}</Link></Typography>
+                                                    <Typography variant="h6">{`${month}-${day} `}<Link to={`posts/${post.slug}`}>{post.name}</Link></Typography>
                                                 </li>
 
                                             })

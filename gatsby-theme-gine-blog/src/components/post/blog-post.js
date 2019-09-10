@@ -8,7 +8,6 @@ import ColorfulTag from '../utils/hash-colorful-tag'
 import getImageByName from '../utils/notion-hash-image'
 import Disqus from 'disqus-react'
 import { Helmet } from "react-helmet"
-import config from '../../../config'
 import { parseImageUrl } from 'notabase/src/utils'
 import 'prismjs/themes/prism-tomorrow.css'
 import 'prismjs/plugins/line-numbers/prism-line-numbers.css'
@@ -26,8 +25,9 @@ class BlogPost extends React.Component {
 
     componentDidMount() {
         const { data } = this.props
+        // console.log(data)
         const post = data.posts
-        const { disqusShortname } = config.comment.disqus;
+        const disqusShortname = data.siteConfig.commentDisqusShortname
         const disqusConfig = {
             url: window.location.href,
             identifier: window.location.pathname,
@@ -54,6 +54,7 @@ class BlogPost extends React.Component {
 
     render() {
         const { data } = this.props
+        let siteConfig = data.siteConfig
         const { public_date,
             name,
             tags,
@@ -73,6 +74,7 @@ class BlogPost extends React.Component {
             coverImageUrl = getImageByName(slug)
         }
         return (
+
             <div>
                 <ScrollProgress />
                 <Layout navStyle={{ background: 'rgba(0,0,0,.05)' }} wrapStyle={{ marginTop: 0 }}>
@@ -82,7 +84,7 @@ class BlogPost extends React.Component {
                         objectFit: 'cover',
                         zIndex: 1
                     }} src={coverImageUrl} />
-                    <Helmet defaultTitle={`${config.blogMeta.title} - ${name}`}>
+                    <Helmet defaultTitle={`${siteConfig.title} - ${name}`}>
                         <meta name="description" content={`${seoKeywords} ${name} mayne gine 博客 python react`} />
                     </Helmet>
                     <main style={{
@@ -117,7 +119,7 @@ class BlogPost extends React.Component {
                             <h1>{name}</h1>
                             <div dangerouslySetInnerHTML={{ __html: html }} />
                             {
-                                (config.comment.open && disqusShortname && disqusConfig) && <Disqus.DiscussionEmbed shortname={disqusShortname} config={disqusConfig} />
+                                (data.siteConfig.commentOpen && disqusShortname && disqusConfig) && <Disqus.DiscussionEmbed shortname={disqusShortname} config={disqusConfig} />
                             }
 
                         </Paper>
@@ -132,7 +134,13 @@ class BlogPost extends React.Component {
 export default withRoot(BlogPost)
 
 export const query = graphql`
+
   query($slug: String!) {
+    siteConfig {  
+        title
+        commentDisqusShortname
+        commentOpen
+    }
     posts(slug: { eq: $slug } ) {
         public_date
         name

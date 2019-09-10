@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles'
 import withRoot from '../withRoot'
-import Layout from '../components/layout'
+import Layout from '../components/layout/index'
 
 
 const styles = theme => ({

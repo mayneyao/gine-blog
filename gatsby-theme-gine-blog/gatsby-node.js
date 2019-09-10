@@ -1,9 +1,75 @@
-const fs = require("fs")
-const config = require('./config')
 
-// exports.sourceNodes = async ({ actions, createNodeId, createContentDigest }) => {
-//     const { createNode } = actions;
-// }
+const Notabase = require("notabase")
+const { parseImageUrl } = require("notabase/src/utils")
+const download = require('image-downloader')
+
+const getConfigFromNotion = async (url) => {
+    let nb = new Notabase()
+
+    let siteConfig = {}
+    const config = await nb.fetch(url)
+    await Promise.all(config.rows.map(async item => {
+        // proxy cant work 
+        // const { Name, Type, Value, Image } = item
+        switch (item.Type) {
+            case 'text':
+                siteConfig[item.Name] = item.Value
+                break
+            case 'number':
+                siteConfig[item.Name] = parseInt(item.Value)
+                break
+            case 'bool':
+                siteConfig[item.Name] = Boolean(item.Value)
+                break
+            case 'image':
+                if (item.Image) {
+                    let options = {
+                        url: parseImageUrl(item.Image),
+                    }
+                    if (Name === "avatar") {
+                        options.dest = `src/static/avatar.jpg`
+                    } else if (Name === "icon") {
+                        options.dest = `src/static/favicon.ico`
+                    }
+                    await download.image(options)
+                    siteConfig[item.Name] = options.dest
+                }
+                break
+        }
+    }))
+    return siteConfig
+
+}
+
+
+exports.sourceNodes = async ({ actions, createNodeId, createContentDigest }, options) => {
+    const { createNode } = actions;
+    const { configTable, ...rawOptions } = options
+
+    let siteConfig = {}
+    if (configTable) {
+        siteConfig = await getConfigFromNotion(configTable)
+    }
+    siteConfig = { ...siteConfig, ...rawOptions }
+
+
+    // create site config node
+    const nodeContent = JSON.stringify(siteConfig)
+    const nodeMeta = {
+        id: createNodeId(nodeContent),
+        parent: null,
+        children: [],
+        internal: {
+            type: `SiteConfig`,
+            mediaType: `text/html`,
+            content: nodeContent,
+            contentDigest: createContentDigest(siteConfig)
+        }
+    }
+
+    const node = Object.assign({}, siteConfig, nodeMeta)
+    createNode(node)
+}
 
 
 // exports.onCreateNode = ({ node, getNode, actions }) => {
@@ -12,25 +78,25 @@ const config = require('./config')
 
 exports.createPages = ({ graphql, actions }) => {
 
-    // google adsense 校验
-    if (config.google_ad_client.open) {
-        const ad_txt = `google.com, ${config.google_ad_client.clientId}, DIRECT, f08c47fec0942fa0`
-        fs.writeFile('public/ads.txt', ad_txt, function (err) {
-            if (err) {
-                console.error(err)
-            }
-        })
-    }
-    // netlify 域名重定向
-    if (config.seo.open) {
-        // 如果站点是部署在 netlify上，开启此选项可以优化seo结果
-        const _redirects = `${config.seo.netlifyUrl}/* ${config.seo.siteUrl}/:splat 301!`
-        fs.writeFile('public/_redirects', _redirects, function (err) {
-            if (err) {
-                console.error(err)
-            }
-        })
-    }
+    // // google adsense 校验
+    // if (config.google_ad_client.open) {
+    //     const ad_txt = `google.com, ${config.google_ad_client.clientId}, DIRECT, f08c47fec0942fa0`
+    //     fs.writeFile('public/ads.txt', ad_txt, function (err) {
+    //         if (err) {
+    //             console.error(err)
+    //         }
+    //     })
+    // }
+    // // netlify 域名重定向
+    // if (config.seo.open) {
+    //     // 如果站点是部署在 netlify上，开启此选项可以优化seo结果
+    //     const _redirects = `${config.seo.netlifyUrl}/* ${config.seo.siteUrl}/:splat 301!`
+    //     fs.writeFile('public/_redirects', _redirects, function (err) {
+    //         if (err) {
+    //             console.error(err)
+    //         }
+    //     })
+    // }
 
     // **Note:** The graphql function call returns a Promise
     // see: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise for more info
@@ -38,10 +104,8 @@ exports.createPages = ({ graphql, actions }) => {
 
     return graphql(`
     {
-      site{
-        siteMetadata {
-          pageSize
-        }
+      siteConfig {
+        pageSize
       }
       allPosts {
         totalCount
@@ -55,7 +119,8 @@ exports.createPages = ({ graphql, actions }) => {
       }
     }`).then(result => {
 
-        const { pageSize } = result.data.site.siteMetadata
+        console.log(result)
+        const { pageSize } = result.data.siteConfig
 
         // 创建主页
         createPage({

@@ -15,8 +15,7 @@ import FriendIcon from '@material-ui/icons/People'
 
 import CardMedia from '@material-ui/core/CardMedia'
 import { Link } from 'gatsby'
-
-import config from '../../config'
+import avatar from '../../static/avatar.jpg'
 
 
 function ListItemLink(props) {
@@ -37,8 +36,7 @@ const styles = theme => ({
 const MyLink = props => <Link {...props} />
 
 function SimpleList(props) {
-    let avatar = require(`../static/${config.blogMeta.avatar}`)
-    const { classes } = props
+    const { classes, aboutPostSlug } = props
 
     return (
         <div className={classes.root}>
@@ -77,7 +75,7 @@ function SimpleList(props) {
                     </ListItem>
                 </MyLink>
 
-                <MyLink to={`posts/${config.blogMeta.aboutPostSlug}/`}>
+                <MyLink to={`posts/${aboutPostSlug}`}>
                     <ListItem button>
                         <ListItemIcon>
                             <AboutIcon style={{ color: '#ffc107' }} />
@@ -112,3 +110,10 @@ SimpleList.propTypes = {
 }
 
 export default withStyles(styles)(SimpleList)
+export const query = graphql`
+  query {
+    siteConfig {  
+        aboutPostSlug
+    }
+  }
+`

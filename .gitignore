@@ -1,6 +1,7 @@
 # IDE
 .idea
 # blog content
+.notion/
 # content
 
 # Logs

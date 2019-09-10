@@ -11,7 +11,6 @@ import Layout from '../layout'
 import TrackCard from './TrackCard'
 import max from 'lodash/max'
 import CircularProgress from '@material-ui/core/CircularProgress';
-import config from '../../../config'
 
 export default class extends React.Component {
     constructor(props) {

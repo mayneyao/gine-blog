@@ -1,7 +1,7 @@
 import React from 'react'
-import LinkCard from '../components/LinkCard'
+import LinkCard from '../components/link/LinkCard'
 import { graphql } from "gatsby"
-import Layout from '../components/layout'
+import Layout from '../components/layout/index'
 import withRoot from '../withRoot'
 
 class AllLink extends React.Component {
