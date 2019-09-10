@@ -2,7 +2,21 @@
 
 
 
-## Get Started
+## Quik Start
+
+<a href="https://app.netlify.com/start/deploy?repository=https://github.com/mayneyao/gatsby-starter-gine-blog" target="_blank"><img src="https://www.netlify.com/img/deploy/button.svg" alt="Deploy to Netlify"></a>
+
+
+You will get a free site, a repository called `gatsby-starter-gine-blog` will be created (by netlify) under your github account. Just modify two lines in gatsby-config.js to complete the configuration.
+
+Clone [this page](https://www.notion.so/share-blog-table-60e00520137944a4a45a437c7d089488) into your own notion. There are some tables in the page, there are 2 configuration tables. One is the site configuration and the other is the data source configuration. Replace the url of the configuration table in gatsby-config.js with your own.
+
+
++ SiteConfig - UI -  `gatsby-theme-gine-blog`     
++ SourceConfig - Data -  `gatsby-source-notion-database` 
+    
+
+## Develop & Run
 
 
 1. install gatsby-cli
@@ -25,24 +39,13 @@ yarn develop
 
 ## Config
 
-copy [this page](https://www.notion.so/share-blog-table-60e00520137944a4a45a437c7d089488) to your own notion's workspace
-
-the only file you need care is `gatsby-config.js`
-
-change `configTable` for your own
-
-+ site config - UI -  `gatsby-theme-gine-blog` 
-    
-+ source config - Data -  `gatsby-source-notion-database` 
-    
-
 ```
 module.exports = {
     plugins: [
         {
             resolve: `gatsby-theme-gine-blog`,
             options: {
-                configTable: "https://www.notion.so/b4af861710064848aaf9f859c79bb127?v=0de244d6f8414ade9b7b147adcb2f78e", 
+                configTable: "https://www.notion.so/b4af861710064848aaf9f859c79bb127?v=0de244d6f8414ade9b7b147adcb2f78e", // change this url to yourself
             }
         },
         {
@@ -55,7 +58,7 @@ module.exports = {
 }
 ```
 
-if you dont want to config source from notion table, write config file like this
+if you dont want to config from notion table, write config file like this
 
 ```
 module.exports = {
@@ -63,7 +66,8 @@ module.exports = {
         {
             resolve: `gatsby-theme-gine-blog`,
             options: {
-                title: "your site title"
+                title: "your site title",
+                ...otherConfig // find in SiteConfig table
             }
         },
         {
