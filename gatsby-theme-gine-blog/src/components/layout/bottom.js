@@ -69,7 +69,7 @@ export default (props) => (
             <span style={{ display: 'block' }}>
                 Copyright 2019 <CopyrightIcon style={{ fontSize: '0.9em' }} /> <ULink
                     href={props.siteConfig.copyrightUrl} text={props.siteConfig.copyrightName} /> Powered by <ULink href="https://github.com/mayneyao/gine-blog" text="gine-blog" />
-            </span>                  
+            </span>
         </Typography>
 
     </div>
