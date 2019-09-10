@@ -23,16 +23,19 @@ const getConfigFromNotion = async (url) => {
                 break
             case 'image':
                 if (item.Image) {
+                    // console.log(item.Image)
                     let options = {
-                        url: parseImageUrl(item.Image),
+                        url: parseImageUrl(item.Image[0]),
                     }
-                    if (Name === "avatar") {
-                        options.dest = `src/static/avatar.jpg`
-                    } else if (Name === "icon") {
-                        options.dest = `src/static/favicon.ico`
+                    let path
+                    if (item.Name === "avatar") {
+                        path = `src/static/avatar.jpg`
+                    } else if (item.Name === "icon") {
+                        path = `src/static/favicon.ico`
                     }
+                    options.dest = require.resolve(`./${path}`)
                     await download.image(options)
-                    siteConfig[item.Name] = options.dest
+                    siteConfig[item.Name] = path
                 }
                 break
         }
