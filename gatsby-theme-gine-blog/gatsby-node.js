@@ -110,7 +110,7 @@ exports.createPages = ({ graphql, actions }) => {
       siteConfig {
         pageSize
       }
-      allPosts {
+      allPosts(filter: {status: {eq: "published"}}) {
         totalCount
         edges {
           node {
@@ -164,9 +164,10 @@ exports.createPages = ({ graphql, actions }) => {
             })
         })
         // 创建tag详情页
+
         let allTags = new Set()
         edges.forEach(({ node }) => {
-            node.tags.map(tag => allTags.add(tag))
+            node.tags && node.tags instanceof Array && node.tags.map(tag => tag && allTags.add(tag))
         })
 
         Array.from(allTags).map(tag => {

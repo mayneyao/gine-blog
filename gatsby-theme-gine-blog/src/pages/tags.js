@@ -53,7 +53,7 @@ export default withRoot(withStyles(styles)(Tags))
 
 export const query = graphql`
   {
-    allPosts{
+    allPosts(filter:{status: {eq: "published"}}){
     edges {
       node {
         tags

@@ -114,10 +114,10 @@ function MediaControlCard(props) {
                             {`${comment}`}
                         </DialogContentText>
                         {
-                            Boolean(postsInfo.length) && <h3>相关文章</h3>
+                            postsInfo && Boolean(postsInfo.length) && <h3>相关文章</h3>
                         }
                         {
-                            postsInfo.map(item => <Link to={`posts/${item.slug}`}><div>{item.name}</div></Link>)
+                            postsInfo && postsInfo.map(item => <Link to={`posts/${item.slug}`}><div>{item.name}</div></Link>)
                         }
                     </DialogContent>
                 </Dialog>

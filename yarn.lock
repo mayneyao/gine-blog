@@ -5252,7 +5252,7 @@ gatsby-telemetry@^1.1.22:
     uuid "3.3.3"
 
 "gatsby-theme-gine-blog@link:gatsby-theme-gine-blog":
-  version "0.4.6"
+  version "0.4.8"
   dependencies:
     "@antv/g2" "^3.4.10"
     "@material-ui/core" "3.9.0"
@@ -5272,6 +5272,7 @@ gatsby-telemetry@^1.1.22:
     gatsby-plugin-react-helmet "^3.0.5"
     gatsby-plugin-sitemap "^2.0.4"
     gatsby-source-notion-database "^0.4.5"
+    image-downloader "^3.5.0"
     jss latest
     katex "^0.10.2"
     lodash "^4.17.13"

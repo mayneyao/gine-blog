@@ -75,7 +75,7 @@ export default withRoot(withStyles(styles)(Tags))
 
 export const query = graphql`
 {
-    allPosts(sort: {fields: [public_date], order: DESC}) {
+    allPosts(sort: {fields: [public_date], order: DESC},filter: {status: {eq: "published"}}) {
     edges {
       node {
         id

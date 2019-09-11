@@ -57,7 +57,7 @@ export const query = graphql`
     siteConfig {  
       pageSize
   }
-  allPosts(skip: $skip, limit: $limit,sort: { fields: [public_date], order: DESC }) {
+  allPosts(skip: $skip, limit: $limit,sort: { fields: [public_date], order: DESC },filter: {status: {eq: "published"}}) {
     edges{
       node{
         id
