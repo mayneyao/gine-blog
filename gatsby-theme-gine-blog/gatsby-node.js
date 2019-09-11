@@ -19,7 +19,7 @@ const getConfigFromNotion = async (url) => {
                 siteConfig[item.Name] = parseInt(item.Value)
                 break
             case 'bool':
-                siteConfig[item.Name] = Boolean(item.Value)
+                siteConfig[item.Name] = Boolean(item.Value) && item.Value === "1"
                 break
             case 'image':
                 if (item.Image) {
