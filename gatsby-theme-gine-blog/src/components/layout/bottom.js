@@ -36,7 +36,7 @@ const Aphorisms = (props) => {
 
 export default (props) => (
     <div style={{ margin: `1em 0 auto auto`, textAlign: 'center', paddingBottom: '1em' }}>
-        <Aphorisms data={props.allAphorisms} />
+        {props.siteConfig.aphorismsOpen && <Aphorisms data={props.allAphorisms} />}
         <Typography variant="subtitle1">
             Build with <ULink href="https://www.gatsbyjs.org" text="gatsby" />,
         <ULink href="https://reactjs.org" text="react" />,
