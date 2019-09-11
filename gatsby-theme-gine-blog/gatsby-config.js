@@ -7,8 +7,5 @@ module.exports = {
                 cachePublic: true
             }
         },
-        {
-            resolve: `gatsby-source-notion-database`,
-        }
     ]
 }

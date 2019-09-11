@@ -102,6 +102,15 @@ class Layout extends React.Component {
                   commentOpen
                   commentDisqusShortname
                   aboutPostSlug
+                  momentsOpen
+                  booksOpen
+              }
+              allAphorisms {
+                nodes {
+                  person
+                  source
+                  content
+                }
               }
           }`}
                 render={data => (
@@ -141,7 +150,7 @@ class Layout extends React.Component {
                                 onClick={this.toggleDrawer(false)}
                                 onKeyDown={this.toggleDrawer(false)}
                             >
-                                <NavList aboutPostSlug={data.siteConfig.aboutPostSlug} />
+                                <NavList siteConfig={data.siteConfig} />
                             </div>
                         </SwipeableDrawer>
                         {/* <AppBar position="sticky">
@@ -172,7 +181,7 @@ class Layout extends React.Component {
                             {this.props.children}
                         </div>
 
-                        <Bottom siteConfig={data.siteConfig} />
+                        <Bottom siteConfig={data.siteConfig} allAphorisms={data.allAphorisms.nodes} />
                     </div>
                 )}
             />

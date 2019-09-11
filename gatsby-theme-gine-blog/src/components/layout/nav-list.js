@@ -12,6 +12,8 @@ import BookListIcon from '@material-ui/icons/LibraryBooks'
 import ArchiveIcon from '@material-ui/icons/Archive'
 import MusicIcon from '@material-ui/icons/Headset'
 import FriendIcon from '@material-ui/icons/People'
+import MomentIcon from '@material-ui/icons/Camera'
+import PaletteIcon from '@material-ui/icons/Palette'
 
 import CardMedia from '@material-ui/core/CardMedia'
 import { Link } from 'gatsby'
@@ -36,8 +38,7 @@ const styles = theme => ({
 const MyLink = props => <Link {...props} />
 
 function SimpleList(props) {
-    const { classes, aboutPostSlug } = props
-
+    const { classes, siteConfig: { aboutPostSlug, momentsOpen, booksOpen } } = props
     return (
         <div className={classes.root}>
             <MyLink to={'/'}>
@@ -83,14 +84,58 @@ function SimpleList(props) {
                         <ListItemText primary="关于" />
                     </ListItem>
                 </MyLink>
-                <MyLink to={'books'}>
-                    <ListItem button>
-                        <ListItemIcon>
-                            <BookListIcon style={{ color: '#607d8b' }} />
-                        </ListItemIcon>
-                        <ListItemText primary="书单" />
-                    </ListItem>
-                </MyLink>
+                {
+                    momentsOpen && <MyLink to={'moments'}>
+                        <ListItem button>
+                            <ListItemIcon>
+                                <MomentIcon style={{ color: '#4a148c' }} />
+                            </ListItemIcon>
+                            <ListItemText primary="动态" />
+                        </ListItem>
+                    </MyLink>
+                }
+                {
+                    booksOpen && <MyLink to={'books'}>
+                        <ListItem button>
+                            <ListItemIcon>
+                                <BookListIcon style={{ color: '#607d8b' }} />
+                            </ListItemIcon>
+                            <ListItemText primary="书单" />
+                        </ListItem>
+                    </MyLink>
+                }
+
+                {/* {
+                    config.music.open && <MyLink to={'music'}>
+                        <ListItem button>
+                            <ListItemIcon>
+                                <MusicIcon style={{ color: '#00bfa5' }} />
+                            </ListItemIcon>
+                            <ListItemText primary="音乐" />
+                        </ListItem>
+                    </MyLink>
+                } */}
+
+                {/* {
+                    config.bangumi.open && <MyLink to={'bangumi'}>
+                        <ListItem button>
+                            <ListItemIcon>
+                                <SubscriptionsIcon style={{ color: '#af52bf' }} />
+                            </ListItemIcon>
+                            <ListItemText primary="番剧" />
+                        </ListItem>
+                    </MyLink>
+                } */}
+                {/* {
+                    config.draw.open && <MyLink to={'v2draw'}>
+                        <ListItem button>
+                            <ListItemIcon>
+                                <PaletteIcon style={{ color: '#00bcd4' }} />
+                            </ListItemIcon>
+                            <ListItemText primary="绘画" />
+                        </ListItem>
+                    </MyLink>
+                } */}
                 <MyLink to={'links'}>
                     <ListItem button>
                         <ListItemIcon>
@@ -110,10 +155,3 @@ SimpleList.propTypes = {
 }
 
 export default withStyles(styles)(SimpleList)
-export const query = graphql`
-  query {
-    siteConfig {  
-        aboutPostSlug
-    }
-  }
-`

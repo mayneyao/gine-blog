@@ -1,10 +1,10 @@
 import React from 'react';
 import Carousel, { Modal, ModalGateway } from 'react-images';
-import { parseImageUrl } from '../../notion/api'
+import { parseImageUrl } from 'notabase/src/utils'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import Card from '@material-ui/core/Card';
-import Music from './music'
+import MomentMusicCard from './music'
 
 dayjs.extend(relativeTime)
 
@@ -44,7 +44,7 @@ class Moment extends React.Component {
       }
     }
     return (
-      <div style={{ margin: '0 auto', maxWidth: 400, marginTop: '10px' }}>
+      <div style={{ margin: '0 auto', maxWidth: 400, marginTop: '10px' }} >
         <Card style={{
           minWidth: 400,
           padding: '1em'
@@ -61,7 +61,9 @@ class Moment extends React.Component {
             {plink && <a href={link} target="_blank">{plink}</a>}
           </div>
           <div>
-            <Music type={type} link={link} />
+            {
+              type === 'music' && <MomentMusicCard link={link} />
+            }
           </div>
           <div style={{
             display: 'flex',
@@ -69,7 +71,7 @@ class Moment extends React.Component {
             justifyContent: 'start'
           }}>
             {
-              parseImages.map((item, index) => <div style={{ width: 120, overflow: 'hidden', maxHeight: 100, padding: 5 }}>
+              parseImages.map((item, index) => <div style={{ width: 120, overflow: 'hidden', maxHeight: 100, padding: 5 }} key={item.src}>
                 <img
                   src={parseImageUrl(item.src, 120)}
                   onClick={() => this.handleImageClick(index)}

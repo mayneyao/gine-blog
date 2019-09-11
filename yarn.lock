@@ -5212,20 +5212,12 @@ gatsby-react-router-scroll@^2.1.7:
     scroll-behavior "^0.9.10"
     warning "^3.0.0"
 
-gatsby-source-notion-database@^0.4.2:
-  version "0.4.2"
-  resolved "https://registry.npmjs.org/gatsby-source-notion-database/-/gatsby-source-notion-database-0.4.2.tgz#6b195d989e7bf75b2ae16191f707c8e72668b15c"
-  integrity sha512-DrgxQDYHBSApoAW96stgTqs2k52ZWgsJgKDIgcfrR+cZ7x8wVCqWmxqKt1Ar9bE7+t65ki0exW6DSfgcQTRpng==
+gatsby-source-notion-database@^0.5.7:
+  version "0.5.7"
+  resolved "https://registry.npmjs.org/gatsby-source-notion-database/-/gatsby-source-notion-database-0.5.7.tgz#f7b5af0e212f70101a22846ae748f8cf5455e872"
+  integrity sha512-XG99OadL0RJgzVDbvcyfrBlZWMewgehKh2q9u+4tEh8aVYIEYixTry949xadH5MUhI34iEoV/1KuPMbVeW18vw==
   dependencies:
-    notabase "^0.6.5"
-    puppeteer "^1.19.0"
-
-gatsby-source-notion-database@^0.4.5:
-  version "0.4.5"
-  resolved "https://registry.npmjs.org/gatsby-source-notion-database/-/gatsby-source-notion-database-0.4.5.tgz#3d0039f40d8b05ab73d9d5c22c0d9b8b33000616"
-  integrity sha512-l1N5+Jp+FgSbSzQTWaIYy+1PCFuky9q0Mba2JqiIOxTJUmYoDJJykB1Y1X6PldtsdOvqO2anVly/bb7BSh6o2Q==
-  dependencies:
-    notabase "^0.6.5"
+    notabase "^0.6.9"
     puppeteer "^1.19.0"
 
 gatsby-telemetry@^1.1.22:
@@ -5252,7 +5244,7 @@ gatsby-telemetry@^1.1.22:
     uuid "3.3.3"
 
 "gatsby-theme-gine-blog@link:gatsby-theme-gine-blog":
-  version "0.4.8"
+  version "0.5.0"
   dependencies:
     "@antv/g2" "^3.4.10"
     "@material-ui/core" "3.9.0"
@@ -5271,7 +5263,6 @@ gatsby-telemetry@^1.1.22:
     gatsby-plugin-offline "^2.0.21"
     gatsby-plugin-react-helmet "^3.0.5"
     gatsby-plugin-sitemap "^2.0.4"
-    gatsby-source-notion-database "^0.4.5"
     image-downloader "^3.5.0"
     jss latest
     katex "^0.10.2"
@@ -8222,19 +8213,19 @@ normalize-url@^3.0.0, normalize-url@^3.3.0:
   resolved "https://registry.npmjs.org/normalize-url/-/normalize-url-3.3.0.tgz#b2e1c4dc4f7c6d57743df733a4f5978d18650559"
   integrity sha512-U+JJi7duF1o+u2pynbp2zXDW2/PADgC30f0GsHZtRh+HOcXHnw137TrNlyxxRvWW5fjKd3bcLHPxofWuCjaeZg==
 
-notabase@^0.6.5:
-  version "0.6.6"
-  resolved "https://registry.npmjs.org/notabase/-/notabase-0.6.6.tgz#75ad43fc9cbbc1587e63cebcf06d8453f6bba2c4"
-  integrity sha512-wilfwKMbLDIvBjlgCuvr9VH78cxUPWRPSUK03QCLS8iBjT4KIxSY7JJzxY8a+9ZugWLeyWksL9UgFkyovOTfNg==
+notabase@^0.6.8:
+  version "0.6.8"
+  resolved "https://registry.npmjs.org/notabase/-/notabase-0.6.8.tgz#14f042cadc47a3614e857237b524e1eaf87eb16a"
+  integrity sha512-jjRPikx6IaHHmpP0ZHoF1syCN1Z62eBDbg7RZHfwEkzWY/fPNiTQjUB0xH4uiOpSIDQdNy3hXvBJUz5jnan9ww==
   dependencies:
     axios "^0.19.0"
     dayjs "^1.8.15"
     node-fetch "^2.6.0"
 
-notabase@^0.6.8:
-  version "0.6.8"
-  resolved "https://registry.npmjs.org/notabase/-/notabase-0.6.8.tgz#14f042cadc47a3614e857237b524e1eaf87eb16a"
-  integrity sha512-jjRPikx6IaHHmpP0ZHoF1syCN1Z62eBDbg7RZHfwEkzWY/fPNiTQjUB0xH4uiOpSIDQdNy3hXvBJUz5jnan9ww==
+notabase@^0.6.9:
+  version "0.6.9"
+  resolved "https://registry.npmjs.org/notabase/-/notabase-0.6.9.tgz#5b6020b89fc9a49f42f15de5e7260974169976fc"
+  integrity sha512-RYP3ZYMZjXpRmsYFfMQQ4HWTJmhPXTa5ZxL96WnjJwGLFsOxJaVY46+I4/pI9aOr3P23TY4tJ+QkBDCrcG/oBA==
   dependencies:
     axios "^0.19.0"
     dayjs "^1.8.15"

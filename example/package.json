@@ -10,7 +10,7 @@
     },
     "dependencies": {
         "gatsby": "^2.15.11",
-        "gatsby-source-notion-database": "^0.4.2",
+        "gatsby-source-notion-database": "^0.5.7",
         "gatsby-theme-gine-blog": "link:/Users/mayne/workspace/gine-blog/gatsby-theme-gine-blog",
         "react": "^16.9.0",
         "react-dom": "^16.9.0"

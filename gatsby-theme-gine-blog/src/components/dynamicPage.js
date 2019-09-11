@@ -1,6 +1,6 @@
 import React from 'react'
 import { withStyles } from '@material-ui/core/styles'
-import axios from 'axios'
+import Notabase from 'notabase'
 import withRoot from '../withRoot'
 import Layout from './layout/index'
 import LinearProgress from '@material-ui/core/LinearProgress'
@@ -14,6 +14,7 @@ const styles = theme => ({
 })
 
 
+
 class ImageGallery extends React.Component {
     constructor(props) {
         super(props)
@@ -25,15 +26,21 @@ class ImageGallery extends React.Component {
 
     componentDidMount() {
         const { url } = this.props
-        let _url = url
+        let _url
         if (process.env.NODE_ENV === 'development') {
-            _url = `http://127.0.0.1:9000/${url}`
+            _url = `http://127.0.0.1:9000/.netlify/functions/notion`
         } else {
-            _url = `/.netlify/functions/${url}`
+            _url = `/.netlify/functions/notion`
         }
-        axios.get(_url).then(res => {
+        let nb = new Notabase({
+            proxy: {
+                url: _url
+            }
+        })
+        
+        nb.fetch(url).then(res => {
             this.setState({
-                data: res.data,
+                data: res.rows,
                 loading: false
             })
         })

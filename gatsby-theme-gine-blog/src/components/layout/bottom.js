@@ -2,7 +2,6 @@ import React from 'react'
 import LoveIcon from '@material-ui/icons/Favorite'
 import CopyrightIcon from '@material-ui/icons/Copyright'
 import ULink from '../utils/link-without-underline'
-import axios from 'axios'
 import Typography from '@material-ui/core/Typography';
 import _ from 'lodash'
 
@@ -11,53 +10,33 @@ function isChineseChar(str) {
     return reg.test(str);
 }
 
-
-
 const WIKI = (props) => <a href={`https://${props.lang}.wikipedia.org/wiki/${props.title}`} target='__blank'>{props.title}</a>
 
-class Aphorisms extends React.Component {
+const Aphorisms = (props) => {
+    const { data } = props
+    const { person, content, source } = data ? data[_.random(data.length - 1)] : {}
 
-    constructor() {
-        super()
-        this.state = {
-            person: '',
-            content: '',
-            source: ''
-        }
-    }
-
-    componentDidMount() {
-        const url = '/static/aphorisms.json'
-        axios.get(url).then(res => {
-            this.setState({
-                data: res.data
-            })
-        })
-    }
-    render() {
-        const { data } = this.state
-        const { person, content, source } = data ? data[_.random(data.length - 1)] : {}
-
-        const getRender = (person, content, source) => {
-            if (person && content && source) {
-                let personLang = isChineseChar(person) ? 'zh' : 'en'
-                let sourceLang = isChineseChar(source) ? 'zh' : 'en'
-                return <div>
-                    {content} —— <WIKI lang={personLang} title={person} /> 《<WIKI lang={sourceLang} title={source} />》
+    const getRender = (person, content, source) => {
+        if (content && source) {
+            let personLang = isChineseChar(person) ? 'zh' : 'en'
+            let sourceLang = isChineseChar(source) ? 'zh' : 'en'
+            return <div>
+                {content} —— {!!person && <WIKI lang={personLang} title={person} />} 《<WIKI lang={sourceLang} title={source} />》
                 </div>
-            }
         }
-        return <Typography variant="subtitle1">
-            {
-                getRender(person, content, source)
-            }
-        </Typography>
     }
+    return <Typography variant="subtitle1">
+        {
+            getRender(person, content, source)
+        }
+    </Typography>
+
 }
 
 
 export default (props) => (
     <div style={{ margin: `1em 0 auto auto`, textAlign: 'center', paddingBottom: '1em' }}>
+        <Aphorisms data={props.allAphorisms} />
         <Typography variant="subtitle1">
             Build with <ULink href="https://www.gatsbyjs.org" text="gatsby" />,
         <ULink href="https://reactjs.org" text="react" />,
