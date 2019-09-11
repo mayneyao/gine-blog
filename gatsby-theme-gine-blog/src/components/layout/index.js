@@ -104,6 +104,7 @@ class Layout extends React.Component {
                   aboutPostSlug
                   momentsOpen
                   booksOpen
+                  aphorismsOpen
               }
               allAphorisms {
                 nodes {

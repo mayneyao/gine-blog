@@ -5212,10 +5212,10 @@ gatsby-react-router-scroll@^2.1.7:
     scroll-behavior "^0.9.10"
     warning "^3.0.0"
 
-gatsby-source-notion-database@^0.5.7:
-  version "0.5.7"
-  resolved "https://registry.npmjs.org/gatsby-source-notion-database/-/gatsby-source-notion-database-0.5.7.tgz#f7b5af0e212f70101a22846ae748f8cf5455e872"
-  integrity sha512-XG99OadL0RJgzVDbvcyfrBlZWMewgehKh2q9u+4tEh8aVYIEYixTry949xadH5MUhI34iEoV/1KuPMbVeW18vw==
+gatsby-source-notion-database@^0.5.8:
+  version "0.5.9"
+  resolved "https://registry.npmjs.org/gatsby-source-notion-database/-/gatsby-source-notion-database-0.5.9.tgz#7b3b4b2b4c956c15f95082e31f2aff0409c9878d"
+  integrity sha512-hOhyKhaFF2WugGt+n7Eny6sDvhD7+EWkT5lgNOOSYjeP28HUJts9ldmJoYQLbdGMy2/KOTVgnZ6DZ7YO3N8kIg==
   dependencies:
     notabase "^0.6.9"
     puppeteer "^1.19.0"
@@ -5244,7 +5244,7 @@ gatsby-telemetry@^1.1.22:
     uuid "3.3.3"
 
 "gatsby-theme-gine-blog@link:gatsby-theme-gine-blog":
-  version "0.5.0"
+  version "0.5.3"
   dependencies:
     "@antv/g2" "^3.4.10"
     "@material-ui/core" "3.9.0"
