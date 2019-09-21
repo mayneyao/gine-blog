@@ -125,7 +125,7 @@ exports.createPages = ({ graphql, actions }) => {
     }`).then(result => {
 
         console.log(result)
-        const { pageSize } = result.data.siteConfig
+        const { pageSize, netlifyUrl, siteUrl } = result.data.siteConfig
 
         // 部署在 netlify上，重定向可以优化 SEO 结果
         const _redirects = `${netlifyUrl}/* ${siteUrl}/:splat 301!`
