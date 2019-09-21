@@ -10,6 +10,7 @@ import IconButton from '@material-ui/core/IconButton'
 import MenuIcon from '@material-ui/icons/Menu'
 import throttle from 'lodash/throttle'
 import Axios from "axios"
+import SearchButton from '../search/search'
 import { StaticQuery, graphql } from "gatsby"
 
 // import SearchButton from './search/search'
@@ -105,6 +106,7 @@ class Layout extends React.Component {
                   momentsOpen
                   booksOpen
                   aphorismsOpen
+                  searchOpen
               }
               allAphorisms {
                 nodes {
@@ -112,6 +114,9 @@ class Layout extends React.Component {
                   source
                   content
                 }
+              }
+              sourceConfig(name: {eq: "posts"}) {
+                table
               }
           }`}
                 render={data => (
@@ -172,7 +177,7 @@ class Layout extends React.Component {
                             <div style={{ wdith: '100%', height: '100%' }} onClick={this.back2Top}>
 
                             </div>
-                            {/* {config.blog.search.open && <SearchButton />} */}
+                            {data.siteConfig.searchOpen && <SearchButton sourceUrl={data.sourceConfig.table} />}
                         </div>
 
                         {/* </Toolbar>

@@ -24,7 +24,7 @@
     "jss": "latest",
     "katex": "^0.10.2",
     "lodash": "^4.17.13",
-    "notabase": "^0.6.8",
+    "notabase": "^0.7.0",
     "prismjs": "^1.16.0",
     "prop-types": "latest",
     "puppeteer": "^1.17.0",
