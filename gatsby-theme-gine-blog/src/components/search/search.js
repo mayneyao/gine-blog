@@ -138,6 +138,7 @@ class FormDialog extends React.Component {
                     <DialogContent >
                         <TextField
                             autoFocus
+                            autoComplete="off"
                             value={query}
                             margin="dense"
                             id="chromecantguess"

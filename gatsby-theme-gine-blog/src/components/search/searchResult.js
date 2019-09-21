@@ -58,12 +58,16 @@ function makeSearchResultTree(recordMap, results) {
                 })
             } else {
                 let parentBlock = recordMap.block[parentBlockID].value
-                tree[parentBlockID] = {
-                    title: parentBlock.properties.title[0][0],
-                    children: [{
-                        title: thisBlock.properties.title[0],
-                        blockID: thisBlock.id
-                    }]
+                try {
+                    tree[parentBlockID] = {
+                        title: parentBlock.properties.title[0][0],
+                        children: [{
+                            title: thisBlock.properties.title[0],
+                            blockID: thisBlock.id
+                        }]
+                    }
+                } catch (error) {
+                    console.log(error)
                 }
             }
         }
