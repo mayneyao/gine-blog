@@ -1,4 +1,4 @@
-
+const fs = require('fs')
 const Notabase = require("notabase")
 const { parseImageUrl } = require("notabase/src/utils")
 const download = require('image-downloader')
@@ -109,6 +109,8 @@ exports.createPages = ({ graphql, actions }) => {
     {
       siteConfig {
         pageSize
+        netlifyUrl
+        siteUrl
       }
       allPosts(filter: {status: {eq: "published"}}) {
         totalCount
@@ -124,6 +126,14 @@ exports.createPages = ({ graphql, actions }) => {
 
         console.log(result)
         const { pageSize } = result.data.siteConfig
+
+        // 部署在 netlify上，重定向可以优化 SEO 结果
+        const _redirects = `${netlifyUrl}/* ${siteUrl}/:splat 301!`
+        fs.writeFile('public/_redirects', _redirects, function (err) {
+            if (err) {
+                console.error(err)
+            }
+        })
 
         // 创建主页
         createPage({
