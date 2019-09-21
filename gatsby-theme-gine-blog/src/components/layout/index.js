@@ -8,8 +8,6 @@ import NavList from './nav-list'
 import { Helmet } from "react-helmet"
 import IconButton from '@material-ui/core/IconButton'
 import MenuIcon from '@material-ui/icons/Menu'
-import throttle from 'lodash/throttle'
-import Axios from "axios"
 import SearchButton from '../search/search'
 import { StaticQuery, graphql } from "gatsby"
 
@@ -37,7 +35,6 @@ class Layout extends React.Component {
         this.setState({
             open: open,
         })
-        this.fetchData()
     }
 
     constructor(props) {
@@ -52,15 +49,6 @@ class Layout extends React.Component {
 
             }
         }
-        this.fetchData = throttle(this._fetchData, 10000)
-    }
-
-    _fetchData = () => {
-        Axios.get('https://api.gine.me/currently_playing').then(res => {
-            this.setState({
-                data: res.data
-            })
-        })
     }
 
     back2Top = () => {
