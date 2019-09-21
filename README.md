@@ -2,7 +2,7 @@
 
 
 
-## Quik Start
+## Quik Start ([中文文档](https://www.notion.so/gine/gine-blog-2019-09-21-a788c3e6713e4166a4a8c72a7977b457))
 
 <a href="https://app.netlify.com/start/deploy?repository=https://github.com/mayneyao/gatsby-starter-gine-blog" target="_blank"><img src="https://www.netlify.com/img/deploy/button.svg" alt="Deploy to Netlify"></a>
 
@@ -52,35 +52,6 @@ module.exports = {
             resolve: `gatsby-source-notion-database`,
             options: {
                 configTable: "https://www.notion.so/65b35da1762e4f259904bb4cc38e54fd?v=89e80623e52e4419a35f20e54056cfb8", // Change this url to your own
-            }
-        }
-    ],
-}
-```
-
-if you dont want to config from notion table, write config file like this
-
-```
-module.exports = {
-    plugins: [
-        {
-            resolve: `gatsby-theme-gine-blog`,
-            options: {
-                title: "your site title",
-                ...otherConfig // find in SiteConfig table
-            }
-        },
-        {
-            resolve: `gatsby-source-notion-database`,
-            options: {
-                dbMap: {
-                    "posts": "https://www.notion.so/99623ef9630940cdb8524ba355831677?v=8366741ca7dd4b339c19484712e13563",
-                    "links": "https://www.notion.so/0e59694e75ee4357963695d6195ceeb3?v=52e8f7f022f240d8899ae26b83458ee6",
-                    "books": "https://www.notion.so/e355d54c576c41ea826c4704fde3a7c0?v=3f7d51a5dba040ff9ba02c4b99b07823",
-                },
-                settings: {
-                    "posts": "html" // html content of title page will be cached
-                }
             }
         }
     ],
