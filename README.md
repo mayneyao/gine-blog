@@ -1,58 +1,10 @@
 # gatsby-theme-gine-blog [WIP]
 
+这个仓库是一款 Gatsby 主题插件，并且需要和 [`gatsby-source-notion-database`](https://github.com/mayneyao/gatsby-source-notion-database) 搭配使用。
 
-## Quik Start ([中文文档](https://gine.me/posts/a788c3e6713e4166a4a8c72a7977b457))
-
-<a href="https://app.netlify.com/start/deploy?repository=https://github.com/mayneyao/gatsby-starter-gine-blog" target="_blank"><img src="https://www.netlify.com/img/deploy/button.svg" alt="Deploy to Netlify"></a>
-
-
-You will get a free site, a repository called [`gatsby-starter-gine-blog`](https://github.com/mayneyao/gatsby-starter-gine-blog) will be created (by netlify) under your github account. Just modify two lines in gatsby-config.js to complete the configuration.
-
-Clone [this page](https://www.notion.so/share-blog-table-60e00520137944a4a45a437c7d089488) into your own notion. There are some tables in the page, there are 2 configuration tables. One is the site configuration and the other is the data source configuration. Replace the url of the configuration table in gatsby-config.js with your own.
+如果你想部署一个和 [https://gine.me](https://gine.me) 同样主题的站点，你用该去 [`gatsby-starter-gine-blog`](https://github.com/mayneyao/gatsby-starter-gine-blog) 
 
 
-+ SiteConfig - UI -  `gatsby-theme-gine-blog`     
-+ SourceConfig - Data -  `gatsby-source-notion-database` 
-    
+This repository is a Gatsby theme plugin and needs to be used with [`gatsby-source-notion-database`] (https://github.com/mayneyao/gatsby-source-notion-database).
 
-## Develop & Run
-
-
-1. install gatsby-cli
-
-```
-yarn global add gatsby-cli
-```
-
-2. get starter code 
-
-```
-gatsby new my-gine-blog https://github.com/mayneyao/gatsby-starter-gine-blog.git
-
-```
-3. run 
-
-```
-yarn develop
-```
-
-## Config
-
-```
-module.exports = {
-    plugins: [
-        {
-            resolve: `gatsby-theme-gine-blog`,
-            options: {
-                configTable: "https://www.notion.so/b4af861710064848aaf9f859c79bb127?v=0de244d6f8414ade9b7b147adcb2f78e", // Url of SiteConfig table
-            }
-        },
-        {
-            resolve: `gatsby-source-notion-database`,
-            options: {
-                configTable: "https://www.notion.so/65b35da1762e4f259904bb4cc38e54fd?v=89e80623e52e4419a35f20e54056cfb8", // Url of SourceConfig table
-            }
-        }
-    ],
-}
-```
+If you want to deploy a site with the same theme as [https://gine.me](https://gine.me), you should use [`gatsby-starter-gine-blog`] (https://github.com/mayneyao/gatsby-starter-gine- Blog)
