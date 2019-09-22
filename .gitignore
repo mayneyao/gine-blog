@@ -1,7 +1,8 @@
 # IDE
 .idea
-# blog content
-.notion/
+# post html cache
+.notion
+
 # content
 
 # Logs
