@@ -1,4 +1,4 @@
-# gine-blog [WIP]
+# gatsby-theme-gine-blog [WIP]
 
 
 ## Quik Start ([中文文档](https://gine.me/posts/a788c3e6713e4166a4a8c72a7977b457))
