@@ -1,7 +1,7 @@
 # gine-blog [WIP]
 
 
-## Quik Start ([中文文档](https://www.notion.so/gine/gine-blog-2019-09-21-a788c3e6713e4166a4a8c72a7977b457))
+## Quik Start ([中文文档](https://gine.me/posts/a788c3e6713e4166a4a8c72a7977b457))
 
 <a href="https://app.netlify.com/start/deploy?repository=https://github.com/mayneyao/gatsby-starter-gine-blog" target="_blank"><img src="https://www.netlify.com/img/deploy/button.svg" alt="Deploy to Netlify"></a>
 
