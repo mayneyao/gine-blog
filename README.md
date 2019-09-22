@@ -1,13 +1,12 @@
 # gine-blog [WIP]
 
 
-
 ## Quik Start ([中文文档](https://www.notion.so/gine/gine-blog-2019-09-21-a788c3e6713e4166a4a8c72a7977b457))
 
 <a href="https://app.netlify.com/start/deploy?repository=https://github.com/mayneyao/gatsby-starter-gine-blog" target="_blank"><img src="https://www.netlify.com/img/deploy/button.svg" alt="Deploy to Netlify"></a>
 
 
-You will get a free site, a repository called `gatsby-starter-gine-blog` will be created (by netlify) under your github account. Just modify two lines in gatsby-config.js to complete the configuration.
+You will get a free site, a repository called [`gatsby-starter-gine-blog`](https://github.com/mayneyao/gatsby-starter-gine-blog) will be created (by netlify) under your github account. Just modify two lines in gatsby-config.js to complete the configuration.
 
 Clone [this page](https://www.notion.so/share-blog-table-60e00520137944a4a45a437c7d089488) into your own notion. There are some tables in the page, there are 2 configuration tables. One is the site configuration and the other is the data source configuration. Replace the url of the configuration table in gatsby-config.js with your own.
 
