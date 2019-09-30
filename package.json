@@ -1,6 +1,6 @@
 {
   "name": "gatsby-theme-gine-blog",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "private": false,
   "dependencies": {
     "@antv/g2": "^3.4.10",
