@@ -3,7 +3,7 @@ import Carousel, { Modal, ModalGateway } from 'react-images';
 import { parseImageUrl } from 'notabase/src/utils'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
-import Card from '@material-ui/core/Card';
+import Card from '../mui-override/Card';
 import MomentMusicCard from './music'
 
 dayjs.extend(relativeTime)
