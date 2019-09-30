@@ -6,13 +6,13 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import ColorfulTag from '../utils/hash-colorful-tag'
-// import StateTag from '../bangumi/StateTag';
+import StateTag from '../utils/state-tag';
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { Link } from 'gatsby'
-    
+
 const styles = theme => ({
     card: {
         display: 'flex',
@@ -76,7 +76,7 @@ function MediaControlCard(props) {
 
     return (
         <Card className={classes.card}>
-            {/* <StateTag state={status} color={CSMap[status]} /> */}
+            <StateTag state={status} color={CSMap[status]} />
             <CardMedia
                 className={classes.cover}
                 image={notionImageResize(cover_image, 150)}
