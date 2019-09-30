@@ -7,7 +7,6 @@ import SearchResults from './searchResult'
 import InputAdornment from '@material-ui/core/InputAdornment';
 import SearchIcon from '@material-ui/icons/Search';
 import CloseIcon from '@material-ui/icons/Cancel';
-import IconButton from '@material-ui/core/IconButton';
 import { withStyles } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Notabase from 'notabase'
@@ -33,6 +32,20 @@ const styles = theme => ({
     progress: {
         margin: theme.spacing.unit * 0,
     },
+    searchIcon: {
+        position: 'fixed',
+        top: 0,
+        right: 0,
+        margin: '10px',
+        '&:hover': {
+            cursor: 'pointer'
+        }
+    },
+    cancelSearch: {
+        '&:hover': {
+            cursor: 'pointer'
+        }
+    }
 })
 
 class FormDialog extends React.Component {
@@ -116,18 +129,13 @@ class FormDialog extends React.Component {
         const { classes } = this.props;
         return (
             <>
-                <IconButton
+                <SearchIcon
                     color="inherit"
                     aria-label="Search"
                     variant="outlined"
                     onClick={this.handleClickOpen}
-                    style={{
-                        position: 'fixed',
-                        top: 0,
-                        right: 0
-                    }}>
-                    <SearchIcon />
-                </IconButton>
+                    className={classes.searchIcon}
+                />
                 <Dialog
                     open={this.state.open}
                     onClose={this.handleClose}
@@ -153,9 +161,7 @@ class FormDialog extends React.Component {
                                 ),
                                 endAdornment: (
                                     <InputAdornment position="end">
-                                        <IconButton onClick={this.cancelSearch}>
-                                            <CloseIcon style={{ color: "gray" }} />
-                                        </IconButton>
+                                        <CloseIcon style={{ color: "gray" }} onClick={this.cancelSearch} className={classes.cancelSearch} />
                                     </InputAdornment>
                                 ),
                             }}

@@ -10,6 +10,7 @@ import IconButton from '@material-ui/core/IconButton'
 import MenuIcon from '@material-ui/icons/Menu'
 import SearchButton from '../search/search'
 import { StaticQuery, graphql } from "gatsby"
+import icon from '../../static/favicon.ico'
 
 // import SearchButton from './search/search'
 
@@ -112,6 +113,7 @@ class Layout extends React.Component {
                         <Helmet defaultTitle={`${data.siteConfig.title}${title ? ` - ${title}` : ""}`}>
                             <html lang="zh-cmn-Hans" />
                             <meta name="description" content={`${data.siteConfig.title} `} />
+                            <link rel="shortcut icon" href={icon} />
                             <noscript>
                                 为了更好的浏览体验，请不要在本页面禁用 Javascript 🙂
                     </noscript>
@@ -158,7 +160,7 @@ class Layout extends React.Component {
                             zIndex: 999,
                             ...navStyle
                         }}>
-                            <IconButton className={classes.menuButton} color="inherit" aria-label="Menu" onClick={this.toggleDrawer(true)}>
+                            <IconButton className={classes.menuButton} color="inherit" aria-label="Menu" onClick={this.toggleDrawer(true)} centerRipple={false}>
                                 <MenuIcon />
                             </IconButton>
 
