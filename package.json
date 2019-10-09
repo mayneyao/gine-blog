@@ -1,6 +1,6 @@
 {
   "name": "gatsby-theme-gine-blog",
-  "version": "0.6.1",
+  "version": "0.6.2",
   "private": false,
   "dependencies": {
     "@antv/g2": "^3.4.10",
@@ -20,7 +20,7 @@
     "jss": "latest",
     "katex": "^0.10.2",
     "lodash": "^4.17.13",
-    "notabase": "^0.7.0",
+    "notabase": "0.7.0",
     "prismjs": "^1.16.0",
     "prop-types": "latest",
     "react": "^16.8.6",
