@@ -41,6 +41,6 @@
   "devDependencies": {
     "add": "^2.0.6",
     "netlify-lambda": "^1.4.13",
-    "yarn": "^1.17.3"
+    "yarn": "^1.22.0"
   }
 }
