@@ -29,9 +29,10 @@ export async function getStaticPaths() {
     const { records } = posts.data;
     const res = {
         paths: records.map((record) => {
+            const postSlug = (record.fields.id as any).split("-").join("");
             return {
                 params: {
-                    slug: record.fields.id,
+                    slug: postSlug,
                 },
             }
         }),
