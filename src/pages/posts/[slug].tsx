@@ -1,20 +1,28 @@
 import React from 'react';
-import { getPageTitle } from 'notion-utils';
 import { NotionAPI } from 'notion-client';
 import { NotionRenderer } from 'react-notion-x';
 import Head from 'next/head';
 import { Vika } from '@vikadata/vika';
+import { PostTagList } from '..';
+import styled from 'styled-components';
+import { Layout } from '../../components/layout';
 
 const notion = new NotionAPI()
 
 export const getStaticProps = async (context) => {
     const pageId = context.params.slug.split("-").join('')
-    console.log(pageId)
     const recordMap = await notion.getPage(pageId)
-    console.log("fetch done")
+    Vika.auth({ token: process.env.VIKA_API_TOKEN });//process.env.VIKA_API_TOKEN
+    const posts = await Vika.datasheet("dst8heCvLqRbaKBpp0").all({
+        viewId: "viwWbQVYN7fJT",
+    })
+    const { records } = posts.data;
+    const record = records.find(record => (record.fields.id as any).split("-").join("") === context.params.slug);
     return {
         props: {
-            recordMap, pageId
+            recordMap,
+            pageId,
+            pageMeta: record.fields,
         },
         revalidate: 1000
     }
@@ -22,7 +30,7 @@ export const getStaticProps = async (context) => {
 
 
 export async function getStaticPaths() {
-    Vika.auth({ token: process.env.VIKA_API_TOKEN });
+    Vika.auth({ token: process.env.VIKA_API_TOKEN });//
     const posts = await Vika.datasheet("dst8heCvLqRbaKBpp0").all({
         viewId: "viwWbQVYN7fJT",
     })
@@ -41,21 +49,34 @@ export async function getStaticPaths() {
     return res;
 }
 
-export default function NotionPage({ recordMap, pageId }) {
+const PageHeather = styled.div`
+margin: 2px auto;
+max-width: 700px;
+`;
+
+function NotionPage({ recordMap, pageId, pageMeta }) {
     if (!recordMap) {
         return <span>{pageId}</span>
     }
-    const title = getPageTitle(recordMap)
-    console.log(title)
+    const { tags, title, public_date } = pageMeta;
     return (
         <>
             <Head>
-                <meta name='description' content='React Notion X demo renderer.' />
+                <meta name='description' />
                 <title>{title}</title>
             </Head>
             <div>
+                <PageHeather>
+                    <h2>
+                        {title}
+                    </h2>
+                    <PostTagList tags={tags} publicDate={public_date} />
+                </PageHeather>
                 <NotionRenderer recordMap={recordMap} fullPage={false} darkMode={false} />
             </div>
         </>
     )
 }
+
+NotionPage.Layout = Layout;
+export default NotionPage;

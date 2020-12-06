@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 import '../index.css'
 // core styles shared by all of react-notion-x (required)
@@ -12,9 +12,16 @@ import 'rc-dropdown/assets/index.css'
 
 // used for rendering equations (optional)
 import 'katex/dist/katex.min.css'
+import { Layout } from '../components/layout'
 
 function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
+  const Layout = Component.Layout ? Component.Layout : React.Fragment;
+  return (
+    <Layout>
+      <Component {...pageProps} />
+    </Layout>
+  );
 }
+
 
 export default MyApp

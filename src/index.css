@@ -7,6 +7,12 @@ body {
     margin: 0;
 }
 
+a {
+    color: #00796b;
+    text-decoration: none;
+    cursor: pointer;
+}
+
 .notion-collection-row-body {
     display: none!important;
 }
