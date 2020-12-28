@@ -55,8 +55,8 @@ function NotionPage({ recordMap, pageId, pageMeta }) {
     const { tags, name, public_date } = pageMeta;
     const disqusShortname = "maynes-blog";
     const disqusConfig = {
-        url: window.location.href,
-        identifier: window.location.pathname,
+        url: `https://gine.me/posts/${pageId}`,
+        identifier: `/posts/${pageId}`,
         title: name,
     }
     return (

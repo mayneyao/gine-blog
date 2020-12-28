@@ -9,7 +9,7 @@ import { Layout } from '../components/layout';
 export const getPosts = async () => {
   const notionRes = Axios.get("https://notion-api.splitbee.io/v1/table/b8081728310b49fea0ff1d14e190b3fb")
   const posts = (await notionRes).data;
-  return posts.filter(post => post.status === "published")
+  return posts.filter(post => post.status === "published").sort((a, b) => a.public_date > b.public_date ? -1 : 0)
 }
 
 type IPostItem = {
@@ -19,7 +19,6 @@ type IPostItem = {
   slug: string;
   tags: string[];
 }
-
 
 const TagList = styled.small`
     display: flex;
