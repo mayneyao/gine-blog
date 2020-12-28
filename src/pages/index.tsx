@@ -63,8 +63,8 @@ const PostIndex = ({ posts = [] }) => {
   return (
     <PostList>
       {
-        posts.map(record => {
-          const { name: title, public_date, id: slug, desc = '', tags } = record.fields;
+        posts.map(post => {
+          const { name: title, public_date, id: slug, desc = '', tags } = post;
           return <PostItem key={slug} tags={tags} title={title} publicDate={public_date} slug={slug} summary={desc} />
         })
       }
