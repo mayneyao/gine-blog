@@ -6,6 +6,7 @@ import { getPosts, PostTagList } from '..';
 import styled from 'styled-components';
 import { Layout } from '../../components/layout';
 import { GetStaticProps } from 'next'
+import Disqus from 'disqus-react';
 
 const notion = new NotionAPI()
 
@@ -51,21 +52,28 @@ function NotionPage({ recordMap, pageId, pageMeta }) {
     if (!recordMap) {
         return <span>{pageId}</span>
     }
-    const { tags, title, public_date } = pageMeta;
+    const { tags, name, public_date } = pageMeta;
+    const disqusShortname = "maynes-blog";
+    const disqusConfig = {
+        url: window.location.href,
+        identifier: window.location.pathname,
+        title: name,
+    }
     return (
         <>
             <Head>
                 <meta name='description' />
-                <title>{title}</title>
+                <title>{name}</title>
             </Head>
             <div>
                 <PageHeather>
                     <h2>
-                        {title}
+                        {name}
                     </h2>
                     <PostTagList tags={tags} publicDate={public_date} />
                 </PageHeather>
                 <NotionRenderer recordMap={recordMap} fullPage={false} darkMode={false} />
+                <Disqus.DiscussionEmbed shortname={disqusShortname} config={disqusConfig} />
             </div>
         </>
     )

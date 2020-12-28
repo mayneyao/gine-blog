@@ -1,11 +1,10 @@
-import { Vika } from '@vikadata/vika';
-import React, { useEffect, useState } from 'react';
-import Link from 'next/link';
-import { ColorfulTag } from '../components/colorfulTag';
-import styled from 'styled-components';
-import { Layout } from '../components/layout';
 import Axios from 'axios';
 import { GetStaticProps } from 'next';
+import Link from 'next/link';
+import React from 'react';
+import styled from 'styled-components';
+import { ColorfulTag } from '../components/colorfulTag';
+import { Layout } from '../components/layout';
 
 export const getPosts = async () => {
   const notionRes = Axios.get("https://notion-api.splitbee.io/v1/table/b8081728310b49fea0ff1d14e190b3fb")
