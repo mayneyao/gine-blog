@@ -5,6 +5,7 @@ import { ColorfulTag } from '../components/colorfulTag';
 import styled from 'styled-components';
 import { Layout } from '../components/layout';
 import Axios from 'axios';
+import { GetStaticProps } from 'next';
 
 export const getPosts = async () => {
   const notionRes = Axios.get("https://notion-api.splitbee.io/v1/table/b8081728310b49fea0ff1d14e190b3fb")
@@ -58,26 +59,25 @@ const PostList = styled.div`
   max-width: 700px;
 `;
 
-const PostIndex = () => {
-  const [records, setRecords] = useState([])
-  useEffect(() => {
-    const getRecords = async () => {
-      const posts = await getPosts();
-      setRecords(posts);
-    }
-    getRecords();
-  }, []);
-
+const PostIndex = ({ posts = [] }) => {
   return (
     <PostList>
       {
-        records.map(record => {
-          const { title, public_date, id: slug, desc = '', tags } = record.fields;
+        posts.map(record => {
+          const { name: title, public_date, id: slug, desc = '', tags } = record.fields;
           return <PostItem key={slug} tags={tags} title={title} publicDate={public_date} slug={slug} summary={desc} />
         })
       }
     </PostList>
   )
+}
+
+export const getStaticProps: GetStaticProps = async (context) => {
+  const posts = await getPosts();
+  return {
+    props: { posts },
+    revalidate: 1000
+  }
 }
 
 PostIndex.Layout = Layout;
