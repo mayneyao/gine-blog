@@ -43,7 +43,7 @@ export async function getStaticPaths() {
     return res;
 }
 
-const PageHeather = styled.div`
+const PageWrapper = styled.div`
     margin: 2px auto;
     max-width: 700px;
 `;
@@ -66,14 +66,14 @@ function NotionPage({ recordMap, pageId, pageMeta }) {
                 <title>{name}</title>
             </Head>
             <div>
-                <PageHeather>
+                <PageWrapper>
                     <h2>
                         {name}
                     </h2>
                     <PostTagList tags={tags} publicDate={public_date} />
-                </PageHeather>
-                <NotionRenderer recordMap={recordMap} fullPage={false} darkMode={false} />
-                <Disqus.DiscussionEmbed shortname={disqusShortname} config={disqusConfig} />
+                    <NotionRenderer recordMap={recordMap} fullPage={false} darkMode={false} />
+                    <Disqus.DiscussionEmbed shortname={disqusShortname} config={disqusConfig} />
+                </PageWrapper>
             </div>
         </>
     )
