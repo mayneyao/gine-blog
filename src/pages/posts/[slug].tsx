@@ -2,27 +2,24 @@ import React from 'react';
 import { NotionAPI } from 'notion-client';
 import { NotionRenderer } from 'react-notion-x';
 import Head from 'next/head';
-import { Vika } from '@vikadata/vika';
-import { PostTagList } from '..';
+import { getPosts, PostTagList } from '..';
 import styled from 'styled-components';
 import { Layout } from '../../components/layout';
+import { GetStaticProps } from 'next'
 
 const notion = new NotionAPI()
 
-export const getStaticProps = async (context) => {
-    const pageId = context.params.slug.split("-").join('')
-    const recordMap = await notion.getPage(pageId)
-    Vika.auth({ token: process.env.VIKA_API_TOKEN });//process.env.VIKA_API_TOKEN
-    const posts = await Vika.datasheet("dst8heCvLqRbaKBpp0").all({
-        viewId: "viwWbQVYN7fJT",
-    })
-    const { records } = posts.data;
-    const record = records.find(record => (record.fields.id as any).split("-").join("") === context.params.slug);
+
+export const getStaticProps: GetStaticProps = async (context) => {
+    const pageId = context.params.slug as string;
+    const recordMap = await notion.getPage(pageId);
+    const posts = await getPosts();
+    const post = posts.find(post => (post.id as string).split("-").join("") === context.params.slug);
     return {
         props: {
             recordMap,
             pageId,
-            pageMeta: record.fields,
+            pageMeta: post,
         },
         revalidate: 1000
     }
@@ -30,14 +27,10 @@ export const getStaticProps = async (context) => {
 
 
 export async function getStaticPaths() {
-    Vika.auth({ token: process.env.VIKA_API_TOKEN });//
-    const posts = await Vika.datasheet("dst8heCvLqRbaKBpp0").all({
-        viewId: "viwWbQVYN7fJT",
-    })
-    const { records } = posts.data;
+    const posts = await getPosts();
     const res = {
-        paths: records.map((record) => {
-            const postSlug = (record.fields.id as any).split("-").join("");
+        paths: posts.map((post) => {
+            const postSlug = (post.id as string).split("-").join("");
             return {
                 params: {
                     slug: postSlug,
@@ -50,8 +43,8 @@ export async function getStaticPaths() {
 }
 
 const PageHeather = styled.div`
-margin: 2px auto;
-max-width: 700px;
+    margin: 2px auto;
+    max-width: 700px;
 `;
 
 function NotionPage({ recordMap, pageId, pageMeta }) {

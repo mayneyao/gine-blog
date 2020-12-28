@@ -4,7 +4,13 @@ import Link from 'next/link';
 import { ColorfulTag } from '../components/colorfulTag';
 import styled from 'styled-components';
 import { Layout } from '../components/layout';
+import Axios from 'axios';
 
+export const getPosts = async () => {
+  const notionRes = Axios.get("https://notion-api.splitbee.io/v1/table/b8081728310b49fea0ff1d14e190b3fb")
+  const posts = (await notionRes).data;
+  return posts
+}
 
 type IPostItem = {
   title: string;
@@ -17,10 +23,10 @@ type IPostItem = {
 
 const TagList = styled.small`
     display: flex;
-  `;
+`;
 const Article = styled.article`
     padding-bottom: 3rem;
-  `;
+`;
 
 
 export const PostTagList = ({ publicDate, tags }) => (
@@ -48,19 +54,16 @@ const PostItem = ({ title, summary, publicDate, slug, tags }: IPostItem) => {
 };
 
 const PostList = styled.div`
-margin: 2px auto;
-max-width: 700px;
+  margin: 2px auto;
+  max-width: 700px;
 `;
 
 const PostIndex = () => {
   const [records, setRecords] = useState([])
   useEffect(() => {
     const getRecords = async () => {
-      Vika.auth({ token: 'uskMWTiTIv4cJdq5jNvipZA' });
-      const posts: any = await Vika.datasheet("dst8heCvLqRbaKBpp0").all({
-        viewId: "viwWbQVYN7fJT",
-      })
-      setRecords(posts.data.records);
+      const posts = await getPosts();
+      setRecords(posts);
     }
     getRecords();
   }, []);

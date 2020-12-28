@@ -3,14 +3,13 @@ import styled from 'styled-components';
 
 
 const BottomWrapper = styled.div`
-margin: 1em auto;
-text-align: center;
-padding-bottom: 1em;
-max-width: 700px;
+  margin: 1em auto;
+  padding-bottom: 1em;
+  max-width: 700px;
 `;
 
-const FlexSpan = styled.span`
-display: flex;
+const FlexSpan = styled.div`
+  text-align: center;
 `;
 
 export const Bottom = () => {
@@ -18,7 +17,7 @@ export const Bottom = () => {
     <BottomWrapper>
       {/* <Aphorisms /> */}
       <FlexSpan>
-        {"Build with "}<a href="https://reactjs.org">nextjs</a>{" and ❤"}
+        {"Build with "}<a href="https://nextjs.org">nextjs</a>{" and ❤"}
       </FlexSpan>
       <FlexSpan>
         Copyright © Mayne

@@ -1,5 +1,5 @@
 import React from 'react';
-import Link from 'next/link';
+// import Link from 'next/link';
 import styled from 'styled-components';
 
 
@@ -55,9 +55,14 @@ interface IColorfulTag {
 }
 export const ColorfulTag = ({ tag, href, color }: IColorfulTag) => {
   const _color = color || getHashColor(tag);
-  return <Link href={href || `tags/${tag}`}>
+  return (
     <Tag color={_color}>
       {tag}
     </Tag>
-  </Link>
+  );
+  // return <Link href={href || `tags/${tag}`}>
+  //   <Tag color={_color}>
+  //     {tag}
+  //   </Tag>
+  // </Link>
 };
