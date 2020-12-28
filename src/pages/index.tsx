@@ -9,7 +9,7 @@ import Axios from 'axios';
 export const getPosts = async () => {
   const notionRes = Axios.get("https://notion-api.splitbee.io/v1/table/b8081728310b49fea0ff1d14e190b3fb")
   const posts = (await notionRes).data;
-  return posts
+  return posts.filter(post => post.status === "published")
 }
 
 type IPostItem = {
@@ -29,7 +29,7 @@ const Article = styled.article`
 `;
 
 
-export const PostTagList = ({ publicDate, tags }) => (
+export const PostTagList = ({ publicDate, tags = [] }) => (
   <TagList>
     {
       <ColorfulTag tag={new Date(publicDate).toLocaleDateString()} color="#aaa" />
