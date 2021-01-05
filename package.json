@@ -8,7 +8,7 @@
     "@material-ui/icons": "^3.0.2",
     "@material-ui/lab": "^3.0.0-alpha.28",
     "@material-ui/styles": "^4.0.1",
-    "axios": "^0.18.1",
+    "axios": "^0.21.1",
     "dayjs": "^1.8.8",
     "disqus-react": "^1.0.5",
     "gatsby": "^2.9.0",
