@@ -5395,8 +5395,9 @@ homedir-polyfill@^1.0.1:
     parse-passwd "^1.0.0"
 
 hosted-git-info@^2.1.4, hosted-git-info@^2.6.0:
-  version "2.7.1"
-  resolved "https://registry.npmjs.org/hosted-git-info/-/hosted-git-info-2.7.1.tgz#97f236977bd6e125408930ff6de3eec6281ec047"
+  version "2.8.9"
+  resolved "https://registry.yarnpkg.com/hosted-git-info/-/hosted-git-info-2.8.9.tgz#dffc0bf9a21c02209090f2aa69429e1414daf3f9"
+  integrity sha512-mxIDAb9Lsm6DoOJ7xH+5+X4y1LU/4Hi50L9C5sIswK3JzULS4bwk1FvjdBgvYR4bzT4tuUQiC15FE2f5HbLvYw==
 
 hpack.js@^2.1.6:
   version "2.1.6"
@@ -7234,9 +7235,9 @@ normalize-url@^3.0.0:
   version "3.3.0"
   resolved "https://registry.npmjs.org/normalize-url/-/normalize-url-3.3.0.tgz#b2e1c4dc4f7c6d57743df733a4f5978d18650559"
 
-notabase@^0.7.0:
+notabase@0.7.0:
   version "0.7.0"
-  resolved "https://registry.npmjs.org/notabase/-/notabase-0.7.0.tgz#1ce252d21ef7669ff7001f326fa26ca82ad9df6b"
+  resolved "https://registry.yarnpkg.com/notabase/-/notabase-0.7.0.tgz#1ce252d21ef7669ff7001f326fa26ca82ad9df6b"
   integrity sha512-UR00cZwgg2dDSWY9KmtMrb+GfhSdSB5Tng4h/HbXw3PjKeo3+Mvh1Up6MApcq4CuK9csN9d0DJzE7X6X0iyrpQ==
   dependencies:
     axios "^0.19.0"
