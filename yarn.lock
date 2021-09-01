@@ -7234,9 +7234,9 @@ normalize-url@^3.0.0:
   version "3.3.0"
   resolved "https://registry.npmjs.org/normalize-url/-/normalize-url-3.3.0.tgz#b2e1c4dc4f7c6d57743df733a4f5978d18650559"
 
-notabase@^0.7.0:
+notabase@0.7.0:
   version "0.7.0"
-  resolved "https://registry.npmjs.org/notabase/-/notabase-0.7.0.tgz#1ce252d21ef7669ff7001f326fa26ca82ad9df6b"
+  resolved "https://registry.yarnpkg.com/notabase/-/notabase-0.7.0.tgz#1ce252d21ef7669ff7001f326fa26ca82ad9df6b"
   integrity sha512-UR00cZwgg2dDSWY9KmtMrb+GfhSdSB5Tng4h/HbXw3PjKeo3+Mvh1Up6MApcq4CuK9csN9d0DJzE7X6X0iyrpQ==
   dependencies:
     axios "^0.19.0"
@@ -7326,9 +7326,9 @@ object-keys@^1.0.12:
   resolved "https://registry.npmjs.org/object-keys/-/object-keys-1.0.12.tgz#09c53855377575310cca62f55bb334abff7b3ed2"
 
 object-path@^0.11.2, object-path@^0.11.4:
-  version "0.11.4"
-  resolved "https://registry.npm.taobao.org/object-path/download/object-path-0.11.4.tgz#370ae752fbf37de3ea70a861c23bba8915691949"
-  integrity sha1-NwrnUvvzfePqcKhhwju6iRVpGUk=
+  version "0.11.7"
+  resolved "https://registry.yarnpkg.com/object-path/-/object-path-0.11.7.tgz#5f211161f34bb395e4b13a5f565b79d933b6f65d"
+  integrity sha512-T4evaK9VfGGQskXBDILcn6F90ZD+WO3OwRFFQ2rmZdUH4vQeDBpiolTpVlPY2yj5xSepyILTjDyM6UvbbdHMZw==
 
 object-visit@^1.0.0:
   version "1.0.1"
